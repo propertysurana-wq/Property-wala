@@ -26,7 +26,7 @@ export default function Index() {
 
   return (
     <>
-      <Header scrollToSection={scrollToSection} />
+      <Header/>
       <HeroSection />
       <ServicesSection />
       <PropertyTypeExplorer/>
