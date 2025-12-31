@@ -104,9 +104,9 @@ export default function RealEstateBuyList() {
           <span className="text-green-700 font-bold uppercase tracking-widest text-xs bg-green-100 px-3 py-1 rounded-full mb-4 inline-block border border-green-200">
             Exclusive Listings
           </span>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
-            अपनी <span className="text-green-600">पसंद की प्रॉपर्टी</span> खोजें
-          </h1>
+         <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
+  अपनी <span className="text-green-500">पसंद की प्रॉपर्टी</span> खोजें
+</h1>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium">
             Find the best Homes, Land, and Shops in your budget.
           </p>

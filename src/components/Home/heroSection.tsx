@@ -1,69 +1,3 @@
-// import { Handshake, Phone } from "lucide-react";
-
-// export default function HeroSection() {
-//   return (
-//     <section className="relative h-[700px] bg-gradient-to-r from-[#fdeee0] via-[#fefbf0] to-[#fce8e8] overflow-hidden">
-//       <div className="absolute inset-0">
-//         <img
-//           className="w-full h-full object-cover opacity-30"
-//           src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&h=700&fit=crop"
-//           alt="Traditional Rajasthani houses with modern city buildings"
-//         />
-//         <div className="absolute inset-0 bg-gradient-to-r from-[#752e2f]/70 via-[#742d2d]/60 to-transparent"></div>
-//       </div>
-
-//       <div className="relative container mx-auto px-4 h-full flex items-center">
-//         <div className="max-w-4xl">
-//           <div className="mb-6">
-//             <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
-//               Your Trusted Property & Registry Partner in Bhilwara
-//             </h1>
-//             <h2 className="text-2xl md:text-3xl text-[#fcf5d9] mb-6 font-semibold">
-//               आपका भरोसेमंद प्रॉपर्टी और पट्टा रजिस्ट्रेशन साथी
-//             </h2>
-//           </div>
-
-//           <p className="text-xl text-[#fefbf0] mb-4 max-w-2xl">
-//             We make buying, selling, and paperwork simple
-//           </p>
-//           <p className="text-lg text-[#fcf5d9] mb-8 max-w-2xl">
-//             प्रॉपर्टी खरीद, बिक्री और कागज़ात अब आसान
-//           </p>
-
-//           <div className="flex flex-col sm:flex-row gap-4">
-//             <button className="bg-[#d9543f] hover:bg-[#b54035] text-white px-8 py-4 rounded-full text-lg font-semibold transition-all transform hover:scale-105 shadow-xl flex items-center justify-center gap-3">
-//               <Handshake size={20} />
-//               Get Property Help
-//             </button>
-//             <button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#d9543f] px-8 py-4 rounded-full text-lg font-semibold transition-all flex items-center justify-center gap-3">
-//               <Phone size={20} />
-//               प्रॉपर्टी सहायता लें
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Floating Stats */}
-//       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-8 bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-2xl">
-//         <div className="text-center">
-//           <div className="text-2xl font-bold text-[#d9543f]">15+</div>
-//           <div className="text-sm text-gray-600">Years Experience</div>
-//         </div>
-//         <div className="text-center border-l border-gray-300 pl-8">
-//           <div className="text-2xl font-bold text-[#cc3f3f]">500+</div>
-//           <div className="text-sm text-gray-600">Happy Clients</div>
-//         </div>
-//         <div className="text-center border-l border-gray-300 pl-8">
-//           <div className="text-2xl font-bold text-green-600">100%</div>
-//           <div className="text-sm text-gray-600">Success Rate</div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
-
-
 import { useState, useEffect } from 'react';
 import { Search, Home, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
 
@@ -105,7 +39,7 @@ export default function HeroSlider() {
     <div className="relative w-full h-auto flex items-center justify-center font-sans overflow-hidden">
 
       {/* Background Slider */}
-      <div className="relative w-full h-[550px] sm:h-[600px] md:h-[650px] lg:h-[750px]">
+      <div className="relative w-full h-[500px] sm:h-[550px] md:h-[650px] lg:h-[750px]">
         {slides.map((slide, index) => (
           <div
             key={index}
@@ -138,33 +72,33 @@ export default function HeroSlider() {
       </button>
 
       {/* Content */}
-      <div className="absolute top-0 left-0 w-full h-full z-20 flex items-center justify-center px-4 text-center">
-        <div className="max-w-4xl space-y-6">
+      <div className="absolute top-0 left-0 w-full h-full z-20 flex items-center justify-center px-4 sm:px-6 text-center">
+        <div className="max-w-4xl space-y-4 sm:space-y-6 w-full">
           
           <div className="flex items-center justify-center">
             
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl text-white font-extrabold drop-shadow-md">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-extrabold drop-shadow-md leading-tight px-2">
             {slides[currentSlide].title}
           </h1>
 
-          <p className="text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto px-2">
             {slides[currentSlide].description}
           </p>
 
           {/* Search Box */}
-          <div className="bg-white/10 backdrop-blur-lg border border-white/30 p-5 rounded-3xl max-w-4xl mx-auto mt-6 shadow-xl">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+          <div className="bg-white/10 backdrop-blur-lg border border-white/30 p-3 sm:p-5 rounded-2xl sm:rounded-3xl max-w-4xl mx-auto mt-4 sm:mt-6 shadow-xl">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4">
 
-              <div className="md:col-span-4 flex items-center bg-white rounded-xl px-4 py-3">
-                <MapPin className="w-5 h-5 text-teal-600 mr-3" />
-                <input type="text" placeholder="Enter City, Zip, Address" 
-                  className="w-full bg-transparent outline-none"/>
+              <div className="md:col-span-4 flex items-center bg-white rounded-xl px-3 sm:px-4 py-2 sm:py-3">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 mr-2 sm:mr-3 flex-shrink-0" />
+                <input type="text" placeholder="City, Zip, Address" 
+                  className="w-full bg-transparent outline-none text-sm sm:text-base"/>
               </div>
 
               <div className="md:col-span-3 relative">
-                <select className="w-full bg-white rounded-xl px-4 py-3 outline-none font-semibold">
+                <select className="w-full bg-white rounded-xl px-3 sm:px-4 py-2 sm:py-3 outline-none font-semibold text-sm sm:text-base">
                   <option>Property Type</option>
                   <option>Residential</option>
                   <option>Commercial</option>
@@ -173,32 +107,32 @@ export default function HeroSlider() {
               </div>
 
               <div className="md:col-span-3 relative">
-                <select className="w-full bg-white rounded-xl px-4 py-3 outline-none font-semibold">
+                <select className="w-full bg-white rounded-xl px-3 sm:px-4 py-2 sm:py-3 outline-none font-semibold text-sm sm:text-base">
                   <option>Price Range</option>
                   <option>$100k - $500k</option>
                   <option>$500k - $1M</option>
                 </select>
               </div>
 
-              <button className="md:col-span-2 bg-teal-500 hover:bg-teal-600 text-white rounded-xl font-bold text-lg">
+              <button className="md:col-span-2 bg-teal-500 hover:bg-teal-600 text-white rounded-xl font-bold text-base sm:text-lg py-3 sm:py-0 transition-colors">
                 Search
               </button>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="flex justify-center gap-10 pt-6 text-white">
+          <div className="flex justify-center gap-6 sm:gap-10 pt-4 sm:pt-6 text-white">
             <div>
-              <h2 className="text-3xl font-bold">12k+</h2>
-              <p>Happy Customers</p>
+              <h2 className="text-2xl sm:text-3xl font-bold">12k+</h2>
+              <p className="text-xs sm:text-base">Happy Customers</p>
             </div>
-            <div className="border-x px-10">
-              <h2 className="text-3xl font-bold">15k+</h2>
-              <p>Listings Added</p>
+            <div className="border-x px-6 sm:px-10">
+              <h2 className="text-2xl sm:text-3xl font-bold">15k+</h2>
+              <p className="text-xs sm:text-base">Listings Added</p>
             </div>
             <div>
-              <h2 className="text-3xl font-bold">28+</h2>
-              <p>Awards</p>
+              <h2 className="text-2xl sm:text-3xl font-bold">28+</h2>
+              <p className="text-xs sm:text-base">Awards</p>
             </div>
           </div>
         </div>
