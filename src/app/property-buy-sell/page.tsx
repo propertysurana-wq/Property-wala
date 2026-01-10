@@ -650,6 +650,7 @@ import Link from "next/link";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
 import { CheckCircle } from "lucide-react";
+import { Loader2 } from "lucide-react";
 /* ---------- Handshake Icon ---------- */
 function Handshake(props: any) {
   return (
@@ -840,7 +841,7 @@ export default function PropertyBuySellPage() {
                     disabled={loading}
                     className="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-green-600 transition-all flex items-center justify-center gap-2 shadow-lg disabled:opacity-70"
                   >
-                    {loading ? <Loader2 className="animate-spin" /> : "Submit Request"}
+                  {loading ? <Loader2 className="animate-spin" /> : "Submit Request"}
                   </button>
                 </form>
               )}
