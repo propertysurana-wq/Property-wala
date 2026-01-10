@@ -593,7 +593,7 @@ export default function ContactPage() {
   const [submitStatus, setSubmitStatus] = useState({
     loading: false,
     success: false,
-    error: null
+    error: ""
   });
 
   // Fetch Contact Information on mount
@@ -617,21 +617,21 @@ export default function ContactPage() {
   };
 
   // Handle input changes
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     
     // Clear error when user starts typing
     if (submitStatus.error) {
-      setSubmitStatus({ loading: false, success: false, error: null });
+      setSubmitStatus({ loading: false, success: false, error: "" });
     }
   };
 
   // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     
     // Set loading state
-    setSubmitStatus({ loading: true, success: false, error: null });
+    setSubmitStatus({ loading: true, success: false, error: "" });
 
     try {
       // Make API call to backend
@@ -647,7 +647,7 @@ export default function ContactPage() {
 
       if (response.ok && data.success) {
         // Success - show message
-        setSubmitStatus({ loading: false, success: true, error: null });
+        setSubmitStatus({ loading: false, success: true, error: "" });
         
         // Reset form after 3 seconds
         setTimeout(() => {
@@ -657,7 +657,7 @@ export default function ContactPage() {
             subject: 'Buy Property',
             message: ''
           });
-          setSubmitStatus({ loading: false, success: false, error: null });
+          setSubmitStatus({ loading: false, success: false, error: "" });
         }, 3000);
       } else {
         // Error from API
