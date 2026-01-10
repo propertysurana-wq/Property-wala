@@ -649,7 +649,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
-
+import { CheckCircle } from "lucide-react";
 /* ---------- Handshake Icon ---------- */
 function Handshake(props: any) {
   return (
@@ -784,11 +784,19 @@ export default function PropertyBuySellPage() {
                 <p className="text-sm text-slate-500 mt-1">Get expert advice instantly</p>
               </div>
 
-              {success ? (
+              {/* {success ? (
                 <div className="bg-green-50 text-green-700 p-4 rounded-xl flex items-center justify-center gap-2 font-bold mb-4 border border-green-200">
                   <CheckCircle size={20} /> Request Sent!
                 </div>
-              ) : (
+              ) : ( */}
+              {success ? (
+  <div className="bg-green-50 text-green-700 p-4 rounded-xl flex items-center justify-center gap-2 font-bold mb-4 border border-green-200">
+    <CheckCircle size={20} />
+    Request Sent!
+  </div>
+) : (
+  
+
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <input
                     value={name}
