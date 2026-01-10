@@ -1131,9 +1131,14 @@ interface ContactInfo {
   };
 }
 
+// export default function PropertyDetailPage() {
+//   const { id } = useParams();
+//   const router = useRouter();
 export default function PropertyDetailPage() {
-  const { id } = useParams();
+  const params = useParams();
   const router = useRouter();
+
+  const id = params?.id as string;
 
   const [property, setProperty] = useState<Property | null>(null);
   const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
