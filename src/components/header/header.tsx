@@ -27,17 +27,22 @@ export default function Navbar() {
             <Link href="/service" className="nav-link">Services</Link>
             <Link href="/Process" className="nav-link">Process</Link>
             <Link href="/Contact" className="nav-link">Contact</Link>
+            {/* <Link href="/Adminlogin" className="nav-link">Contact</Link> */}
           </div>
+          
 
           {/* Desktop Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
-            <button className="bg-green-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-green-700 transition">
-    Sign In
-  </button>
-
+           <div className="hidden md:flex items-center space-x-4">
+            <Link href="/userlogin">
+              <button className="bg-green-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-green-700 transition">
+                Sign In
+              </button>
+            </Link>
+<Link href="/Adminlogin">
   <button className="bg-green-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-green-700 transition">
-    Register
+    Admin
   </button>
+   </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -60,13 +65,17 @@ export default function Navbar() {
 
               {/* Mobile Buttons */}
               <div className="flex flex-col space-y-3 pt-4">
-                 <button className="bg-green-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-green-700 transition">
-    Sign In
-  </button>
+                <Link href="/userlogin">
+                  <button className="bg-green-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-green-700 transition w-full">
+                    Sign In
+                  </button>
+                </Link>
 
+                <Link href="/Adminlogin">
   <button className="bg-green-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-green-700 transition">
-    Register
+    Admin
   </button>
+   </Link>
               </div>
 
             </div>

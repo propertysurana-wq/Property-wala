@@ -309,14 +309,487 @@
 
 
 
-'use client'
-import { FileText, Check, Phone, Mail, MapPin, ArrowRight, Download, Clock, FileSearch, Building, ChevronDown, ShieldCheck, Printer } from "lucide-react";
+// 'use client'
+// import { FileText, Check, Phone, Mail, MapPin, ArrowRight, Download, Clock, FileSearch, Building, ChevronDown, ShieldCheck, Printer } from "lucide-react";
+// import { useState } from "react";
+// import Link from "next/link";
+// import Footer from "@/components/footer/footer";
+// import Header from "@/components/header/header";
+// export default function NakalMapExtractionPage() {
+//   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+//   const documents = [
+//     {
+//       icon: FileText,
+//       title: "Khatauni Nakal",
+//       hindiTitle: "खतौनी नकल",
+//       description: "जमीन के मालिकाना हक का सरकारी रिकॉर्ड (Record of Rights).",
+//       color: "bg-emerald-100 text-emerald-700"
+//     },
+//     {
+//       icon: MapPin,
+//       title: "Khasra Map",
+//       hindiTitle: "खसरा नक्शा",
+//       description: "जमीन का नक्शा जिसमें खेत की सीमा और माप होती है।",
+//       color: "bg-slate-100 text-slate-700"
+//     },
+//     {
+//       icon: FileSearch,
+//       title: "B1 Khasra",
+//       hindiTitle: "बी-1 खसरा",
+//       description: "फसल और सिंचाई का रिकॉर्ड, लोन और मुआवजे के लिए जरूरी।",
+//       color: "bg-emerald-100 text-emerald-700"
+//     },
+//     {
+//       icon: Building,
+//       title: "Property Map",
+//       hindiTitle: "संपत्ति नक्शा",
+//       description: "मकान या प्लॉट का नक्शा जो नगर निगम या अथॉरिटी से पास हो।",
+//       color: "bg-slate-100 text-slate-700"
+//     }
+//   ];
+
+//   const services = [
+//     "Khatauni Copy (खतौनी नकल)",
+//     "Khasra Map (खसरा नक्शा)",
+//     "B1 Khasra Extract",
+//     "Mutation Records (दाखिल खारिज)",
+//     "Land Measurement Records",
+//     "Revenue Court Records",
+//     "Tehsil Records",
+//     "Old Property Records"
+//   ];
+
+//   const process = [
+//     { step: 1, title: "Request", description: "Tell us details: Khasra No., Village." },
+//     { step: 2, title: "Processing", description: "We visit Tehsil/Govt offices." },
+//     { step: 3, title: "Verify", description: "Checking accuracy of records." },
+//     { step: 4, title: "Delivery", description: "Get certified copies delivered." }
+//   ];
+
+//   const faqs = [
+//     {
+//       question: "नकल निकलवाने के लिए क्या जानकारी चाहिए?",
+//       englishQuestion: "Info needed for Nakal?",
+//       answer: "खसरा नंबर, गांव का नाम, तहसील और जिला। अगर मालिक का नाम पता हो तो और आसानी होगी।"
+//     },
+//     {
+//       question: "कितना समय लगता है?",
+//       englishQuestion: "Time taken?",
+//       answer: "आमतौर पर 3-7 दिन। अगर अर्जेंट है तो हम 24-48 घंटे में भी कोशिश कर सकते हैं।"
+//     },
+//     {
+//       question: "क्या ये दस्तावेज कानूनी रूप से मान्य हैं?",
+//       englishQuestion: "Are documents valid?",
+//       answer: "जी हाँ, हम सिर्फ सरकारी दफ्तर से सर्टिफाइड (पक्की) नकल ही निकलवा कर देते हैं जो कोर्ट और बैंक में मान्य है।"
+//     },
+//     {
+//       question: "क्या पुराने रिकॉर्ड भी मिल सकते हैं?",
+//       englishQuestion: "Old records available?",
+//       answer: "जी हाँ, हम पुराने जमाबंदी और रिकॉर्ड भी निकलवा सकते हैं, इसमें थोड़ा समय ज्यादा लग सकता है।"
+//     }
+//   ];
+
+//   return (
+//     <div className="min-h-screen bg-slate-50 font-sans">
+//       <Header/>
+//       {/* --- HERO SECTION --- */}
+//       <section className="relative bg-slate-900 py-24 overflow-hidden">
+//         {/* Abstract Pattern */}
+//         <div className="absolute inset-0 opacity-20">
+//           <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500 rounded-full blur-[120px]"></div>
+//           <div className="absolute bottom-0 left-0 w-80 h-80 bg-emerald-700 rounded-full blur-[100px]"></div>
+//         </div>
+        
+//         <div className="container mx-auto px-4 relative z-10">
+//           <Link href="/#services" className="inline-flex items-center text-emerald-400 hover:text-white mb-8 transition-colors text-sm font-bold uppercase tracking-wider">
+//             <ArrowRight className="rotate-180 mr-2" size={16} />
+//             Back to Services
+//           </Link>
+          
+//           <div className="flex flex-col lg:flex-row items-center gap-16">
+            
+//             {/* Left Content */}
+//             <div className="flex-1 text-center lg:text-left">
+//               <div className="inline-flex items-center gap-2 bg-emerald-900/50 border border-emerald-500/30 rounded-full px-4 py-1.5 mb-6">
+//                 <Printer className="w-4 h-4 text-emerald-400" />
+//                 <span className="text-emerald-100 text-xs font-bold uppercase tracking-wider">Fast Document Service</span>
+//               </div>
+
+//               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight">
+//                 नक़ल और नक्शा <br/>
+//                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">घर बैठे प्राप्त करें</span>
+//               </h1>
+              
+//               <p className="text-lg text-slate-300 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+//                 We extract certified property records (Nakal, Khasra, Map) directly from government revenue offices. 100% Legal & Verified.
+//               </p>
+              
+//               <div className="flex flex-wrap gap-6 mb-10 justify-center lg:justify-start text-sm font-medium text-slate-300">
+//                 <div className="flex items-center bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700">
+//                   <Clock className="mr-2 text-emerald-400" size={18} />
+//                   <span>3-7 Days Delivery</span>
+//                 </div>
+//                 <div className="flex items-center bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700">
+//                   <ShieldCheck className="mr-2 text-emerald-400" size={18} />
+//                   <span>Government Certified</span>
+//                 </div>
+//               </div>
+              
+//               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+//                 <a href="tel:+919876543210" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-emerald-500/30 transition-all flex items-center justify-center gap-2">
+//                   <Phone size={20} /> Call Now
+//                 </a>
+//                 <a href="#request" className="bg-white text-slate-900 hover:bg-slate-100 px-8 py-4 rounded-xl font-bold text-lg shadow-md transition-all flex items-center justify-center gap-2">
+//                   <FileText size={20} /> Request Nakal
+//                 </a>
+//               </div>
+//             </div>
+            
+//             {/* Right Form Card */}
+//             <div id="request" className="flex-1 w-full max-w-md">
+//               <div className="bg-white rounded-3xl p-8 shadow-2xl border border-slate-200 relative overflow-hidden">
+//                 <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500"></div>
+                
+//                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Document Request</h3>
+//                 <p className="text-slate-500 mb-6 text-sm">Fill details to get your land records.</p>
+                
+//                 <form className="space-y-4">
+//                   <div className="grid grid-cols-2 gap-4">
+//                     <div>
+//                       <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Name</label>
+//                       <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm" placeholder="Your Name" />
+//                     </div>
+//                     <div>
+//                       <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Phone</label>
+//                       <input type="tel" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm" placeholder="Mobile" />
+//                     </div>
+//                   </div>
+                  
+//                   <div>
+//                     <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Document Type</label>
+//                     <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm text-slate-700 cursor-pointer">
+//                       <option>Select Document...</option>
+//                       <option>Khatauni Nakal</option>
+//                       <option>Khasra Map</option>
+//                       <option>Mutation Copy</option>
+//                       <option>Registry Copy</option>
+//                     </select>
+//                   </div>
+
+//                   <div>
+//                     <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Property Details</label>
+//                     <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm mb-2" placeholder="Khasra No. / Khata No." />
+//                     <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm" placeholder="Village, Tehsil & District" />
+//                   </div>
+
+//                   <button className="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-emerald-600 transition-all shadow-lg mt-2">
+//                     Submit Request
+//                   </button>
+//                 </form>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* --- DOCUMENT TYPES GRID --- */}
+//       <section className="py-24 bg-white">
+//         <div className="container mx-auto px-4">
+//           <div className="text-center mb-16">
+//             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
+//               Documents We Extract
+//             </h2>
+//             <p className="text-emerald-600 font-bold text-lg">
+//               हम ये सभी सरकारी दस्तावेज़ निकलवा सकते हैं
+//             </p>
+//           </div>
+          
+//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+//             {documents.map((doc, index) => (
+//               <div key={index} className="group bg-slate-50 rounded-2xl p-6 hover:bg-white hover:shadow-xl transition-all border border-slate-100 hover:border-emerald-200 text-center">
+//                 <div className={`w-16 h-16 ${doc.color} rounded-2xl flex items-center justify-center mb-5 mx-auto shadow-sm group-hover:scale-110 transition-transform`}>
+//                   <doc.icon size={32} />
+//                 </div>
+//                 <h3 className="text-xl font-bold text-slate-900 mb-1">{doc.title}</h3>
+//                 <p className="text-emerald-600 font-bold text-sm mb-3">{doc.hindiTitle}</p>
+//                 <p className="text-slate-500 text-sm leading-relaxed">{doc.description}</p>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* --- FULL LIST --- */}
+//       <section className="py-20 bg-emerald-50/50">
+//         <div className="container mx-auto px-4">
+//           <div className="max-w-4xl mx-auto">
+//             <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">Complete List of Services</h3>
+//             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//               {services.map((service, index) => (
+//                 <div key={index} className="flex items-center bg-white p-4 rounded-xl border border-emerald-100 shadow-sm hover:shadow-md transition-shadow">
+//                   <div className="bg-emerald-100 p-1.5 rounded-full mr-3">
+//                     <Check className="text-emerald-600 w-4 h-4" />
+//                   </div>
+//                   <span className="font-medium text-slate-700">{service}</span>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* --- PROCESS STEPS --- */}
+//       <section className="py-24 bg-white">
+//         <div className="container mx-auto px-4">
+//           <div className="text-center mb-16">
+//             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">How It Works</h2>
+//             <p className="text-slate-500 text-lg">Simple 4-Step Extraction Process</p>
+//           </div>
+          
+//           <div className="max-w-5xl mx-auto">
+//             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+//               {/* Connector Line (Desktop) */}
+//               <div className="hidden lg:block absolute top-8 left-[10%] right-[10%] h-0.5 bg-slate-200 -z-0"></div>
+
+//               {process.map((item, index) => (
+//                 <div key={index} className="relative z-10 flex flex-col items-center text-center group">
+//                   <div className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center text-white font-bold text-xl mb-6 shadow-xl border-4 border-white group-hover:bg-emerald-600 transition-colors">
+//                     {item.step}
+//                   </div>
+//                   <h3 className="text-lg font-bold text-slate-900 mb-2">{item.title}</h3>
+//                   <p className="text-slate-500 text-sm leading-relaxed max-w-[200px]">{item.description}</p>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* --- FAQ --- */}
+//       <section className="py-24 bg-slate-50 border-t border-slate-200">
+//         <div className="container mx-auto px-4 max-w-3xl">
+//           <div className="text-center mb-12">
+//             <h2 className="text-3xl font-extrabold text-slate-900 mb-2">FAQ</h2>
+//             <p className="text-emerald-600 font-medium">Common Questions about Nakal</p>
+//           </div>
+          
+//           <div className="space-y-4">
+//             {faqs.map((faq, index) => (
+//               <div key={index} className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-emerald-300 transition-colors shadow-sm">
+//                 <button
+//                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
+//                   className="w-full flex items-center justify-between p-5 text-left"
+//                 >
+//                   <div>
+//                     <span className="font-bold text-slate-800 block text-lg">{faq.question}</span>
+//                     <span className="text-xs font-bold text-emerald-600 uppercase mt-1 block">{faq.englishQuestion}</span>
+//                   </div>
+//                   <ChevronDown className={`text-slate-400 transition-transform duration-300 ${openFaq === index ? 'rotate-180' : ''}`} />
+//                 </button>
+//                 {openFaq === index && (
+//                   <div className="px-5 pb-5 text-slate-600 leading-relaxed border-t border-slate-50 pt-4 bg-emerald-50/30">
+//                     {faq.answer}
+//                   </div>
+//                 )}
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* --- FOOTER CTA --- */}
+//       <section className="py-16 bg-emerald-700 text-white text-center">
+//         <div className="container mx-auto px-4">
+//           <h2 className="text-3xl font-bold mb-6">Need Urgent Documents?</h2>
+//           <p className="text-emerald-100 text-lg mb-8">We can help you get them faster. Contact us now.</p>
+//           <div className="flex justify-center gap-4">
+//             <a href="tel:+919876543210" className="bg-white text-emerald-800 px-8 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
+//               <Phone size={20} /> +91 98765 43210
+//             </a>
+//           </div>
+//         </div>
+//       </section>
+// <Footer/>
+//     </div>
+//   );
+// }
+// "use client";
+
+// import { useState } from "react";
+// import { Phone, FileText } from "lucide-react";
+// import Header from "@/components/header/header";
+// import Footer from "@/components/footer/footer";
+
+// export default function NakalMapExtractionPage() {
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     phone: "",
+//     documentType: "",
+//     khasraOrKhataNo: "",
+//     addressDetails: ""
+//   });
+
+//   const [loading, setLoading] = useState(false);
+
+//   const handleChange = (
+//     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+//   ) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   const handleSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     setLoading(true);
+
+//     const res = await fetch("https://propertybackend-6bou.onrender.com/api/document-request", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify(formData)
+//     });
+
+//     const result = await res.json();
+//     setLoading(false);
+
+//     if (result.success) {
+//       alert("Document request submitted successfully ✅");
+//       setFormData({
+//         name: "",
+//         phone: "",
+//         documentType: "",
+//         khasraOrKhataNo: "",
+//         addressDetails: ""
+//       });
+//     } else {
+//       alert(result.message || "Error");
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-slate-50">
+//       <Header />
+
+//       <section className="py-20">
+//         <div className="max-w-md mx-auto bg-white p-8 rounded-3xl shadow-xl">
+//           <h2 className="text-2xl font-bold mb-2">Document Request</h2>
+//           <p className="text-slate-500 mb-6">
+//             Fill details to get your land records
+//           </p>
+
+//           <form onSubmit={handleSubmit} className="space-y-4">
+//             <input
+//               name="name"
+//               value={formData.name}
+//               onChange={handleChange}
+//               placeholder="Your Name"
+//               className="w-full px-4 py-3 border rounded-xl"
+//               required
+//             />
+
+//             <input
+//               name="phone"
+//               value={formData.phone}
+//               onChange={handleChange}
+//               placeholder="Mobile Number"
+//               className="w-full px-4 py-3 border rounded-xl"
+//               required
+//             />
+
+//             <select
+//               name="documentType"
+//               value={formData.documentType}
+//               onChange={handleChange}
+//               className="w-full px-4 py-3 border rounded-xl"
+//               required
+//             >
+//               <option value="">Select Document</option>
+//               <option>Khatauni Nakal</option>
+//               <option>Khasra Map</option>
+//               <option>Mutation Copy</option>
+//               <option>Registry Copy</option>
+//             </select>
+
+//             <input
+//               name="khasraOrKhataNo"
+//               value={formData.khasraOrKhataNo}
+//               onChange={handleChange}
+//               placeholder="Khasra / Khata No."
+//               className="w-full px-4 py-3 border rounded-xl"
+//               required
+//             />
+
+//             <input
+//               name="addressDetails"
+//               value={formData.addressDetails}
+//               onChange={handleChange}
+//               placeholder="Village, Tehsil & District"
+//               className="w-full px-4 py-3 border rounded-xl"
+//               required
+//             />
+
+//             <button
+//               disabled={loading}
+//               className="w-full bg-slate-900 text-white py-4 rounded-xl hover:bg-emerald-600 transition"
+//             >
+//               {loading ? "Submitting..." : "Submit Request"}
+//             </button>
+//           </form>
+
+//           <div className="mt-6 text-center">
+//             <a
+//               href="tel:+919876543210"
+//               className="inline-flex items-center gap-2 text-emerald-600 font-bold"
+//             >
+//               <Phone size={18} /> Call Now
+//             </a>
+//           </div>
+//         </div>
+//       </section>
+
+//       <Footer />
+//     </div>
+//   );
+// }
+"use client";
+
 import { useState } from "react";
+import {
+  FileText,
+  Check,
+  Phone,
+  MapPin,
+  ArrowRight,
+  Clock,
+  FileSearch,
+  Building,
+  ChevronDown,
+  ShieldCheck,
+  Printer,
+} from "lucide-react";
 import Link from "next/link";
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
+
+type FormData = {
+  name: string;
+  phone: string;
+  documentType: string;
+  khasraOrKhataNo: string;
+  addressDetails: string;
+};
+
 export default function NakalMapExtractionPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    phone: "",
+    documentType: "",
+    khasraOrKhataNo: "",
+    addressDetails: "",
+  });
+
+  const [loading, setLoading] = useState(false);
 
   const documents = [
     {
@@ -324,29 +797,29 @@ export default function NakalMapExtractionPage() {
       title: "Khatauni Nakal",
       hindiTitle: "खतौनी नकल",
       description: "जमीन के मालिकाना हक का सरकारी रिकॉर्ड (Record of Rights).",
-      color: "bg-emerald-100 text-emerald-700"
+      color: "bg-emerald-100 text-emerald-700",
     },
     {
       icon: MapPin,
       title: "Khasra Map",
       hindiTitle: "खसरा नक्शा",
       description: "जमीन का नक्शा जिसमें खेत की सीमा और माप होती है।",
-      color: "bg-slate-100 text-slate-700"
+      color: "bg-slate-100 text-slate-700",
     },
     {
       icon: FileSearch,
       title: "B1 Khasra",
       hindiTitle: "बी-1 खसरा",
       description: "फसल और सिंचाई का रिकॉर्ड, लोन और मुआवजे के लिए जरूरी।",
-      color: "bg-emerald-100 text-emerald-700"
+      color: "bg-emerald-100 text-emerald-700",
     },
     {
       icon: Building,
       title: "Property Map",
       hindiTitle: "संपत्ति नक्शा",
       description: "मकान या प्लॉट का नक्शा जो नगर निगम या अथॉरिटी से पास हो।",
-      color: "bg-slate-100 text-slate-700"
-    }
+      color: "bg-slate-100 text-slate-700",
+    },
   ];
 
   const services = [
@@ -357,74 +830,124 @@ export default function NakalMapExtractionPage() {
     "Land Measurement Records",
     "Revenue Court Records",
     "Tehsil Records",
-    "Old Property Records"
+    "Old Property Records",
   ];
 
   const process = [
     { step: 1, title: "Request", description: "Tell us details: Khasra No., Village." },
     { step: 2, title: "Processing", description: "We visit Tehsil/Govt offices." },
     { step: 3, title: "Verify", description: "Checking accuracy of records." },
-    { step: 4, title: "Delivery", description: "Get certified copies delivered." }
+    { step: 4, title: "Delivery", description: "Get certified copies delivered." },
   ];
 
   const faqs = [
     {
       question: "नकल निकलवाने के लिए क्या जानकारी चाहिए?",
       englishQuestion: "Info needed for Nakal?",
-      answer: "खसरा नंबर, गांव का नाम, तहसील और जिला। अगर मालिक का नाम पता हो तो और आसानी होगी।"
+      answer:
+        "खसरा नंबर, गांव का नाम, तहसील और जिला। अगर मालिक का नाम पता हो तो और आसानी होगी।",
     },
     {
       question: "कितना समय लगता है?",
       englishQuestion: "Time taken?",
-      answer: "आमतौर पर 3-7 दिन। अगर अर्जेंट है तो हम 24-48 घंटे में भी कोशिश कर सकते हैं।"
+      answer: "आमतौर पर 3-7 दिन। अगर अर्जेंट है तो हम 24-48 घंटे में भी कोशिश कर सकते हैं।",
     },
     {
       question: "क्या ये दस्तावेज कानूनी रूप से मान्य हैं?",
       englishQuestion: "Are documents valid?",
-      answer: "जी हाँ, हम सिर्फ सरकारी दफ्तर से सर्टिफाइड (पक्की) नकल ही निकलवा कर देते हैं जो कोर्ट और बैंक में मान्य है।"
+      answer:
+        "जी हाँ, हम सिर्फ सरकारी दफ्तर से सर्टिफाइड (पक्की) नकल ही निकलवा कर देते हैं जो कोर्ट और बैंक में मान्य है।",
     },
     {
       question: "क्या पुराने रिकॉर्ड भी मिल सकते हैं?",
       englishQuestion: "Old records available?",
-      answer: "जी हाँ, हम पुराने जमाबंदी और रिकॉर्ड भी निकलवा सकते हैं, इसमें थोड़ा समय ज्यादा लग सकता है।"
-    }
+      answer:
+        "जी हाँ, हम पुराने जमाबंदी और रिकॉर्ड भी निकलवा सकते हैं, इसमें थोड़ा समय ज्यादा लग सकता है।",
+    },
   ];
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch("https://propertybackend-6bou.onrender.com/api/document-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await res.json().catch(() => ({}));
+
+      if (res.ok && result?.success) {
+        alert("Document request submitted successfully ✅");
+        setFormData({
+          name: "",
+          phone: "",
+          documentType: "",
+          khasraOrKhataNo: "",
+          addressDetails: "",
+        });
+      } else {
+        alert(result?.message || "Error submitting request");
+      }
+    } catch (err) {
+      alert("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
-      <Header/>
-      {/* --- HERO SECTION --- */}
+      <Header />
+
+      {/* HERO */}
       <section className="relative bg-slate-900 py-24 overflow-hidden">
-        {/* Abstract Pattern */}
+        {/* glow */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500 rounded-full blur-[120px]"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-emerald-700 rounded-full blur-[100px]"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-emerald-700 rounded-full blur-[100px]" />
         </div>
-        
+
         <div className="container mx-auto px-4 relative z-10">
-          <Link href="/#services" className="inline-flex items-center text-emerald-400 hover:text-white mb-8 transition-colors text-sm font-bold uppercase tracking-wider">
+          <Link
+            href="/#services"
+            className="inline-flex items-center text-emerald-400 hover:text-white mb-8 transition-colors text-sm font-bold uppercase tracking-wider"
+          >
             <ArrowRight className="rotate-180 mr-2" size={16} />
             Back to Services
           </Link>
-          
+
           <div className="flex flex-col lg:flex-row items-center gap-16">
-            
-            {/* Left Content */}
+            {/* Left */}
             <div className="flex-1 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 bg-emerald-900/50 border border-emerald-500/30 rounded-full px-4 py-1.5 mb-6">
                 <Printer className="w-4 h-4 text-emerald-400" />
-                <span className="text-emerald-100 text-xs font-bold uppercase tracking-wider">Fast Document Service</span>
+                <span className="text-emerald-100 text-xs font-bold uppercase tracking-wider">
+                  Fast Document Service
+                </span>
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight">
-                नक़ल और नक्शा <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">घर बैठे प्राप्त करें</span>
+                नक़ल और नक्शा <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">
+                  घर बैठे प्राप्त करें
+                </span>
               </h1>
-              
+
               <p className="text-lg text-slate-300 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                We extract certified property records (Nakal, Khasra, Map) directly from government revenue offices. 100% Legal & Verified.
+                We extract certified property records (Nakal, Khasra, Map) directly from
+                government revenue offices. 100% Legal &amp; Verified.
               </p>
-              
+
               <div className="flex flex-wrap gap-6 mb-10 justify-center lg:justify-start text-sm font-medium text-slate-300">
                 <div className="flex items-center bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700">
                   <Clock className="mr-2 text-emerald-400" size={18} />
@@ -435,57 +958,127 @@ export default function NakalMapExtractionPage() {
                   <span>Government Certified</span>
                 </div>
               </div>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <a href="tel:+919876543210" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-emerald-500/30 transition-all flex items-center justify-center gap-2">
+                <a
+                  href="tel:+919876543210"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-emerald-500/30 transition-all flex items-center justify-center gap-2"
+                >
                   <Phone size={20} /> Call Now
                 </a>
-                <a href="#request" className="bg-white text-slate-900 hover:bg-slate-100 px-8 py-4 rounded-xl font-bold text-lg shadow-md transition-all flex items-center justify-center gap-2">
+                <a
+                  href="#request"
+                  className="bg-white text-slate-900 hover:bg-slate-100 px-8 py-4 rounded-xl font-bold text-lg shadow-md transition-all flex items-center justify-center gap-2"
+                >
                   <FileText size={20} /> Request Nakal
                 </a>
               </div>
             </div>
-            
-            {/* Right Form Card */}
+
+            {/* Right Form */}
             <div id="request" className="flex-1 w-full max-w-md">
               <div className="bg-white rounded-3xl p-8 shadow-2xl border border-slate-200 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500"></div>
-                
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Document Request</h3>
-                <p className="text-slate-500 mb-6 text-sm">Fill details to get your land records.</p>
-                
-                <form className="space-y-4">
+                <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500" />
+
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                  Document Request
+                </h3>
+                <p className="text-slate-500 mb-6 text-sm">
+                  Fill details to get your land records.
+                </p>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Name</label>
-                      <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm" placeholder="Your Name" />
+                      <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                        Name
+                      </label>
+                      <input
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        type="text"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm"
+                        placeholder="Your Name"
+                      />
                     </div>
+
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Phone</label>
-                      <input type="tel" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm" placeholder="Mobile" />
+                      <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                        Phone
+                      </label>
+                      <input
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required
+                        type="tel"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm"
+                        placeholder="Mobile"
+                      />
                     </div>
                   </div>
-                  
+
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Document Type</label>
-                    <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm text-slate-700 cursor-pointer">
-                      <option>Select Document...</option>
-                      <option>Khatauni Nakal</option>
-                      <option>Khasra Map</option>
-                      <option>Mutation Copy</option>
-                      <option>Registry Copy</option>
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                      Document Type
+                    </label>
+                    <select
+                      name="documentType"
+                      value={formData.documentType}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm text-slate-700 cursor-pointer"
+                    >
+                      <option value="">Select Document...</option>
+                      <option value="Khatauni Nakal">Khatauni Nakal</option>
+                      <option value="Khasra Map">Khasra Map</option>
+                      <option value="Mutation Copy">Mutation Copy</option>
+                      <option value="Registry Copy">Registry Copy</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Property Details</label>
-                    <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm mb-2" placeholder="Khasra No. / Khata No." />
-                    <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm" placeholder="Village, Tehsil & District" />
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                      Property Details
+                    </label>
+                    <input
+                      name="khasraOrKhataNo"
+                      value={formData.khasraOrKhataNo}
+                      onChange={handleChange}
+                      required
+                      type="text"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm mb-2"
+                      placeholder="Khasra No. / Khata No."
+                    />
+                    <input
+                      name="addressDetails"
+                      value={formData.addressDetails}
+                      onChange={handleChange}
+                      required
+                      type="text"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm"
+                      placeholder="Village, Tehsil & District"
+                    />
                   </div>
 
-                  <button className="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-emerald-600 transition-all shadow-lg mt-2">
-                    Submit Request
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-emerald-600 transition-all shadow-lg mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {loading ? "Submitting..." : "Submit Request"}
                   </button>
+
+                  <div className="pt-2 text-center">
+                    <a
+                      href="tel:+919876543210"
+                      className="inline-flex items-center gap-2 text-emerald-600 font-bold"
+                    >
+                      <Phone size={18} /> Call Now
+                    </a>
+                  </div>
                 </form>
               </div>
             </div>
@@ -493,7 +1086,7 @@ export default function NakalMapExtractionPage() {
         </div>
       </section>
 
-      {/* --- DOCUMENT TYPES GRID --- */}
+      {/* DOCUMENT TYPES GRID */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -504,30 +1097,46 @@ export default function NakalMapExtractionPage() {
               हम ये सभी सरकारी दस्तावेज़ निकलवा सकते हैं
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {documents.map((doc, index) => (
-              <div key={index} className="group bg-slate-50 rounded-2xl p-6 hover:bg-white hover:shadow-xl transition-all border border-slate-100 hover:border-emerald-200 text-center">
-                <div className={`w-16 h-16 ${doc.color} rounded-2xl flex items-center justify-center mb-5 mx-auto shadow-sm group-hover:scale-110 transition-transform`}>
+              <div
+                key={index}
+                className="group bg-slate-50 rounded-2xl p-6 hover:bg-white hover:shadow-xl transition-all border border-slate-100 hover:border-emerald-200 text-center"
+              >
+                <div
+                  className={`w-16 h-16 ${doc.color} rounded-2xl flex items-center justify-center mb-5 mx-auto shadow-sm group-hover:scale-110 transition-transform`}
+                >
                   <doc.icon size={32} />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-1">{doc.title}</h3>
-                <p className="text-emerald-600 font-bold text-sm mb-3">{doc.hindiTitle}</p>
-                <p className="text-slate-500 text-sm leading-relaxed">{doc.description}</p>
+                <h3 className="text-xl font-bold text-slate-900 mb-1">
+                  {doc.title}
+                </h3>
+                <p className="text-emerald-600 font-bold text-sm mb-3">
+                  {doc.hindiTitle}
+                </p>
+                <p className="text-slate-500 text-sm leading-relaxed">
+                  {doc.description}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* --- FULL LIST --- */}
+      {/* FULL LIST */}
       <section className="py-20 bg-emerald-50/50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">Complete List of Services</h3>
+            <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">
+              Complete List of Services
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {services.map((service, index) => (
-                <div key={index} className="flex items-center bg-white p-4 rounded-xl border border-emerald-100 shadow-sm hover:shadow-md transition-shadow">
+                <div
+                  key={index}
+                  className="flex items-center bg-white p-4 rounded-xl border border-emerald-100 shadow-sm hover:shadow-md transition-shadow"
+                >
                   <div className="bg-emerald-100 p-1.5 rounded-full mr-3">
                     <Check className="text-emerald-600 w-4 h-4" />
                   </div>
@@ -539,26 +1148,36 @@ export default function NakalMapExtractionPage() {
         </div>
       </section>
 
-      {/* --- PROCESS STEPS --- */}
+      {/* PROCESS */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">How It Works</h2>
-            <p className="text-slate-500 text-lg">Simple 4-Step Extraction Process</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
+              How It Works
+            </h2>
+            <p className="text-slate-500 text-lg">
+              Simple 4-Step Extraction Process
+            </p>
           </div>
-          
+
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-              {/* Connector Line (Desktop) */}
-              <div className="hidden lg:block absolute top-8 left-[10%] right-[10%] h-0.5 bg-slate-200 -z-0"></div>
+              <div className="hidden lg:block absolute top-8 left-[10%] right-[10%] h-0.5 bg-slate-200 -z-0" />
 
               {process.map((item, index) => (
-                <div key={index} className="relative z-10 flex flex-col items-center text-center group">
+                <div
+                  key={index}
+                  className="relative z-10 flex flex-col items-center text-center group"
+                >
                   <div className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center text-white font-bold text-xl mb-6 shadow-xl border-4 border-white group-hover:bg-emerald-600 transition-colors">
                     {item.step}
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">{item.title}</h3>
-                  <p className="text-slate-500 text-sm leading-relaxed max-w-[200px]">{item.description}</p>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed max-w-[200px]">
+                    {item.description}
+                  </p>
                 </div>
               ))}
             </div>
@@ -566,27 +1185,42 @@ export default function NakalMapExtractionPage() {
         </div>
       </section>
 
-      {/* --- FAQ --- */}
+      {/* FAQ */}
       <section className="py-24 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-extrabold text-slate-900 mb-2">FAQ</h2>
-            <p className="text-emerald-600 font-medium">Common Questions about Nakal</p>
+            <p className="text-emerald-600 font-medium">
+              Common Questions about Nakal
+            </p>
           </div>
-          
+
           <div className="space-y-4">
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-emerald-300 transition-colors shadow-sm">
+              <div
+                key={index}
+                className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-emerald-300 transition-colors shadow-sm"
+              >
                 <button
+                  type="button"
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
                   className="w-full flex items-center justify-between p-5 text-left"
                 >
                   <div>
-                    <span className="font-bold text-slate-800 block text-lg">{faq.question}</span>
-                    <span className="text-xs font-bold text-emerald-600 uppercase mt-1 block">{faq.englishQuestion}</span>
+                    <span className="font-bold text-slate-800 block text-lg">
+                      {faq.question}
+                    </span>
+                    <span className="text-xs font-bold text-emerald-600 uppercase mt-1 block">
+                      {faq.englishQuestion}
+                    </span>
                   </div>
-                  <ChevronDown className={`text-slate-400 transition-transform duration-300 ${openFaq === index ? 'rotate-180' : ''}`} />
+                  <ChevronDown
+                    className={`text-slate-400 transition-transform duration-300 ${
+                      openFaq === index ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
+
                 {openFaq === index && (
                   <div className="px-5 pb-5 text-slate-600 leading-relaxed border-t border-slate-50 pt-4 bg-emerald-50/30">
                     {faq.answer}
@@ -598,19 +1232,25 @@ export default function NakalMapExtractionPage() {
         </div>
       </section>
 
-      {/* --- FOOTER CTA --- */}
+      {/* FOOTER CTA */}
       <section className="py-16 bg-emerald-700 text-white text-center">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-6">Need Urgent Documents?</h2>
-          <p className="text-emerald-100 text-lg mb-8">We can help you get them faster. Contact us now.</p>
+          <p className="text-emerald-100 text-lg mb-8">
+            We can help you get them faster. Contact us now.
+          </p>
           <div className="flex justify-center gap-4">
-            <a href="tel:+919876543210" className="bg-white text-emerald-800 px-8 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
+            <a
+              href="tel:+919876543210"
+              className="bg-white text-emerald-800 px-8 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
+            >
               <Phone size={20} /> +91 98765 43210
             </a>
           </div>
         </div>
       </section>
-<Footer/>
+
+      <Footer />
     </div>
   );
 }
