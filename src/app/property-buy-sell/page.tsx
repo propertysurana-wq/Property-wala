@@ -723,8 +723,8 @@ export default function PropertyBuySellPage() {
 
   const process = [
     { step: 1, title: "मुलाकात", englishTitle: "Meet Us", icon: Users },
-    { step: 2, title: "प्रॉपर्टी देखें", englishTitle: "Visit", icon: MapPin },
-    { step: 3, title: "सौदा तय", englishTitle: "Deal", icon: Handshake },
+    { step: 2, title: "प्रॉपर्टी देखें", englishTitle: "Visit", icon: MapPin  },
+    { step: 3, title: "सौदा तय", englishTitle: "Deal", icon: Handshake  },
     { step: 4, title: "रजिस्ट्री", englishTitle: "Registry", icon: Key },
   ];
 
@@ -901,7 +901,7 @@ export default function PropertyBuySellPage() {
                 </div>
                 <h3 className="text-lg font-bold mb-1 group-hover:text-green-400 transition-colors">{step.title}</h3>
                 <p className="text-slate-500 text-xs uppercase tracking-wider mb-2">{step.englishTitle}</p>
-                <p className="text-slate-400 text-sm max-w-[200px]">{step.description}</p>
+                
               </div>
             ))}
           </div>
