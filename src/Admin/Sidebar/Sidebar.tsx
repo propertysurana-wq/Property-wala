@@ -490,13 +490,22 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
   const [contactOpen, setContactOpen] = useState(false);
 
   // open dropdown automatically when inside property routes
-  useEffect(() => {
-    const propertyRoutes = ["/Adminarea", "/PropertyTypes", "/property", "/propertylist"];
-    if (propertyRoutes.includes(pathname)) setPropertyOpen(true);
+  // useEffect(() => {
+  //   const propertyRoutes = ["/Adminarea", "/PropertyTypes", "/property", "/propertylist"];
+  //   if (propertyRoutes.includes(pathname:any)) setPropertyOpen(true);
     
-    const contactRoutes = ["/contactinfromation", "/contactfrom"];
-    if (contactRoutes.includes(pathname)) setContactOpen(true);
-  }, [pathname]);
+  //   const contactRoutes = ["/contactinfromation", "/contactfrom"];
+  //   if (contactRoutes.includes(pathname:any)) setContactOpen(true);
+  // }, [pathname]);
+  useEffect(() => {
+  if (!pathname) return;
+
+  const propertyRoutes = ["/Adminarea", "/PropertyTypes", "/property", "/propertylist"];
+  const contactRoutes = ["/contactinfromation", "/contactfrom"];
+
+  setPropertyOpen(propertyRoutes.some(route => pathname.startsWith(route)));
+  setContactOpen(contactRoutes.some(route => pathname.startsWith(route)));
+}, [pathname]);
 
   const handleLogout = () => {
     if (confirm("Are you sure you want to logout?")) {
