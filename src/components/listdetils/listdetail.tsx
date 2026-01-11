@@ -447,7 +447,7 @@
 //   useEffect(() => {
 //     if (!id) return;
 
-//     fetch(`https://propertybackend-6bou.onrender.com/api/property/${id}`)
+//     fetch(`https://propertybackend-1-xdbs.onrender.com/api/property/${id}`)
 //       .then((res) => res.json())
 //       .then((data) => setProperty(data.data))
 //       .finally(() => setLoading(false));
@@ -534,7 +534,7 @@
 //         <img
 //           src={
 //             property.images?.length
-//               ? `https://propertybackend-6bou.onrender.com${property.images[currentImageIndex]}`
+//               ? `https://propertybackend-1-xdbs.onrender.com${property.images[currentImageIndex]}`
 //               : "/no-image.png"
 //           }
 //           alt="Property View"
@@ -1154,13 +1154,13 @@ export default function PropertyDetailPage() {
     if (!id) return;
 
     // Fetch Property
-    fetch(`https://propertybackend-6bou.onrender.com/api/property/${id}`)
+    fetch(`https://propertybackend-1-xdbs.onrender.com/api/property/${id}`)
       .then((res) => res.json())
       .then((data) => setProperty(data.data))
       .finally(() => setLoading(false));
 
     // Fetch Contact Information
-    fetch('https://propertybackend-6bou.onrender.com/api/contact')
+    fetch('https://propertybackend-1-xdbs.onrender.com/api/contact')
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data) {
@@ -1270,7 +1270,7 @@ export default function PropertyDetailPage() {
         <img
           src={
             property.images?.length
-              ? `https://propertybackend-6bou.onrender.com${property.images[currentImageIndex]}`
+              ? `https://propertybackend-1-xdbs.onrender.com${property.images[currentImageIndex]}`
               : "/no-image.png"
           }
           alt="Property View"

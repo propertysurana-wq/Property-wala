@@ -230,7 +230,7 @@ export default function HeroSlider() {
   const fetchPropertyData = async () => {
     try {
       // Fetch all properties
-      const propRes = await fetch('https://propertybackend-6bou.onrender.com/api/property');
+      const propRes = await fetch('https://propertybackend-1-xdbs.onrender.com/api/property');
       const propData: ApiResponse = await propRes.json();
       const allProperties = propData.data || [];
       

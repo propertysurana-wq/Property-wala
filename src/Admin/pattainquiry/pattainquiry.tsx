@@ -24,7 +24,7 @@
 //   const fetchData = async () => {
 //     try {
 //       setLoading(true);
-//       const res = await fetch("https://propertybackend-6bou.onrender.com/api/patta-inquiry");
+//       const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/patta-inquiry");
 //       const result = await res.json();
 
 //       if (!res.ok) throw new Error(result.message || "Failed to fetch");
@@ -47,7 +47,7 @@
 
 //     try {
 //       const res = await fetch(
-//         `https://propertybackend-6bou.onrender.com/api/patta-inquiry/${id}`,
+//         `https://propertybackend-1-xdbs.onrender.com/api/patta-inquiry/${id}`,
 //         { method: "DELETE" }
 //       );
 
@@ -200,7 +200,7 @@ export default function PattaInquiryListPage() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const res = await fetch("https://propertybackend-6bou.onrender.com/api/patta-inquiry");
+      const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/patta-inquiry");
       const result = await res.json();
 
       if (!res.ok) throw new Error(result.message || "Failed to fetch");
@@ -237,7 +237,7 @@ export default function PattaInquiryListPage() {
     if (!confirm("Are you sure you want to delete this inquiry?")) return;
 
     try {
-      await fetch(`https://propertybackend-6bou.onrender.com/api/patta-inquiry/${id}`, { method: "DELETE" });
+      await fetch(`https://propertybackend-1-xdbs.onrender.com/api/patta-inquiry/${id}`, { method: "DELETE" });
       
       // Update local state without refetching
       const newData = data.filter(item => item._id !== id);

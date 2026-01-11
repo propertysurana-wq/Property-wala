@@ -180,7 +180,7 @@ export default function ServiceAreasSection() {
 
   useEffect(() => {
     // Fetch all properties and extract unique city names
-    fetch("https://propertybackend-6bou.onrender.com/api/property")
+    fetch("https://propertybackend-1-xdbs.onrender.com/api/property")
       .then((res) => res.json())
       .then((data) => {
         const allCities: string[] = data.data.map((p: Property) => p.cityName);

@@ -35,7 +35,7 @@ export default function ConsultationsListPage() {
     try {
       setLoading(true);
       // Removed artificial delay for production feel, add back if needed
-      const res = await fetch("https://propertybackend-6bou.onrender.com/api/consultation");
+      const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/consultation");
       const result = await res.json();
 
       if (!res.ok) throw new Error("Failed to fetch data");
@@ -75,7 +75,7 @@ export default function ConsultationsListPage() {
         setData(newData);
         
         // Call API to delete
-        await fetch(`https://propertybackend-6bou.onrender.com/api/consultation/${id}`, { method: 'DELETE' });
+        await fetch(`https://propertybackend-1-xdbs.onrender.com/api/consultation/${id}`, { method: 'DELETE' });
       } catch (err) {
         alert("Failed to delete on server");
         fetchConsultations(); // Revert on error

@@ -134,7 +134,7 @@
 //     try {
 //       setLoading(true);
 
-//       const res = await fetch("https://propertybackend-6bou.onrender.com/api/consultation", {
+//       const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/consultation", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -523,7 +523,7 @@
 
 //     try {
 //       setLoading(true);
-//       const res = await fetch("https://propertybackend-6bou.onrender.com/api/consultation", {
+//       const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/consultation", {
 //         method: "POST",
 //         headers: { "Content-Type": "application/json" },
 //         body: JSON.stringify({ name, phone, type }),
@@ -693,7 +693,7 @@ export default function PropertyBuySellPage() {
 
     try {
       setLoading(true);
-      const res = await fetch("https://propertybackend-6bou.onrender.com/api/consultation", {
+      const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/consultation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, type }),

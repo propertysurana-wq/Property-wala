@@ -91,7 +91,7 @@
 // //         ...(searchTerm && { search: searchTerm })
 // //       });
 
-// //       const response = await fetch(`https://propertybackend-6bou.onrender.com/api/contacts?${params}`);
+// //       const response = await fetch(`https://propertybackend-1-xdbs.onrender.com/api/contacts?${params}`);
 // //       const data: ApiResponse<Contact[]> = await response.json();
 
 // //       if (response.ok && data.success) {
@@ -112,7 +112,7 @@
 // //   // Fetch statistics
 // //   const fetchStats = async (): Promise<void> => {
 // //     try {
-// //       const response = await fetch('https://propertybackend-6bou.onrender.com/api/contacts/stats/summary');
+// //       const response = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contacts/stats/summary');
 // //       const data: ApiResponse<Stats> = await response.json();
 
 // //       if (response.ok && data.success && data.data) {
@@ -130,7 +130,7 @@
 // //     }
 
 // //     try {
-// //       const response = await fetch(`https://propertybackend-6bou.onrender.com/api/contacts/${id}`, {
+// //       const response = await fetch(`https://propertybackend-1-xdbs.onrender.com/api/contacts/${id}`, {
 // //         method: 'DELETE'
 // //       });
 
@@ -152,7 +152,7 @@
 // //   // Update contact status
 // //   const handleStatusUpdate = async (id: string, newStatus: string): Promise<void> => {
 // //     try {
-// //       const response = await fetch(`https://propertybackend-6bou.onrender.com/api/contacts/${id}/status`, {
+// //       const response = await fetch(`https://propertybackend-1-xdbs.onrender.com/api/contacts/${id}/status`, {
 // //         method: 'PATCH',
 // //         headers: {
 // //           'Content-Type': 'application/json'
@@ -594,7 +594,7 @@
 //   const fetchContacts = async () => {
 //     try {
 //       setFetchLoading(true);
-//       const res = await fetch('https://propertybackend-6bou.onrender.com/api/contacts'); // Backend endpoint
+//       const res = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contacts'); // Backend endpoint
 //       const data = await res.json();
 
 //       if (data.success) {
@@ -652,7 +652,7 @@
 //     if (!confirm('Are you sure you want to delete this inquiry?')) return;
 
 //     try {
-//       const res = await fetch(`https://propertybackend-6bou.onrender.com/api/contacts/${id}`, { method: 'DELETE' });
+//       const res = await fetch(`https://propertybackend-1-xdbs.onrender.com/api/contacts/${id}`, { method: 'DELETE' });
 //       const data = await res.json();
 //       if (data.success) fetchContacts();
 //       else alert('Failed to delete contact');
@@ -664,7 +664,7 @@
 
 //   const handleStatusChange = async (id: string, status: string) => {
 //     try {
-//       const res = await fetch(`https://propertybackend-6bou.onrender.com/api/contacts/${id}/status`, {
+//       const res = await fetch(`https://propertybackend-1-xdbs.onrender.com/api/contacts/${id}/status`, {
 //         method: 'PATCH',
 //         headers: { 'Content-Type': 'application/json' },
 //         body: JSON.stringify({ status }),
@@ -865,7 +865,7 @@
 //   const fetchContacts = async () => {
 //     try {
 //       setFetchLoading(true);
-//       const res = await fetch('https://propertybackend-6bou.onrender.com/api/contacts');
+//       const res = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contacts');
 //       const data = await res.json();
 
 //       if (data.success) {
@@ -923,7 +923,7 @@
 //     if (!confirm('Are you sure you want to delete this inquiry?')) return;
 
 //     try {
-//       const res = await fetch(`https://propertybackend-6bou.onrender.com/api/contacts/${id}`, { method: 'DELETE' });
+//       const res = await fetch(`https://propertybackend-1-xdbs.onrender.com/api/contacts/${id}`, { method: 'DELETE' });
 //       const data = await res.json();
 //       if (data.success) fetchContacts();
 //       else alert('Failed to delete contact');
@@ -935,7 +935,7 @@
 
 //   const handleStatusChange = async (id: string, status: string) => {
 //     try {
-//       const res = await fetch(`https://propertybackend-6bou.onrender.com/api/contacts/${id}/status`, {
+//       const res = await fetch(`https://propertybackend-1-xdbs.onrender.com/api/contacts/${id}/status`, {
 //         method: 'PATCH',
 //         headers: { 'Content-Type': 'application/json' },
 //         body: JSON.stringify({ status }),
@@ -1223,7 +1223,7 @@
 //   const fetchContacts = async () => {
 //     try {
 //       setFetchLoading(true);
-//       const res = await fetch('https://propertybackend-6bou.onrender.com/api/contacts');
+//       const res = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contacts');
 //       const data = await res.json();
 
 //       if (data.success) {
@@ -1281,7 +1281,7 @@
 //     if (!confirm('Are you sure you want to delete this inquiry?')) return;
 
 //     try {
-//       const res = await fetch(`https://propertybackend-6bou.onrender.com/api/contacts/${id}`, { method: 'DELETE' });
+//       const res = await fetch(`https://propertybackend-1-xdbs.onrender.com/api/contacts/${id}`, { method: 'DELETE' });
 //       const data = await res.json();
 //       if (data.success) fetchContacts();
 //       else alert('Failed to delete contact');
@@ -1293,7 +1293,7 @@
 
 //   const handleStatusChange = async (id: string, status: string) => {
 //     try {
-//       const res = await fetch(`https://propertybackend-6bou.onrender.com/api/contacts/${id}/status`, {
+//       const res = await fetch(`https://propertybackend-1-xdbs.onrender.com/api/contacts/${id}/status`, {
 //         method: 'PATCH',
 //         headers: { 'Content-Type': 'application/json' },
 //         body: JSON.stringify({ status }),
@@ -1584,7 +1584,7 @@ export default function ContactListPage() {
       // Simulate delay for better UX (remove in production)
       await new Promise(resolve => setTimeout(resolve, 600));
       
-      const res = await fetch('https://propertybackend-6bou.onrender.com/api/contacts');
+      const res = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contacts');
       const data = await res.json();
 
       if (data.success) {
@@ -1657,7 +1657,7 @@ export default function ContactListPage() {
       setContacts(prev => prev.filter(c => c._id !== id));
       setFilteredContacts(prev => prev.filter(c => c._id !== id));
       
-      const res = await fetch(`https://propertybackend-6bou.onrender.com/api/contacts/${id}`, { method: 'DELETE' });
+      const res = await fetch(`https://propertybackend-1-xdbs.onrender.com/api/contacts/${id}`, { method: 'DELETE' });
       const data = await res.json();
       
       if (!data.success) throw new Error('Failed to delete');
@@ -1678,7 +1678,7 @@ export default function ContactListPage() {
     setFilteredContacts(prev => prev.map(c => c._id === id ? { ...c, status: status as any } : c));
 
     try {
-      const res = await fetch(`https://propertybackend-6bou.onrender.com/api/contacts/${id}/status`, {
+      const res = await fetch(`https://propertybackend-1-xdbs.onrender.com/api/contacts/${id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status }),

@@ -642,7 +642,7 @@
 //     e.preventDefault();
 //     setLoading(true);
 
-//     const res = await fetch("https://propertybackend-6bou.onrender.com/api/document-request", {
+//     const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/document-request", {
 //       method: "POST",
 //       headers: { "Content-Type": "application/json" },
 //       body: JSON.stringify(formData)
@@ -878,7 +878,7 @@ export default function NakalMapExtractionPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("https://propertybackend-6bou.onrender.com/api/document-request", {
+      const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/document-request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

@@ -26,7 +26,7 @@
 //   const fetchRequests = async () => {
 //     try {
 //       setLoading(true);
-//       const res = await fetch("https://propertybackend-6bou.onrender.com/api/document-request");
+//       const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/document-request");
 //       const result = await res.json();
 
 //       if (!res.ok) throw new Error("Failed to fetch data");
@@ -169,7 +169,7 @@
 //   const fetchRequests = async () => {
 //     try {
 //       setLoading(true);
-//       const res = await fetch("https://propertybackend-6bou.onrender.com/api/document-request");
+//       const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/document-request");
 //       const result = await res.json();
 
 //       if (!res.ok) throw new Error("Failed to fetch data");
@@ -204,7 +204,7 @@
 //   const handleDelete = async (id: string) => {
 //     if(confirm("Are you sure you want to delete this request?")) {
 //       try {
-//         await fetch(`https://propertybackend-6bou.onrender.com/api/document-request/${id}`, { method: 'DELETE' });
+//         await fetch(`https://propertybackend-1-xdbs.onrender.com/api/document-request/${id}`, { method: 'DELETE' });
 //         // Optimistic UI Update
 //         const newData = data.filter(item => item._id !== id);
 //         setData(newData);
@@ -415,7 +415,7 @@
 //   const fetchRequests = async () => {
 //     try {
 //       setLoading(true);
-//       const res = await fetch("https://propertybackend-6bou.onrender.com/api/document-request");
+//       const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/document-request");
 //       const result = await res.json();
 
 //       if (!res.ok) throw new Error("Failed to fetch data");
@@ -463,7 +463,7 @@
 //   const handleDelete = async (id: string) => {
 //     if(confirm("Are you sure you want to delete this request?")) {
 //       try {
-//         await fetch(`https://propertybackend-6bou.onrender.com/api/document-request/${id}`, { method: 'DELETE' });
+//         await fetch(`https://propertybackend-1-xdbs.onrender.com/api/document-request/${id}`, { method: 'DELETE' });
 //         const newData = data.filter(item => item._id !== id);
 //         setData(newData);
 //         // Effect will update filteredData automatically
@@ -763,7 +763,7 @@ export default function DocumentRequestListPage() {
   const fetchRequests = async () => {
     try {
       setLoading(true);
-      const res = await fetch("https://propertybackend-6bou.onrender.com/api/document-request");
+      const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/document-request");
       const result = await res.json();
 
       if (!res.ok) throw new Error("Failed to fetch data");
@@ -811,7 +811,7 @@ export default function DocumentRequestListPage() {
   const handleDelete = async (id: string) => {
     if(confirm("Are you sure you want to delete this request?")) {
       try {
-        await fetch(`https://propertybackend-6bou.onrender.com/api/document-request/${id}`, { method: 'DELETE' });
+        await fetch(`https://propertybackend-1-xdbs.onrender.com/api/document-request/${id}`, { method: 'DELETE' });
         const newData = data.filter(item => item._id !== id);
         setData(newData);
       } catch (err) {

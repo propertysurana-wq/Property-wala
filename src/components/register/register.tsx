@@ -15,7 +15,7 @@
 //     e.preventDefault();
 
 //     try {
-//       await axios.post('https://propertybackend-6bou.onrender.com/api/user/register', {
+//       await axios.post('https://propertybackend-1-xdbs.onrender.com/api/user/register', {
 //         username,
 //         email,
 //         password
@@ -70,7 +70,7 @@ export default function SignupPage() {
     setError('');
 
     try {
-      await axios.post('https://propertybackend-6bou.onrender.com/api/user/register', {
+      await axios.post('https://propertybackend-1-xdbs.onrender.com/api/user/register', {
         username,
         email,
         password

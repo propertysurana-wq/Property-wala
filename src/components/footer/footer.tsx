@@ -213,7 +213,7 @@ export default function Footer() {
 
   const fetchContactInfo = async () => {
     try {
-      const response = await fetch('https://propertybackend-6bou.onrender.com/api/contact');
+      const response = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contact');
       const data = await response.json();
       
       if (data.success && data.data) {

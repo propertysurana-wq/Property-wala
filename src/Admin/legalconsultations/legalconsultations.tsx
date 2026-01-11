@@ -35,7 +35,7 @@ export default function LegalConsultationListPage() {
   const fetchConsultations = async () => {
     try {
       setLoading(true);
-      const res = await fetch("https://propertybackend-6bou.onrender.com/api/legal-consultation");
+      const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/legal-consultation");
       const result = await res.json();
 
       if (!res.ok) throw new Error(result.message || "Failed to fetch");
@@ -71,7 +71,7 @@ export default function LegalConsultationListPage() {
     if (!confirm("Are you sure you want to delete this record?")) return;
 
     try {
-      await fetch(`https://propertybackend-6bou.onrender.com/api/legal-consultation/${id}`, { method: "DELETE" });
+      await fetch(`https://propertybackend-1-xdbs.onrender.com/api/legal-consultation/${id}`, { method: "DELETE" });
       
       // Update local state immediately
       const newData = data.filter((item) => item._id !== id);

@@ -14,7 +14,7 @@
 //     e.preventDefault();
 
 //     try {
-//       const res = await axios.post('https://propertybackend-6bou.onrender.com/api/user/login', {
+//       const res = await axios.post('https://propertybackend-1-xdbs.onrender.com/api/user/login', {
 //         username,
 //         password
 //       });
@@ -65,7 +65,7 @@ export default function LoginPage() {
     setError('');
 
     try {
-      const res = await axios.post('https://propertybackend-6bou.onrender.com/api/user/login', {
+      const res = await axios.post('https://propertybackend-1-xdbs.onrender.com/api/user/login', {
         username,
         password
       });

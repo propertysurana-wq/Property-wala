@@ -6,10 +6,10 @@
 // import Sidebar from '../Sidebar/Sidebar';
 
 // /* ================= API URLS ================= */
-// const CITY_API_URL = 'https://propertybackend-6bou.onrender.com/api/city';
-// const PROPERTY_TYPE_API_URL = 'https://propertybackend-6bou.onrender.com/api/property-type';
-// const PROPERTY_API_URL = 'https://propertybackend-6bou.onrender.com/api/property';
-// const BASE_URL = 'https://propertybackend-6bou.onrender.com';
+// const CITY_API_URL = 'https://propertybackend-1-xdbs.onrender.com/api/city';
+// const PROPERTY_TYPE_API_URL = 'https://propertybackend-1-xdbs.onrender.com/api/property-type';
+// const PROPERTY_API_URL = 'https://propertybackend-1-xdbs.onrender.com/api/property';
+// const BASE_URL = 'https://propertybackend-1-xdbs.onrender.com';
 
 // /* ================= TYPES ================= */
 // interface City {
@@ -683,10 +683,10 @@ import Navbar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/Sidebar';
 
 /* ================= API URLS ================= */
-const CITY_API_URL = 'https://propertybackend-6bou.onrender.com/api/city';
-const PROPERTY_TYPE_API_URL = 'https://propertybackend-6bou.onrender.com/api/property-type';
-const PROPERTY_API_URL = 'https://propertybackend-6bou.onrender.com/api/property';
-const BASE_URL = 'https://propertybackend-6bou.onrender.com';
+const CITY_API_URL = 'https://propertybackend-1-xdbs.onrender.com/api/city';
+const PROPERTY_TYPE_API_URL = 'https://propertybackend-1-xdbs.onrender.com/api/property-type';
+const PROPERTY_API_URL = 'https://propertybackend-1-xdbs.onrender.com/api/property';
+const BASE_URL = 'https://propertybackend-1-xdbs.onrender.com';
 
 /* ================= TYPES ================= */
 interface City {

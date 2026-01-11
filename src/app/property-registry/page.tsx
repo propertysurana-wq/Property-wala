@@ -929,7 +929,7 @@ export default function PropertyRegistryPage() {
 
     try {
       const res = await fetch(
-        "https://propertybackend-6bou.onrender.com/api/complete-property-registration",
+        "https://propertybackend-1-xdbs.onrender.com/api/complete-property-registration",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -10,7 +10,7 @@
 // import Sidebar from '@/Admin/Sidebar/Sidebar';
 
 // /* ================= API URL ================= */
-// const API_BASE_URL = 'https://propertybackend-6bou.onrender.com/api';
+// const API_BASE_URL = 'https://propertybackend-1-xdbs.onrender.com/api';
 
 // /* ================= TYPES ================= */
 // interface DashboardStats {
@@ -190,7 +190,7 @@
 //                       <div key={property._id} className="p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors cursor-pointer" onClick={() => router.push(`/propertyedit/${property._id}`)}>
 //                         <div className="w-16 h-16 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
 //                           {property.images && property.images[0] ? (
-//                             <img src={`https://propertybackend-6bou.onrender.com${property.images[0]}`} alt="" className="w-full h-full object-cover" />
+//                             <img src={`https://propertybackend-1-xdbs.onrender.com${property.images[0]}`} alt="" className="w-full h-full object-cover" />
 //                           ) : (
 //                             <div className="w-full h-full flex items-center justify-center text-gray-400"><Building size={20} /></div>
 //                           )}
@@ -343,7 +343,7 @@ import Navbar from '@/Admin/Navbar/Navbar';
 import Sidebar from '@/Admin/Sidebar/Sidebar';
 
 /* ================= API URL ================= */
-const API_BASE_URL = 'https://propertybackend-6bou.onrender.com/api';
+const API_BASE_URL = 'https://propertybackend-1-xdbs.onrender.com/api';
 
 /* ================= TYPES ================= */
 interface DashboardStats {
@@ -523,7 +523,7 @@ export default function DashboardPage() {
                       <div key={property._id} className="p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors cursor-pointer" onClick={() => router.push(`/propertyedit/${property._id}`)}>
                         <div className="w-16 h-16 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
                           {property.images && property.images[0] ? (
-                            <img src={`https://propertybackend-6bou.onrender.com${property.images[0]}`} alt="" className="w-full h-full object-cover" />
+                            <img src={`https://propertybackend-1-xdbs.onrender.com${property.images[0]}`} alt="" className="w-full h-full object-cover" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center text-gray-400"><Building size={20} /></div>
                           )}

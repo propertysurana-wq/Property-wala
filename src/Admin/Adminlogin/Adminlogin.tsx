@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
     setError('');
 
     try {
-      const res = await fetch('https://propertybackend-6bou.onrender.com/api/auth/login', {
+      const res = await fetch('https://propertybackend-1-xdbs.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

@@ -67,7 +67,7 @@
 
 //   const fetchExistingContact = async (): Promise<void> => {
 //     try {
-//       const response = await fetch('https://propertybackend-6bou.onrender.com/api/contact');
+//       const response = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contact');
 //       const data: ApiResponse<ContactInformation> = await response.json();
       
 //       if (data.success && data.data) {
@@ -185,8 +185,8 @@
 
 //     try {
 //       const url = editMode 
-//         ? `https://propertybackend-6bou.onrender.com/api/contact/${contactId}`
-//         : 'https://propertybackend-6bou.onrender.com/api/contact';
+//         ? `https://propertybackend-1-xdbs.onrender.com/api/contact/${contactId}`
+//         : 'https://propertybackend-1-xdbs.onrender.com/api/contact';
       
 //       const method = editMode ? 'PUT' : 'POST';
 
@@ -512,7 +512,7 @@ export default function ContactAdminForm() {
 
   const fetchExistingContact = async () => {
     try {
-      const response = await fetch('https://propertybackend-6bou.onrender.com/api/contact');
+      const response = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contact');
       const data: ApiResponse<ContactInformation> = await response.json();
       
       if (data.success && data.data) {
@@ -603,8 +603,8 @@ export default function ContactAdminForm() {
 
     try {
       const url = editMode 
-        ? `https://propertybackend-6bou.onrender.com/api/contact/${contactId}`
-        : 'https://propertybackend-6bou.onrender.com/api/contact';
+        ? `https://propertybackend-1-xdbs.onrender.com/api/contact/${contactId}`
+        : 'https://propertybackend-1-xdbs.onrender.com/api/contact';
       
       const method = editMode ? 'PUT' : 'POST';
 

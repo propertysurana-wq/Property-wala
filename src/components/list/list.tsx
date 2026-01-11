@@ -382,7 +382,7 @@
 
 //   /* ================= FETCH PROPERTIES ================= */
 //   useEffect(() => {
-//     fetch("https://propertybackend-6bou.onrender.com/api/property")
+//     fetch("https://propertybackend-1-xdbs.onrender.com/api/property")
 //       .then((res) => res.json())
 //       .then((data) => {
 //         const allProperties = data.data || [];
@@ -817,7 +817,7 @@
 //                       {/* Image */}
 //                       <div className="relative overflow-hidden h-72">
 //                         <img
-//                           src={p.images?.length ? `https://propertybackend-6bou.onrender.com${p.images[0]}` : "/no-image.png"}
+//                           src={p.images?.length ? `https://propertybackend-1-xdbs.onrender.com${p.images[0]}` : "/no-image.png"}
 //                           alt={p.propertyTypeName}
 //                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
 //                         />
@@ -955,7 +955,7 @@
 
 //   /* ================= FETCH PROPERTIES ================= */
 //   useEffect(() => {
-//     fetch("https://propertybackend-6bou.onrender.com/api/property")
+//     fetch("https://propertybackend-1-xdbs.onrender.com/api/property")
 //       .then((res) => res.json())
 //       .then((data) => {
 //         const allProperties = data.data || [];
@@ -1219,7 +1219,7 @@
 //                     {/* Image */}
 //                     <div className={`relative overflow-hidden ${viewMode === "list" ? "w-80 flex-shrink-0" : "h-64"}`}>
 //                       <img
-//                         src={property.images?.length > 0 ? `https://propertybackend-6bou.onrender.com${property.images[0]}` : "https://via.placeholder.com/600x400?text=No+Image"}
+//                         src={property.images?.length > 0 ? `https://propertybackend-1-xdbs.onrender.com${property.images[0]}` : "https://via.placeholder.com/600x400?text=No+Image"}
 //                         alt={property.propertyTypeName}
 //                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
 //                         onError={(e) => { (e.target as HTMLImageElement).src = "https://via.placeholder.com/600x400?text=No+Image"; }}
@@ -1347,7 +1347,7 @@ export default function RealEstateBuyList() {
 
   /* ================= FETCH PROPERTIES ================= */
   useEffect(() => {
-    fetch("https://propertybackend-6bou.onrender.com/api/property")
+    fetch("https://propertybackend-1-xdbs.onrender.com/api/property")
       .then((res) => res.json())
       .then((data) => {
         const allProperties = data.data || [];
@@ -1631,7 +1631,7 @@ export default function RealEstateBuyList() {
                       {/* Image */}
                       <div className={`relative overflow-hidden ${viewMode === "list" ? "w-80 flex-shrink-0" : "h-64"}`}>
                         <img
-                          src={property.images?.length > 0 ? `https://propertybackend-6bou.onrender.com${property.images[0]}` : "https://via.placeholder.com/600x400?text=No+Image"}
+                          src={property.images?.length > 0 ? `https://propertybackend-1-xdbs.onrender.com${property.images[0]}` : "https://via.placeholder.com/600x400?text=No+Image"}
                           alt={property.propertyTypeName}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                           onError={(e) => { (e.target as HTMLImageElement).src = "https://via.placeholder.com/600x400?text=No+Image"; }}

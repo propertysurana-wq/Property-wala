@@ -9,8 +9,8 @@ import {
 import Navbar from '@/Admin/Navbar/Navbar';
 import Sidebar from '@/Admin/Sidebar/Sidebar';
 
-const CITY_API_URL = 'https://propertybackend-6bou.onrender.com/api/city';
-const PROPERTY_TYPE_API_URL = 'https://propertybackend-6bou.onrender.com/api/property-type';
+const CITY_API_URL = 'https://propertybackend-1-xdbs.onrender.com/api/city';
+const PROPERTY_TYPE_API_URL = 'https://propertybackend-1-xdbs.onrender.com/api/property-type';
 
 /* ================= TYPES ================= */
 

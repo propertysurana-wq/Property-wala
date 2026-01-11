@@ -343,7 +343,7 @@ export default function LegalConsultancyPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("https://propertybackend-6bou.onrender.com/api/legal-consultation", {
+      const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/legal-consultation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

@@ -6,8 +6,8 @@ import Sidebar from '../Sidebar/Sidebar';
 import Link from 'next/link';
 
 /* ================= API URLS ================= */
-const PROPERTY_API_URL = 'https://propertybackend-6bou.onrender.com/api/property';
-const BASE_URL = 'https://propertybackend-6bou.onrender.com';
+const PROPERTY_API_URL = 'https://propertybackend-1-xdbs.onrender.com/api/property';
+const BASE_URL = 'https://propertybackend-1-xdbs.onrender.com';
 
 /* ================= TYPES ================= */
 interface Property {

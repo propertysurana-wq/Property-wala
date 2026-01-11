@@ -35,7 +35,7 @@ export default function PropertyRegistrationList() {
     try {
       setLoading(true);
       const res = await fetch(
-        "https://propertybackend-6bou.onrender.com/api/complete-property-registration",
+        "https://propertybackend-1-xdbs.onrender.com/api/complete-property-registration",
         { cache: "no-store" }
       );
       const result = await res.json();
@@ -72,7 +72,7 @@ export default function PropertyRegistrationList() {
 
     try {
       await fetch(
-        `https://propertybackend-6bou.onrender.com/api/complete-property-registration/${id}`,
+        `https://propertybackend-1-xdbs.onrender.com/api/complete-property-registration/${id}`,
         { method: "DELETE" }
       );
       

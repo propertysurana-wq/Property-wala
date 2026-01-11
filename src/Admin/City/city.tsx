@@ -8,7 +8,7 @@
 // import Navbar from '../Navbar/Navbar';
 // import Sidebar from '../Sidebar/Sidebar';
 
-// const API_URL = 'https://propertybackend-6bou.onrender.com/api/city';
+// const API_URL = 'https://propertybackend-1-xdbs.onrender.com/api/city';
 
 // /* ================= TYPES ================= */
 
@@ -315,7 +315,7 @@
 // import Navbar from '@/Admin/Navbar/Navbar';
 // import Sidebar from '@/Admin/Sidebar/Sidebar';
 
-// const API_URL = 'https://propertybackend-6bou.onrender.com/api/city';
+// const API_URL = 'https://propertybackend-1-xdbs.onrender.com/api/city';
 
 // /* ================= TYPES ================= */
 
@@ -683,7 +683,7 @@ import {
 import Navbar from '@/Admin/Navbar/Navbar';
 import Sidebar from '@/Admin/Sidebar/Sidebar';
 
-const API_URL = 'https://propertybackend-6bou.onrender.com/api/city';
+const API_URL = 'https://propertybackend-1-xdbs.onrender.com/api/city';
 
 /* ================= TYPES ================= */
 

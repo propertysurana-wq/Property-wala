@@ -265,7 +265,7 @@
 
 //     try {
 //       // Make API call to backend
-//       const response = await fetch('https://propertybackend-6bou.onrender.com/api/contacts', {
+//       const response = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contacts', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -603,7 +603,7 @@ export default function ContactPage() {
 
   const fetchContactInfo = async () => {
     try {
-      const response = await fetch('https://propertybackend-6bou.onrender.com/api/contact');
+      const response = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contact');
       const data = await response.json();
       
       if (data.success && data.data) {
@@ -635,7 +635,7 @@ export default function ContactPage() {
 
     try {
       // Make API call to backend
-      const response = await fetch('https://propertybackend-6bou.onrender.com/api/contacts', {
+      const response = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contacts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

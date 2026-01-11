@@ -498,7 +498,7 @@ export default function PropertyListingGrid() {
 
   const fetchTopProperties = async () => {
     try {
-      const res = await fetch("https://propertybackend-6bou.onrender.com/api/property/top");
+      const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/property/top");
       const json = await res.json();
       let props: Property[] = json.data || [];
 
@@ -570,7 +570,7 @@ export default function PropertyListingGrid() {
                   <img
                     src={
                       property.images?.length
-                        ? `https://propertybackend-6bou.onrender.com${property.images[0]}`
+                        ? `https://propertybackend-1-xdbs.onrender.com${property.images[0]}`
                         : "/no-image.png"
                     }
                     alt={property.propertyTypeName}

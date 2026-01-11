@@ -339,7 +339,7 @@
 //     setLoading(true);
 
 //     try {
-//       const res = await fetch("https://propertybackend-6bou.onrender.com/api/patta-inquiry", {
+//       const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/patta-inquiry", {
 //         method: "POST",
 //         headers: { "Content-Type": "application/json" },
 //         body: JSON.stringify(formData),
@@ -609,7 +609,7 @@ export default function PattaCreationPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("https://propertybackend-6bou.onrender.com/api/patta-inquiry", {
+      const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/patta-inquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
