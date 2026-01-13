@@ -1,3 +1,103 @@
+// import { Phone, MessageCircle, FileCheck, CheckCircle2 } from "lucide-react";
+// import Footer from "../footer/footer";
+// import Header from "@/components/header/header";
+
+// export default function ProcessSection() {
+//   const steps = [
+//     {
+//       icon: Phone,
+//       title: "Contact Us",
+//       hindiTitle: "हमसे संपर्क करें",
+//       description: "Call or WhatsApp us anytime. We are ready to listen to your property goals.",
+//     },
+//     {
+//       icon: MessageCircle,
+//       title: "Discuss Needs",
+//       hindiTitle: "ज़रूरत बताइए",
+//       description: "Share your requirements. We analyze your needs to find the perfect match.",
+//     },
+//     {
+//       icon: FileCheck,
+//       title: "Paperwork & Deal",
+//       hindiTitle: "कागज़ और डील",
+//       description: "We handle all legal formalities, documentation, and negotiations seamlessly.",
+//     },
+//     {
+//       icon: CheckCircle2,
+//       title: "Problem Solved",
+//       hindiTitle: "समाधान प्राप्त करें",
+//       description: "Walk away with the keys and papers. A successful transaction, guaranteed.",
+//     }
+//   ];
+
+//   return (
+//     <>
+//       <Header />
+      
+//       <section className="py-24 bg-white font-sans overflow-hidden">
+//         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+//           {/* Header */}
+//           <div className="text-center mb-24">
+//             <span className="text-green-600 font-bold tracking-widest uppercase text-xs bg-green-50 px-4 py-1.5 rounded-full inline-block mb-4 border border-green-100">
+//               Work Process
+//             </span>
+//             <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
+//               How We <span className="text-green-600">Work</span>
+//             </h2>
+//             <p className="text-lg text-slate-500 font-medium">
+//               हमारी आसान 4-चरण प्रक्रिया
+//             </p>
+//           </div>
+
+//           {/* Steps Container */}
+//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            
+//             {/* Background Connecting Line (Desktop) */}
+//             <div className="hidden lg:block absolute top-[50px] left-[15%] right-[15%] h-1 bg-gray-100 -z-0">
+//               <div className="h-full w-full bg-gradient-to-r from-green-200 via-green-400 to-green-200 rounded-full opacity-50"></div>
+//             </div>
+
+//             {steps.map((step, index) => (
+//               <div key={index} className="relative z-10 flex flex-col items-center text-center group">
+                
+//                 {/* Icon Circle */}
+//                 <div className="relative mb-8 transition-transform duration-300 group-hover:-translate-y-2">
+//                   {/* Outer Ring */}
+//                   <div className="w-24 h-24 rounded-full bg-white border-4 border-green-500 flex items-center justify-center shadow-lg relative z-10 group-hover:bg-green-600 group-hover:border-green-600 transition-colors duration-300">
+//                     <step.icon className="w-10 h-10 text-green-600 group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />
+//                   </div>
+                  
+//                   {/* Step Number Badge */}
+//                   <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs font-bold px-3 py-1 rounded-full border-2 border-white shadow-md z-20">
+//                     STEP {index + 1}
+//                   </div>
+//                 </div>
+
+//                 {/* Content Card */}
+//                 <div className="w-full bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-green-200 hover:bg-white hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+//                   <h3 className="text-xl font-bold text-slate-900 mb-1 group-hover:text-green-700 transition-colors">
+//                     {step.title}
+//                   </h3>
+//                   <p className="text-sm font-medium text-green-600 mb-4 font-serif">
+//                     {step.hindiTitle}
+//                   </p>
+//                   <div className="w-10 h-0.5 bg-slate-200 mx-auto mb-4 group-hover:bg-green-400 transition-colors"></div>
+//                   <p className="text-slate-500 text-sm leading-relaxed">
+//                     {step.description}
+//                   </p>
+//                 </div>
+
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+      
+//       <Footer />
+//     </>
+//   );
+// }
 import { Phone, MessageCircle, FileCheck, CheckCircle2 } from "lucide-react";
 import Footer from "../footer/footer";
 import Header from "@/components/header/header";
@@ -34,20 +134,21 @@ export default function ProcessSection() {
     <>
       <Header />
       
-      <section className="py-24 bg-white font-sans overflow-hidden">
+      <section className="py-24 bg-gradient-to-br from-[#fef7f0] via-[#fefdf9] to-[#fdf2f2] font-sans overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Header */}
           <div className="text-center mb-24">
-            <span className="text-green-600 font-bold tracking-widest uppercase text-xs bg-green-50 px-4 py-1.5 rounded-full inline-block mb-4 border border-green-100">
+            <span className="text-[#e8734a] font-bold tracking-widest uppercase text-xs bg-[#fef7f0] px-4 py-1.5 rounded-full inline-block mb-4 border border-[#fdeee0]">
               Work Process
             </span>
             <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
-              How We <span className="text-green-600">Work</span>
+              How We <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e8734a] to-[#e15e5e]">Work</span>
             </h2>
-            <p className="text-lg text-slate-500 font-medium">
+            <p className="text-lg text-[#b54035] font-semibold">
               हमारी आसान 4-चरण प्रक्रिया
             </p>
+            <div className="w-24 h-1 bg-gradient-to-r from-[#e8734a] to-[#e15e5e] mx-auto rounded-full mt-4"></div>
           </div>
 
           {/* Steps Container */}
@@ -55,41 +156,52 @@ export default function ProcessSection() {
             
             {/* Background Connecting Line (Desktop) */}
             <div className="hidden lg:block absolute top-[50px] left-[15%] right-[15%] h-1 bg-gray-100 -z-0">
-              <div className="h-full w-full bg-gradient-to-r from-green-200 via-green-400 to-green-200 rounded-full opacity-50"></div>
+              <div className="h-full w-full bg-gradient-to-r from-[#e8734a]/30 via-[#e15e5e]/50 to-[#e8734a]/30 rounded-full"></div>
             </div>
 
-            {steps.map((step, index) => (
-              <div key={index} className="relative z-10 flex flex-col items-center text-center group">
-                
-                {/* Icon Circle */}
-                <div className="relative mb-8 transition-transform duration-300 group-hover:-translate-y-2">
-                  {/* Outer Ring */}
-                  <div className="w-24 h-24 rounded-full bg-white border-4 border-green-500 flex items-center justify-center shadow-lg relative z-10 group-hover:bg-green-600 group-hover:border-green-600 transition-colors duration-300">
-                    <step.icon className="w-10 h-10 text-green-600 group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />
-                  </div>
+            {steps.map((step, index) => {
+              // Alternating gradient colors for icons
+              const iconGradient = index % 2 === 0 
+                ? "from-[#e8734a] to-[#cc3f3f]" 
+                : "from-[#e15e5e] to-[#d9543f]";
+              
+              const borderColor = index % 2 === 0
+                ? "border-[#e8734a]"
+                : "border-[#e15e5e]";
+
+              return (
+                <div key={index} className="relative z-10 flex flex-col items-center text-center group">
                   
-                  {/* Step Number Badge */}
-                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs font-bold px-3 py-1 rounded-full border-2 border-white shadow-md z-20">
-                    STEP {index + 1}
+                  {/* Icon Circle */}
+                  <div className="relative mb-8 transition-transform duration-300 group-hover:-translate-y-2">
+                    {/* Outer Ring */}
+                    <div className={`w-24 h-24 rounded-full bg-white border-4 ${borderColor} flex items-center justify-center shadow-lg relative z-10 group-hover:bg-gradient-to-br group-hover:${iconGradient} transition-all duration-300`}>
+                      <step.icon className={`w-10 h-10 text-[#e8734a] group-hover:text-white transition-colors duration-300`} strokeWidth={1.5} />
+                    </div>
+                    
+                    {/* Step Number Badge */}
+                    <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs font-bold px-3 py-1 rounded-full border-2 border-white shadow-md z-20">
+                      STEP {index + 1}
+                    </div>
                   </div>
-                </div>
 
-                {/* Content Card */}
-                <div className="w-full bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-green-200 hover:bg-white hover:shadow-xl transition-all duration-300 h-full flex flex-col">
-                  <h3 className="text-xl font-bold text-slate-900 mb-1 group-hover:text-green-700 transition-colors">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm font-medium text-green-600 mb-4 font-serif">
-                    {step.hindiTitle}
-                  </p>
-                  <div className="w-10 h-0.5 bg-slate-200 mx-auto mb-4 group-hover:bg-green-400 transition-colors"></div>
-                  <p className="text-slate-500 text-sm leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
+                  {/* Content Card */}
+                  <div className="w-full bg-white rounded-2xl p-6 border border-[#fdeee0] hover:border-[#e8734a]/30 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+                    <h3 className="text-xl font-bold text-slate-900 mb-1 group-hover:text-[#e8734a] transition-colors">
+                      {step.title}
+                    </h3>
+                    <p className="text-sm font-semibold text-[#b54035] mb-4">
+                      {step.hindiTitle}
+                    </p>
+                    <div className="w-10 h-0.5 bg-slate-200 mx-auto mb-4 group-hover:bg-gradient-to-r group-hover:from-[#e8734a] group-hover:to-[#e15e5e] transition-all"></div>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
 
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

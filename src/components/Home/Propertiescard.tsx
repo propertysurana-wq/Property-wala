@@ -455,20 +455,503 @@
 // };
 
 // export default PropertyListingGrid;
+// 
+// "use client";
+
+// import React, { useEffect, useState } from "react";
+// import { useRouter } from "next/navigation";
+// import {
+//   Heart,
+//   MapPin,
+//   Bed,
+//   Square,
+//   ArrowRight,
+//   Home,
+//   CheckCircle,
+//   Star,
+// } from "lucide-react";
+
+// interface Property {
+//   _id: string;
+//   propertyTypeName: string;
+//   cityName: string;
+//   address: string;
+//   price: number;
+//   images: string[];
+//   configuration?: string;
+//   area?: number;
+//   carpetArea?: number;
+//   plotArea?: number;
+//   status: string;
+// }
+
+// export default function PropertyListingGrid() {
+//   const router = useRouter();
+
+//   const [properties, setProperties] = useState<Property[]>([]);
+//   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+//   const [loading, setLoading] = useState(true);
+
+//   /* ================= FETCH PROPERTIES ================= */
+//   useEffect(() => {
+//     fetchTopProperties();
+//   }, []);
+
+//   const fetchTopProperties = async () => {
+//     try {
+//       const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/property/top");
+//       const json = await res.json();
+//       let props: Property[] = json.data || [];
+
+//       // ✅ Make unique by propertyTypeName using Map
+//       const map = new Map<string, Property>();
+//       for (const p of props) {
+//         const key = p.propertyTypeName.trim().toLowerCase();
+//         if (!map.has(key)) {
+//           map.set(key, p); // only first occurrence
+//         }
+//       }
+
+//       setProperties(Array.from(map.values()));
+//     } catch (err) {
+//       console.error("Property load error", err);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   /* ================= FAVORITE ================= */
+//   const toggleFavorite = (id: string) => {
+//     setFavorites((prev) => {
+//       const set = new Set(prev);
+//       set.has(id) ? set.delete(id) : set.add(id);
+//       return set;
+//     });
+//   };
+
+//   /* ================= UI ================= */
+//   return (
+//     <section 
+//       className="w-full py-20 px-4 sm:px-6 lg:px-8 font-sans"
+//       style={{ backgroundColor: '#ffffff' }}
+//     >
+//       <div className="max-w-7xl mx-auto">
+
+//         {/* Header */}
+//         <div className="mb-14 text-center">
+//           <div 
+//             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold uppercase border mb-4"
+//             style={{
+//               backgroundColor: 'rgba(204, 63, 63, 0.1)',
+//               color: '#cc3f3f',
+//               borderColor: 'rgba(204, 63, 63, 0.3)'
+//             }}
+//           >
+//             <Star className="w-4 h-4" />
+//             चुनिंदा प्रॉपर्टी
+//           </div>
+
+//           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-3">
+//             आपके लिए <span style={{ color: '#cc3f3f' }}>बेस्ट प्रॉपर्टी</span>
+//           </h2>
+
+//           <p className="text-gray-700 font-medium text-lg">
+//             सही कीमत • सही जगह • पक्का सौदा
+//           </p>
+//         </div>
+
+//         {/* Loading */}
+//         {loading && (
+//           <p className="text-center text-gray-600 font-semibold text-lg">
+//             प्रॉपर्टी दिख रही है... कृपया इंतज़ार करें
+//           </p>
+//         )}
+
+//         {/* Properties Grid */}
+//         {!loading && (
+//           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+//             {properties.map((property) => (
+//               <div
+//                 key={property._id}
+//                 onClick={() => router.push(`/listdeatils/${property._id}`)}
+//                 className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all cursor-pointer overflow-hidden border-2"
+//                 style={{ borderColor: '#f3f4f6' }}
+//                 onMouseEnter={(e) => {
+//                   e.currentTarget.style.borderColor = '#cc3f3f';
+//                   e.currentTarget.style.transform = 'translateY(-4px)';
+//                 }}
+//                 onMouseLeave={(e) => {
+//                   e.currentTarget.style.borderColor = '#f3f4f6';
+//                   e.currentTarget.style.transform = 'translateY(0)';
+//                 }}
+//               >
+//                 {/* Image */}
+//                 <div className="relative h-64 overflow-hidden">
+//                   <img
+//                     src={
+//                       property.images?.length
+//                         ? `https://propertybackend-1-xdbs.onrender.com${property.images[0]}`
+//                         : "/no-image.png"
+//                     }
+//                     alt={property.propertyTypeName}
+//                     className="w-full h-full object-cover group-hover:scale-110 duration-700"
+//                   />
+//                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+
+//                   {/* Tag */}
+//                   <div 
+//                     className="absolute top-4 left-4 text-white text-sm font-bold px-4 py-2 rounded-lg shadow-md"
+//                     style={{ backgroundColor: '#cc3f3f' }}
+//                   >
+//                     बिक्री के लिए
+//                   </div>
+
+//                   {/* Favorite */}
+//                   <button
+//                     onClick={(e) => {
+//                       e.stopPropagation();
+//                       toggleFavorite(property._id);
+//                     }}
+//                     className="absolute top-4 right-4 w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+//                   >
+//                     <Heart
+//                       className={`w-5 h-5 ${
+//                         favorites.has(property._id)
+//                           ? "fill-red-500 text-red-500"
+//                           : "text-gray-600"
+//                       }`}
+//                     />
+//                   </button>
+
+//                   {/* Price */}
+//                   <div className="absolute bottom-4 left-4 text-white">
+//                     <p className="text-3xl font-extrabold drop-shadow-lg">
+//                       ₹{property.price.toLocaleString("en-IN")}
+//                     </p>
+//                     <p className="text-sm font-medium opacity-90">सबसे अच्छी कीमत</p>
+//                   </div>
+//                 </div>
+
+//                 {/* Content */}
+//                 <div className="p-6 space-y-4">
+//                   <h3 className="text-xl font-bold flex items-center gap-2 text-gray-900 group-hover:text-[#cc3f3f] transition-colors">
+//                     <Home className="w-5 h-5" style={{ color: '#cc3f3f' }} />
+//                     {property.propertyTypeName}
+//                   </h3>
+
+//                   <p className="text-sm text-gray-600 line-clamp-2 flex items-start gap-2">
+//                     <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: '#cc3f3f' }} />
+//                     <span>{property.address}, {property.cityName}</span>
+//                   </p>
+
+//                   {/* Property Details */}
+//                   <div className="flex flex-wrap gap-2 pt-4 border-t-2 border-gray-100">
+//                     {property.configuration && (
+//                       <span 
+//                         className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold border-2"
+//                         style={{
+//                           backgroundColor: 'rgba(204, 63, 63, 0.05)',
+//                           borderColor: 'rgba(204, 63, 63, 0.2)',
+//                           color: '#cc3f3f'
+//                         }}
+//                       >
+//                         <Bed className="w-4 h-4" /> {property.configuration}
+//                       </span>
+//                     )}
+//                     {property.area && (
+//                       <span 
+//                         className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold border-2"
+//                         style={{
+//                           backgroundColor: 'rgba(204, 63, 63, 0.05)',
+//                           borderColor: 'rgba(204, 63, 63, 0.2)',
+//                           color: '#cc3f3f'
+//                         }}
+//                       >
+//                         <Square className="w-4 h-4" /> {property.area} sqft
+//                       </span>
+//                     )}
+//                     {property.carpetArea && (
+//                       <span 
+//                         className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold border-2"
+//                         style={{
+//                           backgroundColor: 'rgba(204, 63, 63, 0.05)',
+//                           borderColor: 'rgba(204, 63, 63, 0.2)',
+//                           color: '#cc3f3f'
+//                         }}
+//                       >
+//                         <Square className="w-4 h-4" /> {property.carpetArea} CA
+//                       </span>
+//                     )}
+//                     {property.plotArea && (
+//                       <span 
+//                         className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold border-2"
+//                         style={{
+//                           backgroundColor: 'rgba(204, 63, 63, 0.05)',
+//                           borderColor: 'rgba(204, 63, 63, 0.2)',
+//                           color: '#cc3f3f'
+//                         }}
+//                       >
+//                         <Square className="w-4 h-4" /> {property.plotArea} गज़
+//                       </span>
+//                     )}
+//                   </div>
+
+//                   {/* Verified Badge */}
+//                   <div 
+//                     className="flex items-center justify-center gap-2 text-sm font-bold py-3 rounded-lg border-2"
+//                     style={{
+//                       backgroundColor: 'rgba(204, 63, 63, 0.05)',
+//                       borderColor: 'rgba(204, 63, 63, 0.2)',
+//                       color: '#cc3f3f'
+//                     }}
+//                   >
+//                     <CheckCircle className="w-4 h-4" />
+//                     जाँचा हुआ • कोई दलाली नहीं • अच्छी जगह
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         )}
+
+//         {/* View All Button */}
+//         <div className="mt-16 flex justify-center">
+//           <button
+//             onClick={() => router.push("/list")}
+//             className="px-10 py-4 rounded-full text-white flex items-center gap-3 font-bold text-lg transition-all shadow-xl hover:shadow-2xl transform hover:scale-105"
+//             style={{ backgroundColor: '#cc3f3f' }}
+//             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#b33636'}
+//             onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#cc3f3f'}
+//           >
+//             सभी प्रॉपर्टी देखें <ArrowRight className="w-5 h-5" />
+//           </button>
+//         </div>
+
+//         {/* Bottom Info */}
+//         <div className="mt-12 text-center">
+//           <p className="text-gray-700 text-base font-medium">
+//             और भी प्रॉपर्टी देखने के लिए ऊपर बटन दबाएं
+//           </p>
+//           <p className="text-gray-500 text-sm mt-1">
+//             हम आपके सपनों का घर ढूंढने में मदद करेंगे
+//           </p>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+// "use client";
+
+// import React, { useEffect, useState } from "react";
+// import { useRouter } from "next/navigation";
+
+// interface Property {
+//   _id: string;
+//   propertyTypeName: string;
+//   cityName: string;
+//   address: string;
+//   price: number;
+//   images: string[];
+//   configuration?: string;
+//   area?: number;
+//   carpetArea?: number;
+//   plotArea?: number;
+//   status: string;
+// }
+
+// export default function DesiPropertyListing() {
+//   const router = useRouter();
+//   const [properties, setProperties] = useState<Property[]>([]);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     fetchTopProperties();
+//   }, []);
+
+//   const fetchTopProperties = async () => {
+//     try {
+//       const res = await fetch("https://propertybackend-1-xdbs.onrender.com/api/property/top");
+//       const json = await res.json();
+//       let props: Property[] = json.data || [];
+
+//       // Make unique by propertyTypeName
+//       const map = new Map<string, Property>();
+//       for (const p of props) {
+//         const key = p.propertyTypeName.trim().toLowerCase();
+//         if (!map.has(key)) {
+//           map.set(key, p);
+//         }
+//       }
+
+//       setProperties(Array.from(map.values()));
+//     } catch (err) {
+//       console.error("Property load error", err);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const getPropertyIcon = (type: string) => {
+//     const typeLower = type.toLowerCase();
+//     if (typeLower.includes("खेत") || typeLower.includes("agriculture") || typeLower.includes("कृषि")) return "🌾";
+//     if (typeLower.includes("प्लॉट") || typeLower.includes("plot")) return "🏡";
+//     if (typeLower.includes("मकान") || typeLower.includes("house") || typeLower.includes("residential")) return "🏠";
+//     if (typeLower.includes("दुकान") || typeLower.includes("shop")) return "🏢";
+//     if (typeLower.includes("बंगला") || typeLower.includes("villa")) return "🏰";
+//     if (typeLower.includes("फ्लैट") || typeLower.includes("apartment")) return "🏢";
+//     return "🏘️";
+//   };
+
+//   const getStatusBadgeColor = (index: number) => {
+//     const colors = ['#cc3f3f', '#3b82f6', '#8b5cf6', '#16a34a'];
+//     return colors[index % colors.length];
+//   };
+
+//   const handleCall = (e: React.MouseEvent) => {
+//     e.stopPropagation();
+//     // Add your call functionality here
+//     alert("कॉल फंक्शनलिटी यहाँ add करें");
+//   };
+
+//   const handleViewProperty = (propertyId: string) => {
+//     router.push(`/listdeatils/${propertyId}`);
+//   };
+
+//   return (
+//     <section className="py-12 font-sans" style={{ backgroundColor: 'white' }}>
+//       <div className="container mx-auto px-4">
+//         {/* Header */}
+//         <h2 
+//           className="text-3xl md:text-4xl font-bold text-center mb-4"
+//           style={{ color: '#cc3f3f' }}
+//         >
+//           नई लिस्टेड प्रॉपर्टीज़
+//         </h2>
+//         <p className="text-center text-gray-600 mb-10 text-lg">
+//           अभी देखें और जल्दी डील करें
+//         </p>
+
+//         {/* Loading State */}
+//         {loading && (
+//           <div className="text-center py-20">
+//             <p className="text-gray-600 font-semibold text-lg">
+//               प्रॉपर्टी दिख रही है... कृपया इंतज़ार करें
+//             </p>
+//           </div>
+//         )}
+
+//         {/* Property Grid */}
+//         {!loading && properties.length > 0 && (
+//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+//             {properties.map((property, index) => (
+//               <div
+//                 key={property._id}
+//                 className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
+//                 onClick={() => handleViewProperty(property._id)}
+//               >
+//                 {/* Image Section */}
+//                 <div className="relative">
+//                   <img
+//                     src={
+//                       property.images && property.images.length > 0
+//                         ? `https://propertybackend-1-xdbs.onrender.com${property.images[0]}`
+//                         : "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600"
+//                     }
+//                     alt={property.propertyTypeName}
+//                     className="w-full h-48 object-cover"
+//                     onError={(e) => {
+//                       const target = e.target as HTMLImageElement;
+//                       target.src = "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600";
+//                     }}
+//                   />
+                  
+//                   {/* Status Badge */}
+                
+//                 </div>
+
+//                 {/* Content Section */}
+//                 <div className="p-5">
+//                   {/* Title */}
+//                   <h3 className="text-xl font-bold text-gray-800 mb-2 line-clamp-1">
+//                     {property.propertyTypeName}
+//                     {property.configuration && ` - ${property.configuration}`}
+//                   </h3>
+
+//                   {/* Location */}
+//                   <p className="text-gray-600 mb-2 line-clamp-2">
+//                      {property.address}, {property.cityName}
+//                   </p>
+
+//                   {/* Price */}
+//                   <div 
+//                     className="flex items-center gap-2 font-bold text-lg mb-3"
+//                     style={{ color: '#cc3f3f' }}
+//                   >
+//                     <span></span>
+//                     <span>₹{property.price.toLocaleString("en-IN")}</span>
+//                     <span className="text-sm font-normal text-gray-500">
+//                       (तक़रीबन)
+//                     </span>
+//                   </div>
+
+//                   {/* Action Buttons */}
+//                   <div className="flex gap-2">
+//                     <button
+//                       onClick={handleCall}
+//                       className="flex-1 text-white py-2 rounded-lg font-bold flex items-center justify-center gap-1 transition-colors"
+//                       style={{ backgroundColor: '#16a34a' }}
+//                       onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#15803d'}
+//                       onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#16a34a'}
+//                     >
+//                      कॉल करें
+//                     </button>
+//                     <button
+//                       className="flex-1 text-white py-2 rounded-lg font-bold transition-colors"
+//                       style={{ backgroundColor: '#d97706' }}
+//                       onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#b45309'}
+//                       onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#d97706'}
+//                     >
+//                       देखें
+//                     </button>
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         )}
+
+//         {/* No Properties Found */}
+//         {!loading && properties.length === 0 && (
+//           <div className="text-center py-20">
+//             <p className="text-gray-600 font-semibold text-lg">
+//               कोई प्रॉपर्टी नहीं मिली
+//             </p>
+//           </div>
+//         )}
+
+//         {/* View More Button */}
+//         {!loading && properties.length > 0 && (
+//           <div className="text-center mt-8">
+//             <button
+//               onClick={() => router.push("/list")}
+//               className="text-white px-8 py-3 rounded-xl font-bold text-lg transition-colors"
+//               style={{ backgroundColor: '#cc3f3f' }}
+//               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#b33636'}
+//               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#cc3f3f'}
+//             >
+//               और प्रॉपर्टी देखें →
+//             </button>
+//           </div>
+//         )}
+//       </div>
+//     </section>
+//   );
+// }
 "use client";
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Heart,
-  MapPin,
-  Bed,
-  Square,
-  ArrowRight,
-  Tag,
-  Home,
-  CheckCircle,
-} from "lucide-react";
+import { Phone, X } from "lucide-react";
 
 interface Property {
   _id: string;
@@ -484,17 +967,44 @@ interface Property {
   status: string;
 }
 
-export default function PropertyListingGrid() {
+interface ContactInfo {
+  phoneNumbers: string[];
+}
+
+export default function DesiPropertyListing() {
   const router = useRouter();
-
   const [properties, setProperties] = useState<Property[]>([]);
-  const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
+  
+  // Contact Info State
+  const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
+  
+  // Dropdown State
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
 
-  /* ================= FETCH PROPERTIES ================= */
+  // --- FIX: Define function inside component with explicit return type ---
+  const getStatusBadgeColor = (index: number): string => {
+    const colors = ['#cc3f3f', '#3b82f6', '#8b5cf6', '#16a34a'];
+    return colors[index % colors.length];
+  };
+
   useEffect(() => {
     fetchTopProperties();
+    fetchContactInfo();
   }, []);
+
+  const fetchContactInfo = async () => {
+    try {
+      const res = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contact');
+      const data = await res.json();
+      if (data.success && data.data) {
+        setContactInfo(data.data);
+      }
+    } catch (err) {
+      console.error('Error fetching contact info:', err);
+    }
+  };
 
   const fetchTopProperties = async () => {
     try {
@@ -502,15 +1012,13 @@ export default function PropertyListingGrid() {
       const json = await res.json();
       let props: Property[] = json.data || [];
 
-      // ✅ Make unique by propertyTypeName using Map
       const map = new Map<string, Property>();
       for (const p of props) {
         const key = p.propertyTypeName.trim().toLowerCase();
         if (!map.has(key)) {
-          map.set(key, p); // only first occurrence
+          map.set(key, p);
         }
       }
-
       setProperties(Array.from(map.values()));
     } catch (err) {
       console.error("Property load error", err);
@@ -519,157 +1027,223 @@ export default function PropertyListingGrid() {
     }
   };
 
-  /* ================= FAVORITE ================= */
-  const toggleFavorite = (id: string) => {
-    setFavorites((prev) => {
-      const set = new Set(prev);
-      set.has(id) ? set.delete(id) : set.add(id);
-      return set;
-    });
+  const getPropertyIcon = (type: string) => {
+    const typeLower = type.toLowerCase();
+    if (typeLower.includes("खेत") || typeLower.includes("agriculture") || typeLower.includes("कृषि")) return "🌾";
+    if (typeLower.includes("प्लॉट") || typeLower.includes("plot")) return "🏡";
+    if (typeLower.includes("मकान") || typeLower.includes("house") || typeLower.includes("residential")) return "🏠";
+    if (typeLower.includes("दुकान") || typeLower.includes("shop")) return "🏢";
+    if (typeLower.includes("बंगला") || typeLower.includes("villa")) return "🏰";
+    if (typeLower.includes("फ्लैट") || typeLower.includes("apartment")) return "🏢";
+    return "🏘️";
   };
 
-  /* ================= UI ================= */
+  // --- SMART CALL LOGIC ---
+  const handleCall = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    if (!contactInfo || !contactInfo.phoneNumbers || contactInfo.phoneNumbers.length === 0) {
+      alert("Contact number not available");
+      return;
+    }
+
+    // Check if Mobile/Tablet
+    const isMobile = window.innerWidth <= 1024;
+
+    if (isMobile) {
+      // Mobile: Direct call to FIRST number
+      const firstNumber = contactInfo.phoneNumbers[0];
+      window.location.href = `tel:${firstNumber}`;
+    } else {
+      // Desktop: Show Dropdown
+      const btn = e.currentTarget;
+      const rect = btn.getBoundingClientRect();
+      
+      setDropdownPosition({
+        top: rect.bottom + window.scrollY + 5,
+        left: rect.left + window.scrollX
+      });
+      setShowDropdown(true);
+    }
+  };
+
+  const handleDirectPhoneCall = (phone: string) => {
+    window.location.href = `tel:${phone}`;
+    setShowDropdown(false);
+  };
+
+  const handleViewProperty = (propertyId: string) => {
+    router.push(`/listdeatils/${propertyId}`);
+  };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = () => {
+      if (showDropdown) setShowDropdown(false);
+    };
+    window.addEventListener('click', handleClickOutside);
+    return () => window.removeEventListener('click', handleClickOutside);
+  }, [showDropdown]);
+
   return (
-    <section className="w-full py-20 px-4 sm:px-6 lg:px-8 font-sans border-t-8">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-12 font-sans" style={{ backgroundColor: 'white' }}>
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4" style={{ color: '#cc3f3f' }}>
+          नई लिस्टेड प्रॉपर्टीज़
+        </h2>
+        <p className="text-center text-gray-600 mb-10 text-lg">
+          अभी देखें और जल्दी डील करें
+        </p>
 
-        {/* Header */}
-        <div className="mb-14 text-center">
-          <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-1 rounded-full text-sm font-bold uppercase border mb-3">
-            <Tag className="w-4 h-4" />
-            चुनिंदा प्रॉपर्टी
-          </div>
-
-          <h2 className="text-3xl md:text-4xl font-extrabold font-heading text-black">
-            आपके लिए बेस्ट प्रॉपर्टी
-          </h2>
-
-          <p className="text-green-700 font-medium text-lg mt-2">
-            सही कीमत • सही एरिया • भरोसेमंद सौदा
-          </p>
-        </div>
-
-        {/* Loading */}
         {loading && (
-          <p className="text-center text-gray-500 font-semibold">
-            प्रॉपर्टी लोड हो रही है...
-          </p>
+          <div className="text-center py-20">
+            <div className="w-12 h-12 border-4 rounded-full animate-spin mx-auto mb-4" style={{ borderColor: '#cc3f3f', borderTopColor: 'transparent' }}></div>
+            <p className="text-gray-600 font-semibold text-lg">प्रॉपर्टी दिख रही है...</p>
+          </div>
         )}
 
-        {/* Properties Grid */}
-        {!loading && (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {properties.map((property) => (
+        {!loading && properties.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {properties.map((property, index) => (
               <div
                 key={property._id}
-                onClick={() => router.push(`/listdeatils/${property._id}`)}
-                className="group bg-white rounded-3xl shadow-md hover:shadow-2xl transition-all cursor-pointer overflow-hidden border hover:border-green-600"
+                className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer border border-gray-100"
+                onClick={() => handleViewProperty(property._id)}
               >
-                {/* Image */}
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative">
                   <img
                     src={
-                      property.images?.length
+                      property.images && property.images.length > 0
                         ? `https://propertybackend-1-xdbs.onrender.com${property.images[0]}`
-                        : "/no-image.png"
+                        : "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600"
                     }
                     alt={property.propertyTypeName}
-                    className="w-full h-full object-cover group-hover:scale-110 duration-700"
+                    className="w-full h-48 object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600";
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-
-                  {/* Tag */}
-                  <div className="absolute top-4 left-4 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-md">
-                    बिक्री के लिए
+                  
+                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur px-3 py-1 rounded-lg shadow-md font-bold text-lg">
+                    {getPropertyIcon(property.propertyTypeName)}
                   </div>
 
-                  {/* Favorite */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleFavorite(property._id);
-                    }}
-                    className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow"
+                  {/* Status Badge - Now works without error */}
+                  <div 
+                    className="absolute top-3 right-3 text-white px-2 py-1 rounded-md text-xs font-bold uppercase shadow-md"
+                    style={{ backgroundColor: getStatusBadgeColor(index) }}
                   >
-                    <Heart
-                      className={`w-5 h-5 ${
-                        favorites.has(property._id)
-                          ? "fill-red-500 text-red-500"
-                          : "text-gray-600"
-                      }`}
-                    />
-                  </button>
-
-                  {/* Price */}
-                  <div className="absolute bottom-4 left-4 text-white">
-                    <p className="text-2xl font-bold">
-                      ₹{property.price.toLocaleString("en-IN")}
-                    </p>
-                    <p className="text-sm opacity-90">Best Price</p>
+                    {property.status || "New"}
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-6 space-y-3">
-                  <h3 className="text-xl font-bold flex items-center gap-2 group-hover:text-green-700">
-                    <Home className="w-5 h-5 text-green-600" />
+                <div className="p-5">
+                  <h3 className="text-xl font-bold text-gray-800 mb-2 line-clamp-1 hover:text-[#cc3f3f] transition-colors">
                     {property.propertyTypeName}
+                    {property.configuration && ` - ${property.configuration}`}
                   </h3>
 
-                  <p className="text-sm text-gray-600 line-clamp-2">
-                    📍 {property.address}
+                  <p className="text-gray-600 mb-2 line-clamp-2 text-sm">
+                    📍 {property.address}, {property.cityName}
                   </p>
 
-                  <p className="flex items-center text-sm text-gray-600">
-                    <MapPin className="w-4 h-4 mr-1 text-green-600" />
-                    {property.cityName}
-                  </p>
-
-                  {/* Property Details */}
-                  <div className="flex flex-wrap gap-2 pt-4 border-t text-sm font-semibold text-gray-700">
-                    {property.configuration && (
-                      <span className="flex items-center gap-1 bg-green-50 px-2 py-1 rounded-md border border-green-100 text-green-800">
-                        <Bed className="w-4 h-4 text-green-600" /> {property.configuration}
-                      </span>
-                    )}
-                    {property.area && (
-                      <span className="flex items-center gap-1 bg-green-50 px-2 py-1 rounded-md border border-green-100 text-green-800">
-                        <Square className="w-4 h-4 text-green-600" /> {property.area} sqft
-                      </span>
-                    )}
-                    {property.carpetArea && (
-                      <span className="flex items-center gap-1 bg-green-50 px-2 py-1 rounded-md border border-green-100 text-green-800">
-                        <Square className="w-4 h-4 text-green-600" /> {property.carpetArea} CA
-                      </span>
-                    )}
-                    {property.plotArea && (
-                      <span className="flex items-center gap-1 bg-green-50 px-2 py-1 rounded-md border border-green-100 text-green-800">
-                        <Square className="w-4 h-4 text-green-600" /> {property.plotArea} गज़
-                      </span>
-                    )}
+                  <div className="flex items-center gap-2 font-bold text-lg mb-3" style={{ color: '#cc3f3f' }}>
+                    <span>₹{property.price.toLocaleString("en-IN")}</span>
+                    <span className="text-sm font-normal text-gray-500">(Approx)</span>
                   </div>
 
-                  {/* Verified Info */}
-                  {/* <div className="flex items-center justify-center gap-2 bg-green-50 text-green-700 text-xs font-bold py-2 rounded-lg border border-green-200">
-                    <CheckCircle className="w-4 h-4" />
-                    100% Verified • No Brokerage • Best Location
-                  </div> */}
+                  <div className="flex gap-2">
+                    <button
+                      onClick={handleCall}
+                      className="flex-1 text-white py-2 rounded-lg font-bold flex items-center justify-center gap-1 transition-colors hover:opacity-90"
+                      style={{ backgroundColor: '#16a34a' }}
+                    >
+                      <Phone className="w-4 h-4" /> कॉल करें
+                    </button>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleViewProperty(property._id);
+                      }}
+                      className="flex-1 text-white py-2 rounded-lg font-bold transition-colors hover:opacity-90"
+                      style={{ backgroundColor: '#cc3f3f' }}
+                    >
+                      देखें
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         )}
 
-        {/* View All Button */}
-        <div className="mt-16 flex justify-center">
-          <button
-            onClick={() => router.push("/list")}
-            className="px-10 py-4 rounded-xl bg-black text-white flex items-center gap-2 font-bold text-lg hover:bg-green-700 transition-all shadow-xl"
-          >
-            सभी प्रॉपर्टी देखें <ArrowRight />
-          </button>
-        </div>
+        {!loading && properties.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-gray-600 font-semibold text-lg">कोई प्रॉपर्टी नहीं मिली</p>
+          </div>
+        )}
+
+        {!loading && properties.length > 0 && (
+          <div className="text-center mt-8">
+            <button
+              onClick={() => router.push("/list")}
+              className="text-white px-8 py-3 rounded-xl font-bold text-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              style={{ backgroundColor: '#cc3f3f' }}
+            >
+              और प्रॉपर्टी देखें →
+            </button>
+          </div>
+        )}
       </div>
+
+      {/* Dropdown for Desktop */}
+      {showDropdown && (
+        <div 
+          className="fixed bg-white rounded-xl shadow-2xl border-2 border-gray-200 overflow-hidden z-50 animate-fadeIn"
+          style={{ 
+            top: dropdownPosition.top, 
+            left: dropdownPosition.left,
+            minWidth: '250px'
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="p-3 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
+            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Select Number</span>
+            <button onClick={() => setShowDropdown(false)} className="text-gray-400 hover:text-red-500">
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+          <div className="max-h-60 overflow-y-auto">
+            {contactInfo?.phoneNumbers.map((phone, index) => (
+              <button
+                key={index}
+                onClick={() => handleDirectPhoneCall(phone)}
+                className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-[#fdf2f2] transition-colors border-b border-gray-100 last:border-b-0"
+              >
+                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#fdf2f2' }}>
+                  <Phone className="w-4 h-4" style={{ color: '#cc3f3f' }} />
+                </div>
+                <div>
+                  <p className="font-bold text-gray-800">{phone}</p>
+                  <p className="text-xs text-gray-500">Office Line {index + 1}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-5px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.2s ease-out;
+        }
+      `}</style>
     </section>
   );
 }

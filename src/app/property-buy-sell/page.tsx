@@ -643,6 +643,7 @@
 //   );
 // }
 
+// 
 'use client'
 import { ArrowLeftRight, Check, Phone, Mail, MapPin, ArrowRight, Shield, TrendingUp, Users, FileCheck, ChevronDown, Home, Key, BadgeCheck } from "lucide-react";
 import { useState } from "react";
@@ -651,6 +652,7 @@ import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
 import { CheckCircle } from "lucide-react";
 import { Loader2 } from "lucide-react";
+
 /* ---------- Handshake Icon ---------- */
 function Handshake(props: any) {
   return (
@@ -715,17 +717,17 @@ export default function PropertyBuySellPage() {
 
   /* ---------- DATA ---------- */
   const features = [
-    { icon: TrendingUp, title: "सही दाम की गारंटी", englishTitle: "Best Price", description: "बाजार भाव के अनुसार सही कीमत।" },
-    { icon: FileCheck, title: "कागजात जांच", englishTitle: "Documents", description: "रजिस्ट्री, नक्शा, पट्टा जांच।" },
-    { icon: Users, title: "बातचीत सहयोग", englishTitle: "Negotiation", description: "आपके फायदे की बात।" },
-    { icon: Shield, title: "धोखे से सुरक्षा", englishTitle: "Fraud Safety", description: "पूरी तरह सुरक्षित सौदा।" },
+    { icon: TrendingUp, title: "सही दाम की गारंटी", englishTitle: "Market Price Analysis", description: "बाजार भाव के अनुसार सही कीमत।", englishDesc: "Accurate valuations based on current market trends." },
+    { icon: FileCheck, title: "कागजात जांच", englishTitle: "Legal Documentation", description: "रजिस्ट्री, नक्शा, पट्टा जांच।", englishDesc: "Complete title verification and legal clearances." },
+    { icon: Users, title: "बातचीत सहयोग", englishTitle: "Negotiation Support", description: "आपके फायदे की बात।", englishDesc: "Expert assistance to get you the best deal." },
+    { icon: Shield, title: "धोखे से सुरक्षा", englishTitle: "Fraud Protection", description: "पूरी तरह सुरक्षित सौदा।", englishDesc: "Protection from fraudulent sellers and fake documents." },
   ];
 
   const process = [
-    { step: 1, title: "मुलाकात", englishTitle: "Meet Us", icon: Users },
-    { step: 2, title: "प्रॉपर्टी देखें", englishTitle: "Visit", icon: MapPin  },
-    { step: 3, title: "सौदा तय", englishTitle: "Deal", icon: Handshake  },
-    { step: 4, title: "रजिस्ट्री", englishTitle: "Registry", icon: Key },
+    { step: 1, title: "मुलाकात", englishTitle: "Initial Consultation", icon: Users, description: "Discuss requirements and preferences" },
+    { step: 2, title: "प्रॉपर्टी देखें", englishTitle: "Property Visit", icon: MapPin, description: "Visit and inspect properties" },
+    { step: 3, title: "सौदा तय", englishTitle: "Deal Finalization", icon: Handshake, description: "Negotiate and finalize terms" },
+    { step: 4, title: "रजिस्ट्री", englishTitle: "Registration", icon: Key, description: "Complete documentation and handover" },
   ];
 
   const propertyTypes = [
@@ -733,84 +735,97 @@ export default function PropertyBuySellPage() {
     { name: "खेती की जमीन", english: "Agricultural Land", icon: "🌾" },
     { name: "दुकान/गोदाम", english: "Commercial", icon: "🏪" },
     { name: "बना हुआ घर", english: "Ready House", icon: "🏠" },
+    { name: "फ्लैट्स", english: "Apartments", icon: "🏢" },
+    { name: "औद्योगिक जमीन", english: "Industrial Land", icon: "🏭" },
   ];
 
   const faqs = [
-    { question: "कौन से कागजात?", englishQuestion: "Documents?", answer: "रजिस्ट्री, आधार, पैन।" },
-    { question: "कितना समय?", englishQuestion: "Time?", answer: "15–20 दिन।" },
-    { question: "आपकी फीस?", englishQuestion: "Charges?", answer: "काम होने पर।" },
-    { question: "लोन मिलेगा?", englishQuestion: "Loan?", answer: "हाँ, हम मदद करेंगे।" },
+    { 
+      question: "कौन से कागजात चाहिए?", 
+      englishQuestion: "What documents are required?", 
+      answer: "रजिस्ट्री, आधार, पैन, प्रॉपर्टी टैक्स रसीद, एनकम्ब्रेंस सर्टिफिकेट, और बिल्डिंग अप्रूवल प्लान। हमारी टीम पूरी प्रक्रिया में आपका मार्गदर्शन करेगी।" 
+    },
+    { 
+      question: "कितना समय लगेगा?", 
+      englishQuestion: "How long does the process take?", 
+      answer: "आमतौर पर 30-60 दिन, डॉक्यूमेंटेशन और रजिस्ट्रेशन स्लॉट के आधार पर। हम प्रक्रिया को जल्द से जल्द पूरा करने में मदद करते हैं।" 
+    },
+    { 
+      question: "आपकी फीस कितनी है?", 
+      englishQuestion: "What are your charges?", 
+      answer: "हमारी फीस प्रॉपर्टी की वैल्यू और सेवाओं पर निर्भर करती है। हम पारदर्शी मूल्य निर्धारण प्रदान करते हैं। विस्तृत जानकारी के लिए संपर्क करें।" 
+    },
+    { 
+      question: "क्या आप लोन में मदद करते हैं?", 
+      englishQuestion: "Do you help with home loans?", 
+      answer: "हाँ, हमारे कई बैंकों से टाई-अप हैं। हम प्री-अप्रूव्ड लोन दिलाने और पूरी लोन प्रक्रिया में मदद करते हैं।" 
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
+    <div className="min-h-screen bg-white">
       <Header />
 
       {/* ---------- HERO SECTION ---------- */}
-      <section className="relative bg-slate-900 pt-24 pb-32 overflow-hidden border-b border-green-900">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-green-900/40 via-slate-900 to-slate-900 opacity-60"></div>
+      <section className="relative bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] pt-24 pb-32 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-[#e8734a] rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#e15e5e] rounded-full blur-3xl"></div>
+        </div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             
             {/* Left Content */}
             <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 text-green-400 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
+              <div className="inline-flex items-center gap-2 bg-[#e8734a]/10 border border-[#e8734a]/20 text-[#e8734a] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
                 <BadgeCheck size={14} /> 100% Trusted Service
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
                 प्रॉपर्टी खरीदें या बेचें <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">भरोसे के साथ</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e8734a] to-[#e15e5e]">भरोसे के साथ</span>
               </h1>
-              <p className="text-slate-400 text-lg mb-8 max-w-xl mx-auto lg:mx-0">
-                Buy, Sell & Rent Properties with complete transparency. We handle everything from paperwork to possession.
+              <p className="text-gray-300 text-lg mb-8 max-w-xl mx-auto lg:mx-0">
+                Complete assistance in property buying and selling with legal verification, 
+                market analysis, and expert negotiation support.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <a href="tel:+919876543210" className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg hover:shadow-green-500/25">
+                <a href="tel:+919876543210" className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#e8734a] to-[#e15e5e] hover:shadow-lg hover:shadow-[#e8734a]/30 text-white px-8 py-4 rounded-xl font-bold transition-all">
                   <Phone size={20} /> Call Now
                 </a>
-                <Link href="#contact" className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-bold border border-white/10 backdrop-blur-sm transition-all">
-                  <Mail size={20} /> Enquiry
-                </Link>
+                <a href="#contact" className="flex items-center justify-center gap-2 border-2 border-white text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-gray-800 transition-all">
+                  <Mail size={20} /> Free Consultation
+                </a>
               </div>
             </div>
 
             {/* Right Form */}
-            <div id="contact" className="bg-white rounded-3xl p-8 shadow-2xl relative overflow-hidden max-w-md mx-auto w-full">
-              <div className="absolute top-0 left-0 w-full h-1.5 bg-green-500"></div>
-              
+            <div id="contact" className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20 max-w-md mx-auto w-full">
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-slate-900">Free Consultation</h3>
-                <p className="text-sm text-slate-500 mt-1">Get expert advice instantly</p>
+                <h3 className="text-2xl font-bold text-white">Quick Enquiry</h3>
+                <p className="text-sm text-gray-300 mt-1">Get expert advice instantly</p>
               </div>
 
-              {/* {success ? (
-                <div className="bg-green-50 text-green-700 p-4 rounded-xl flex items-center justify-center gap-2 font-bold mb-4 border border-green-200">
-                  <CheckCircle size={20} /> Request Sent!
-                </div>
-              ) : ( */}
               {success ? (
-  <div className="bg-green-50 text-green-700 p-4 rounded-xl flex items-center justify-center gap-2 font-bold mb-4 border border-green-200">
-    <CheckCircle size={20} />
-    Request Sent!
-  </div>
-) : (
-  
-
+                <div className="bg-green-500/20 border border-green-500/40 text-white p-4 rounded-xl flex items-center justify-center gap-2 font-bold mb-4">
+                  <CheckCircle size={20} />
+                  Request Sent Successfully!
+                </div>
+              ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="आपका नाम (Name)"
-                    className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none font-medium text-slate-900"
+                    placeholder="आपका नाम (Your Name)"
+                    className="w-full px-4 py-3.5 bg-white/10 border border-white/20 text-white placeholder-gray-400 rounded-xl focus:border-[#e8734a] focus:outline-none font-medium"
                     required
                   />
                   <input
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="मोबाइल नंबर (Phone)"
-                    className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none font-medium text-slate-900"
+                    placeholder="मोबाइल नंबर (Phone Number)"
+                    className="w-full px-4 py-3.5 bg-white/10 border border-white/20 text-white placeholder-gray-400 rounded-xl focus:border-[#e8734a] focus:outline-none font-medium"
                     required
                   />
                   
@@ -820,8 +835,8 @@ export default function PropertyBuySellPage() {
                         key={option} 
                         className={`cursor-pointer border rounded-xl p-3 flex items-center justify-center gap-2 font-bold transition-all ${
                           type === option 
-                            ? 'bg-green-50 border-green-500 text-green-700' 
-                            : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                            ? 'bg-[#e8734a]/20 border-[#e8734a] text-white' 
+                            : 'bg-white/5 border-white/20 text-gray-300 hover:bg-white/10'
                         }`}
                       >
                         <input
@@ -830,18 +845,24 @@ export default function PropertyBuySellPage() {
                           value={option}
                           checked={type === option}
                           onChange={() => setType(option as any)}
-                          className="w-4 h-4 accent-green-600"
+                          className="w-4 h-4 accent-[#e8734a]"
                         />
                         {option}
                       </label>
                     ))}
                   </div>
 
+                  {error && (
+                    <div className="bg-red-500/20 border border-red-500/40 text-white p-3 rounded-xl text-sm">
+                      {error}
+                    </div>
+                  )}
+
                   <button 
                     disabled={loading}
-                    className="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-green-600 transition-all flex items-center justify-center gap-2 shadow-lg disabled:opacity-70"
+                    className="w-full bg-gradient-to-r from-[#e8734a] to-[#e15e5e] text-white font-bold py-4 rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-70"
                   >
-                  {loading ? <Loader2 className="animate-spin" /> : "Submit Request"}
+                    {loading ? <Loader2 className="animate-spin" size={20} /> : "Submit Request"}
                   </button>
                 </form>
               )}
@@ -852,24 +873,24 @@ export default function PropertyBuySellPage() {
       </section>
 
       {/* ---------- FEATURES ---------- */}
-      <section className="py-24 bg-white">
+      <section className="py-20 bg-gradient-to-br from-[#fefdf9] to-[#fef7f0]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-extrabold text-slate-900 mb-4">हमारी सेवाएं</h2>
-            <p className="text-slate-500 max-w-2xl mx-auto">
-              We provide end-to-end property solutions with trust and transparency.
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">हमारी सेवाएं</h2>
+            <p className="text-xl text-[#b54035] font-semibold">
+              Why Choose Our Property Services?
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((f, i) => (
-              <div key={i} className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-green-200 hover:bg-white hover:shadow-xl transition-all group">
-                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-green-600 transition-colors">
-                  <f.icon className="w-7 h-7 text-green-600 group-hover:text-white transition-colors" />
+              <div key={i} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-[#fdeee0]">
+                <div className="w-14 h-14 bg-gradient-to-br from-[#e8734a] to-[#cc3f3f] rounded-xl flex items-center justify-center mb-4">
+                  <f.icon className="text-white" size={28} />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{f.title}</h3>
-                <p className="text-xs font-bold text-green-600 uppercase mb-3 tracking-wider">{f.englishTitle}</p>
-                <p className="text-slate-600 text-sm leading-relaxed">{f.description}</p>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">{f.title}</h3>
+                <p className="text-xs font-bold text-[#b54035] uppercase mb-3 tracking-wider">{f.englishTitle}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{f.englishDesc}</p>
               </div>
             ))}
           </div>
@@ -877,31 +898,29 @@ export default function PropertyBuySellPage() {
       </section>
 
       {/* ---------- PROCESS ---------- */}
-      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-        {/* Background Grid */}
-        <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'radial-gradient(#10b981 1px, transparent 1px)', backgroundSize: '30px 30px'}}></div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl font-extrabold mb-4">काम करने का तरीका</h2>
-            <p className="text-green-400 font-medium">Simple 4-Step Process</p>
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">काम करने का तरीका</h2>
+            <p className="text-xl text-[#b54035] font-semibold">Our Simple 4-Step Process</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-            {/* Line */}
-            <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-800 -z-10"></div>
-
+          <div className="max-w-4xl mx-auto">
             {process.map((step, i) => (
-              <div key={i} className="flex flex-col items-center text-center group">
-                <div className="w-24 h-24 bg-slate-800 rounded-full border-4 border-slate-900 flex items-center justify-center mb-6 shadow-xl group-hover:border-green-500 transition-colors relative">
-                  <step.icon className="w-10 h-10 text-slate-400 group-hover:text-white transition-colors" />
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-sm font-bold border-4 border-slate-900">
+              <div key={i} className="flex gap-6 mb-8 last:mb-0">
+                <div className="flex flex-col items-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#e8734a] to-[#e15e5e] rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
                     {step.step}
                   </div>
+                  {i < process.length - 1 && (
+                    <div className="w-0.5 h-full bg-gradient-to-b from-[#e8734a] to-[#e15e5e] mt-2"></div>
+                  )}
                 </div>
-                <h3 className="text-lg font-bold mb-1 group-hover:text-green-400 transition-colors">{step.title}</h3>
-                <p className="text-slate-500 text-xs uppercase tracking-wider mb-2">{step.englishTitle}</p>
-                
+                <div className="flex-1 pb-8">
+                  <h3 className="text-xl font-bold text-gray-800 mb-1">{step.title}</h3>
+                  <p className="text-sm font-semibold text-[#b54035] mb-2">{step.englishTitle}</p>
+                  <p className="text-gray-600">{step.description}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -909,23 +928,19 @@ export default function PropertyBuySellPage() {
       </section>
 
       {/* ---------- PROPERTY TYPES ---------- */}
-      <section className="py-24 bg-white">
+      <section className="py-20 bg-gradient-to-br from-[#fefdf9] to-[#fdf2f2]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-extrabold text-slate-900 mb-4">किस तरह की प्रॉपर्टी?</h2>
-            <div className="flex justify-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-green-600"></span>
-              <span className="w-2 h-2 rounded-full bg-slate-300"></span>
-              <span className="w-2 h-2 rounded-full bg-slate-300"></span>
-            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">किस तरह की प्रॉपर्टी?</h2>
+            <p className="text-xl text-[#b54035] font-semibold">Types of Properties We Deal In</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {propertyTypes.map((t, i) => (
-              <div key={i} className="bg-slate-50 border border-slate-200 p-8 rounded-2xl text-center hover:border-green-500 hover:shadow-lg transition-all group cursor-pointer">
+              <div key={i} className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-all border border-[#fce8e8] cursor-pointer group">
                 <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform">{t.icon}</div>
-                <h3 className="text-lg font-bold text-slate-900 group-hover:text-green-700 transition-colors">{t.name}</h3>
-                <p className="text-slate-500 text-xs mt-1 font-medium">{t.english}</p>
+                <h3 className="text-base font-bold text-gray-800 group-hover:text-[#e8734a] transition-colors mb-1">{t.name}</h3>
+                <p className="text-gray-600 text-xs font-medium">{t.english}</p>
               </div>
             ))}
           </div>
@@ -933,30 +948,55 @@ export default function PropertyBuySellPage() {
       </section>
 
       {/* ---------- FAQ ---------- */}
-      <section className="py-24 bg-slate-50 border-t border-slate-200">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-extrabold text-center text-slate-900 mb-12">FAQ (सवाल-जवाब)</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">FAQ (सवाल-जवाब)</h2>
+            <p className="text-xl text-[#b54035] font-semibold">Frequently Asked Questions</p>
+          </div>
           
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <div key={i} className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-green-300 transition-colors shadow-sm">
+              <div key={i} className="border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all">
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-5 text-left"
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
                 >
                   <div>
-                    <span className="font-bold text-slate-800 block text-lg">{faq.question}</span>
-                    <span className="text-xs font-bold text-green-600 uppercase mt-1 block">{faq.englishQuestion}</span>
+                    <span className="font-bold text-gray-800 block text-lg">{faq.question}</span>
+                    <span className="text-xs font-bold text-[#b54035] uppercase mt-1 block">{faq.englishQuestion}</span>
                   </div>
-                  <ChevronDown className={`text-slate-400 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`text-[#e8734a] transition-transform duration-300 flex-shrink-0 ml-4 ${openFaq === i ? 'rotate-180' : ''}`} size={24} />
                 </button>
                 {openFaq === i && (
-                  <div className="px-5 pb-5 text-slate-600 leading-relaxed border-t border-slate-50 pt-4 bg-green-50/30">
+                  <div className="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
                     {faq.answer}
                   </div>
                 )}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- CTA SECTION ---------- */}
+      <section className="py-20 bg-gradient-to-r from-[#e8734a] to-[#e15e5e]">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to Buy or Sell Your Property?
+          </h2>
+          <p className="text-xl text-white/90 mb-8">
+            Get expert assistance today. Contact us for a free consultation.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a href="tel:+919876543210" className="bg-white text-[#e8734a] px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all flex items-center">
+              <Phone className="mr-2" size={20} />
+              +91 98765 43210
+            </a>
+            <a href="mailto:info@example.com" className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-[#e8734a] transition-all flex items-center">
+              <Mail className="mr-2" size={20} />
+              Email Us
+            </a>
           </div>
         </div>
       </section>

@@ -164,9 +164,96 @@
 //     </section>
 //   );
 // }
+// "use client";
+// import { MapPin, Navigation, Map } from "lucide-react";
+// import { useRouter } from "next/navigation";
+// import { useEffect, useState } from "react";
+
+// interface Property {
+//   cityName: string;
+// }
+
+// export default function ServiceAreasSection() {
+//   const router = useRouter();
+//   const [cities, setCities] = useState<string[]>([]);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     // Fetch all properties and extract unique city names
+//     fetch("https://propertybackend-1-xdbs.onrender.com/api/property")
+//       .then((res) => res.json())
+//       .then((data) => {
+//         const allCities: string[] = data.data.map((p: Property) => p.cityName);
+//         const uniqueCities = Array.from(new Set(allCities)); // unique only
+//         setCities(uniqueCities);
+//       })
+//       .finally(() => setLoading(false));
+//   }, []);
+
+//   const openListPage = (city: string) => {
+//     router.push(`/list?city=${encodeURIComponent(city)}`);
+//   };
+
+//   if (loading) {
+//     return (
+//       <div className="flex items-center justify-center h-96 text-white">
+//         Loading cities...
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <section className="relative py-24 bg-slate-900 overflow-hidden font-sans border-t border-slate-800">
+//       <div className="container mx-auto px-4 relative z-10">
+
+//         {/* Header */}
+//         <div className="text-center max-w-3xl mx-auto mb-16">
+//           <div className="flex items-center justify-center gap-2 mb-4">
+//             <Map className="w-4 h-4 text-emerald-400" />
+//             <span className="text-emerald-400 font-bold uppercase text-xs">Service Locations</span>
+//           </div>
+//           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+//             Serving Across <span className="text-emerald-400">Rajasthan</span>
+//           </h2>
+//           <p className="text-lg text-slate-400">हमारे सभी शहरों में उपलब्ध प्रॉपर्टीज़</p>
+//         </div>
+
+//         {/* Cities Grid */}
+//         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+//           {cities.map((city, index) => (
+//             <div
+//               key={index}
+//               onClick={() => openListPage(city)}
+//               className="group relative bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-emerald-900/40 
+//               border border-slate-700 hover:border-emerald-500/50 transition-all duration-300 
+//               hover:-translate-y-1 cursor-pointer flex flex-col items-center text-center overflow-hidden"
+//             >
+//               {/* Hover Background */}
+//               <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 opacity-0 group-hover:opacity-100 transition" />
+
+//               {/* Icon */}
+//               <div className="relative mb-5 w-14 h-14 rounded-full bg-slate-900 flex items-center justify-center 
+//               border border-slate-700 group-hover:border-emerald-500 group-hover:bg-emerald-500 transition-all">
+//                 <MapPin className="w-6 h-6 text-slate-400 group-hover:text-black transition" />
+//               </div>
+
+//               {/* City Name */}
+//               <h3 className="text-lg font-bold text-slate-100 group-hover:text-white">{city}</h3>
+
+//               {/* Arrow */}
+//               <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition">
+//                 <Navigation className="w-3 h-3 text-emerald-400" />
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
 "use client";
-import { MapPin, Navigation, Map } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { MapPin, Navigation } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface Property {
@@ -174,7 +261,6 @@ interface Property {
 }
 
 export default function ServiceAreasSection() {
-  const router = useRouter();
   const [cities, setCities] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -184,65 +270,76 @@ export default function ServiceAreasSection() {
       .then((res) => res.json())
       .then((data) => {
         const allCities: string[] = data.data.map((p: Property) => p.cityName);
-        const uniqueCities = Array.from(new Set(allCities)); // unique only
+        const uniqueCities = Array.from(new Set(allCities));
         setCities(uniqueCities);
       })
       .finally(() => setLoading(false));
   }, []);
 
   const openListPage = (city: string) => {
-    router.push(`/list?city=${encodeURIComponent(city)}`);
+    // Using window.location instead of Next.js router for demo
+    window.location.href = `/list?city=${encodeURIComponent(city)}`;
   };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-96 text-white">
+      <div className="flex items-center justify-center h-96 text-gray-800">
         Loading cities...
       </div>
     );
   }
 
   return (
-    <section className="relative py-24 bg-slate-900 overflow-hidden font-sans border-t border-slate-800">
-      <div className="container mx-auto px-4 relative z-10">
-
+    <section className="py-20" style={{ backgroundColor: '#fff5f5' }}>
+      <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Map className="w-4 h-4 text-emerald-400" />
-            <span className="text-emerald-400 font-bold uppercase text-xs">Service Locations</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
-            Serving Across <span className="text-emerald-400">Rajasthan</span>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            Our Service Areas
           </h2>
-          <p className="text-lg text-slate-400">हमारे सभी शहरों में उपलब्ध प्रॉपर्टीज़</p>
+          <p className="text-xl text-red-700 mb-2 font-semibold">
+            हमारे सेवा क्षेत्र
+          </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-red-500 mx-auto rounded-full"></div>
+        </div>
+
+        {/* View All Button */}
+        <div className="flex justify-center mb-12">
+          <button 
+            onClick={() => openListPage('')}
+            className="inline-flex flex-col sm:flex-row items-center gap-4 text-white px-8 py-4 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300"
+          >
+            सभी शहर देखें / View All Cities
+            <Navigation className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Cities Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {cities.map((city, index) => (
             <div
               key={index}
               onClick={() => openListPage(city)}
-              className="group relative bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-emerald-900/40 
-              border border-slate-700 hover:border-emerald-500/50 transition-all duration-300 
-              hover:-translate-y-1 cursor-pointer flex flex-col items-center text-center overflow-hidden"
+              className="group relative bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl 
+              transition-all duration-300 border border-orange-100 hover:border-orange-300 
+              cursor-pointer hover:-translate-y-1"
             >
               {/* Hover Background */}
-              <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 opacity-0 group-hover:opacity-100 transition" />
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-rose-50 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
 
               {/* Icon */}
-              <div className="relative mb-5 w-14 h-14 rounded-full bg-slate-900 flex items-center justify-center 
-              border border-slate-700 group-hover:border-emerald-500 group-hover:bg-emerald-500 transition-all">
-                <MapPin className="w-6 h-6 text-slate-400 group-hover:text-black transition" />
+              <div className="relative mb-3 mx-auto w-12 h-12 flex items-center justify-center">
+                <MapPin className="w-6 h-6 text-red-600 group-hover:text-orange-600 transition-colors" />
               </div>
 
               {/* City Name */}
-              <h3 className="text-lg font-bold text-slate-100 group-hover:text-white">{city}</h3>
+              <h3 className="relative font-semibold text-gray-800 group-hover:text-gray-900 transition-colors">
+                {city}
+              </h3>
 
               {/* Arrow */}
-              <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition">
-                <Navigation className="w-3 h-3 text-emerald-400" />
+              <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all">
+                <Navigation className="w-4 h-4 text-orange-500" />
               </div>
             </div>
           ))}
@@ -251,4 +348,3 @@ export default function ServiceAreasSection() {
     </section>
   );
 }
-

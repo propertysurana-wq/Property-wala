@@ -1282,20 +1282,1089 @@
 //     </div>
 //   );
 // }
+// "use client";
+// import React, { useEffect, useState } from "react";
+// import {
+//   Heart,
+//   MapPin,
+//   Bed,
+//   Maximize,
+//   Grid,
+//   List,
+//   Search,
+//   Filter,
+//   Home,
+//   ChevronLeft, // Added for pagination
+//   ChevronRight, // Added for pagination
+// } from "lucide-react";
+// import Footer from "../footer/footer";
+// import Header from "@/components/header/header";
+
+// interface Property {
+//   _id: string;
+//   propertyTypeName: string;
+//   price: number;
+//   images: string[];
+//   address: string;
+//   cityName: string;
+//   configuration?: string;
+//   area?: number;
+//   plotArea?: number;
+// }
+
+// export default function RealEstateBuyList() {
+//   const [properties, setProperties] = useState<Property[]>([]);
+//   const [filtered, setFiltered] = useState<Property[]>([]);
+//   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+//   const [loading, setLoading] = useState(true);
+
+//   // Filters
+//   const [search, setSearch] = useState("");
+//   const [location, setLocation] = useState("");
+//   const [type, setType] = useState("");
+//   const [minPrice, setMinPrice] = useState("");
+//   const [maxPrice, setMaxPrice] = useState("");
+//   const [availableCities, setAvailableCities] = useState<string[]>([]);
+//   const [availableTypes, setAvailableTypes] = useState<string[]>([]);
+
+//   // Pagination States
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const itemsPerPage = 20; // एक पेज पर 20 कार्ड दिखाएं
+
+//   /* ================= GET URL PARAMETERS ================= */
+//   useEffect(() => {
+//     const params = new URLSearchParams(window.location.search);
+//     const cityParam = params.get('city') || '';
+//     const typeParam = params.get('type') || '';
+//     const minPriceParam = params.get('minPrice') || '';
+//     const maxPriceParam = params.get('maxPrice') || '';
+
+//     setLocation(cityParam);
+//     setType(typeParam);
+//     setMinPrice(minPriceParam);
+//     setMaxPrice(maxPriceParam);
+//   }, []);
+
+//   /* ================= FETCH PROPERTIES ================= */
+//   useEffect(() => {
+//     fetch("https://propertybackend-1-xdbs.onrender.com/api/property")
+//       .then((res) => res.json())
+//       .then((data) => {
+//         const allProperties = data.data || [];
+//         setProperties(allProperties);
+
+//         const cities = Array.from(new Set(allProperties.map((p: Property) => p.cityName))).sort();
+//         const types = Array.from(new Set(allProperties.map((p: Property) => p.propertyTypeName))).sort();
+
+//         setAvailableCities(cities as string[]);
+//         setAvailableTypes(types as string[]);
+//       })
+//       .catch(err => console.error("Failed to fetch properties:", err))
+//       .finally(() => setLoading(false));
+//   }, []);
+
+//   /* ================= FILTER LOGIC ================= */
+//   const applyFilters = () => {
+//     let data = [...properties];
+
+//     if (search) {
+//       data = data.filter(
+//         (p) =>
+//           p.propertyTypeName.toLowerCase().includes(search.toLowerCase()) ||
+//           p.address.toLowerCase().includes(search.toLowerCase()) ||
+//           p.cityName.toLowerCase().includes(search.toLowerCase())
+//       );
+//     }
+
+//     if (location) {
+//       data = data.filter((p) =>
+//         p.cityName.toLowerCase() === location.toLowerCase()
+//       );
+//     }
+
+//     if (type) {
+//       data = data.filter((p) =>
+//         p.propertyTypeName.toLowerCase() === type.toLowerCase()
+//       );
+//     }
+
+//     if (minPrice) data = data.filter((p) => p.price >= Number(minPrice));
+//     if (maxPrice) data = data.filter((p) => p.price <= Number(maxPrice));
+
+//     setFiltered(data);
+//     setCurrentPage(1); // फ़िल्टर लागू होने पर पेज को 1 पर रीसेट करें
+//   };
+
+//   useEffect(() => {
+//     if (properties.length > 0) {
+//       applyFilters();
+//     }
+//   }, [location, search, type, minPrice, maxPrice, properties]);
+
+//   const resetFilters = () => {
+//     setSearch("");
+//     setLocation("");
+//     setType("");
+//     setMinPrice("");
+//     setMaxPrice("");
+//     setFiltered(properties);
+//     setCurrentPage(1); // फ़िल्टर रीसेट होने पर भी पेज को 1 पर रीसेट करें
+//     window.history.pushState({}, "", "/list");
+//   };
+
+//   const navigateToDetails = (id: string) => {
+//     window.location.href = `/listdeatils/${id}`;
+//   };
+
+//   const formatPrice = (price: number) => {
+//     if (price >= 10000000) return `₹${(price / 10000000).toFixed(2)} Cr`;
+//     if (price >= 100000) return `₹${(price / 100000).toFixed(2)} Lac`;
+//     return `₹${price.toLocaleString("en-IN")}`;
+//   };
+
+//   // Pagination calculations
+//   const totalPages = Math.ceil(filtered.length / itemsPerPage);
+//   const startIndex = (currentPage - 1) * itemsPerPage;
+//   const endIndex = startIndex + itemsPerPage;
+//   const currentProperties = filtered.slice(startIndex, endIndex);
+
+//   const handleNextPage = () => {
+//     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+//     window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top on page change
+//   };
+
+//   const handlePreviousPage = () => {
+//     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+//     window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top on page change
+//   };
+
+//   if (loading) {
+//     return (
+//       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+//         <div className="text-center">
+//           <div className="w-16 h-16 border-4 border-green-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+//           <p className="text-slate-600 font-semibold">Loading Properties...</p>
+//         </div>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="min-h-screen bg-slate-50 font-sans">
+//        <Header />
+//       {/* Hero Header */}
+//       <div className="bg-black border-b-4 border-green-600 pt-16 pb-20 px-4 relative overflow-hidden">
+//         <div className="absolute top-[-50px] right-[-50px] w-64 h-64 bg-green-50 rounded-full z-0"></div>
+//         <div className="max-w-7xl mx-auto text-center relative z-10">
+//           <span className="text-green-700 font-bold uppercase tracking-widest text-xs bg-green-100 px-3 py-1 rounded-full mb-4 inline-block border border-green-200">
+//             Exclusive Listings
+//           </span>
+//           <h1 className="text-5xl md:text-7xl font-black text-white leading-tight">
+//             अपनी <span className="text-emerald-400">पसंद की प्रॉपर्टी</span> खोजें
+//           </h1>
+//           <p className="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto font-medium mt-4">
+//             Find the best Homes, Land, and Shops in your budget.
+//           </p>
+
+//           {/* Active Filters Display */}
+//           {(location || type || minPrice || maxPrice) && (
+//             <div className="mt-6 flex flex-wrap justify-center gap-2">
+//               {location && (
+//                 <span className="bg-emerald-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+//                   📍 {location}
+//                 </span>
+//               )}
+//               {type && (
+//                 <span className="bg-emerald-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+//                   🏠 {type}
+//                 </span>
+//               )}
+//               {(minPrice || maxPrice) && (
+//                 <span className="bg-emerald-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+//                   💰 {minPrice && `₹${Number(minPrice).toLocaleString()}`}
+//                   {minPrice && maxPrice && ' - '}
+//                   {maxPrice && `₹${Number(maxPrice).toLocaleString()}`}
+//                 </span>
+//               )}
+//             </div>
+//           )}
+//         </div>
+//       </div>
+
+//       <div className="max-w-7xl mx-auto px-4 -mt-10 pb-12 relative z-20">
+//         <div className="flex flex-col lg:flex-row gap-8">
+
+//           {/* Sidebar */}
+//           <aside className="w-full lg:w-80 space-y-6">
+
+//             {/* Search */}
+//             <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100">
+//               <div className="flex items-center gap-3 bg-slate-50 rounded-xl px-4 py-3 border border-slate-200 focus-within:border-green-600 transition-all">
+//                 <Search className="w-5 h-5 text-green-600" />
+//                 <input
+//                   type="text"
+//                   placeholder="खोजें (Search)..."
+//                   value={search}
+//                   onChange={(e) => setSearch(e.target.value)}
+//                   className="flex-1 outline-none text-sm bg-transparent placeholder:text-slate-400 text-slate-900 font-medium"
+//                 />
+//               </div>
+//             </div>
+
+//             {/* Filters */}
+//             <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100 space-y-6">
+//               <div className="flex justify-between items-center pb-4 border-b border-slate-100">
+//                 <div className="flex items-center gap-2">
+//                   <Filter className="w-5 h-5 text-green-600" />
+//                   <h3 className="font-bold text-lg text-slate-900">Filters</h3>
+//                 </div>
+//                 <button onClick={resetFilters} className="text-green-600 text-xs font-bold uppercase hover:underline">
+//                   Reset
+//                 </button>
+//               </div>
+
+//               {/* Location */}
+//               <div>
+//                 <label className="text-xs font-bold text-slate-700 mb-2 block uppercase tracking-wider">
+//                   स्थान (Location)
+//                 </label>
+//                 <select
+//                   value={location}
+//                   onChange={(e) => setLocation(e.target.value)}
+//                   className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 focus:border-green-600 outline-none transition-all cursor-pointer font-medium"
+//                 >
+//                   <option value="">All Locations</option>
+//                   {availableCities.map((city) => (
+//                     <option key={city} value={city}>{city}</option>
+//                   ))}
+//                 </select>
+//               </div>
+
+//               {/* Type */}
+//               <div>
+//                 <label className="text-xs font-bold text-slate-700 mb-2 block uppercase tracking-wider">
+//                   प्रॉपर्टी टाइप (Type)
+//                 </label>
+//                 <select
+//                   value={type}
+//                   onChange={(e) => setType(e.target.value)}
+//                   className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 focus:border-green-600 outline-none transition-all cursor-pointer font-medium"
+//                 >
+//                   <option value="">All Types</option>
+//                   {availableTypes.map((t) => (
+//                     <option key={t} value={t}>{t}</option>
+//                   ))}
+//                 </select>
+//               </div>
+
+//               {/* Price */}
+//               <div>
+//                 <label className="text-xs font-bold text-slate-700 mb-2 block uppercase tracking-wider">
+//                   कीमत (Price Range)
+//                 </label>
+//                 <div className="grid grid-cols-2 gap-3">
+//                   <input
+//                     type="number"
+//                     placeholder="Min"
+//                     value={minPrice}
+//                     onChange={(e) => setMinPrice(e.target.value)}
+//                     className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 focus:border-green-600 outline-none transition-all font-medium"
+//                   />
+//                   <input
+//                     type="number"
+//                     placeholder="Max"
+//                     value={maxPrice}
+//                     onChange={(e) => setMaxPrice(e.target.value)}
+//                     className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 focus:border-green-600 outline-none transition-all font-medium"
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+//           </aside>
+
+//           {/* Main Content */}
+//           <main className="flex-1">
+
+//             {/* Toolbar */}
+//             <div className="bg-white rounded-2xl p-4 shadow-md mb-6 border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+//               <p className="text-sm text-slate-500 font-medium">
+//                 Showing <span className="text-slate-900 font-bold">{filtered.length}</span> properties
+//               </p>
+
+//               <div className="flex items-center gap-3">
+//                 <span className="text-xs font-bold text-slate-400 uppercase">View:</span>
+//                 <div className="flex gap-1 bg-slate-100 p-1 rounded-lg">
+//                   <button onClick={() => setViewMode("grid")} className={`p-2 rounded-md transition-all ${viewMode === "grid" ? "bg-white text-green-600 shadow-sm" : "text-slate-400"}`}>
+//                     <Grid className="w-4 h-4" />
+//                   </button>
+//                   <button onClick={() => setViewMode("list")} className={`p-2 rounded-md transition-all ${viewMode === "list" ? "bg-white text-green-600 shadow-sm" : "text-slate-400"}`}>
+//                     <List className="w-4 h-4" />
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Grid/List View */}
+//             {filtered.length === 0 ? (
+//               <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 shadow-sm">
+//                 <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
+//                   <Home className="w-10 h-10 text-slate-300" />
+//                 </div>
+//                 <h3 className="text-xl font-bold text-slate-900">No Properties Found</h3>
+//                 <p className="text-slate-500 mt-2">Try adjusting your search filters.</p>
+//                 <button onClick={resetFilters} className="mt-6 px-6 py-2 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition">
+//                   Reset Filters
+//                 </button>
+//               </div>
+//             ) : (
+//               <> {/* Added a Fragment here to wrap both properties and pagination */}
+//                 <div className={`${viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 gap-6" : "space-y-6"}`}>
+//                   {/* Changed from filtered.map to currentProperties.map */}
+//                   {currentProperties.map((property) => (
+//                     <div
+//                       key={property._id}
+//                       onClick={() => navigateToDetails(property._id)}
+//                       className={`group bg-white rounded-3xl overflow-hidden border border-slate-200 hover:border-green-500 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer ${
+//                         viewMode === "list" ? "flex flex-row" : ""
+//                       }`}
+//                     >
+//                       {/* Image */}
+//                       <div className={`relative overflow-hidden ${viewMode === "list" ? "w-80 flex-shrink-0" : "h-64"}`}>
+//                         <img
+//                           src={property.images?.length > 0 ? `https://propertybackend-1-xdbs.onrender.com${property.images[0]}` : "https://via.placeholder.com/600x400?text=No+Image"}
+//                           alt={property.propertyTypeName}
+//                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+//                           onError={(e) => { (e.target as HTMLImageElement).src = "https://via.placeholder.com/600x400?text=No+Image"; }}
+//                         />
+
+//                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+
+//                         <div className="absolute top-4 left-4">
+//                           <span className="bg-green-600 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider shadow-md">
+//                             {property.propertyTypeName}
+//                           </span>
+//                         </div>
+
+//                         <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-lg shadow-lg border-l-4 border-green-600">
+//                           <p className="text-xl font-bold text-slate-900">{formatPrice(property.price)}</p>
+//                         </div>
+//                       </div>
+
+//                       {/* Content */}
+//                       <div className={`p-6 ${viewMode === "list" ? "flex-1 flex flex-col justify-center" : ""}`}>
+//                         <div className="mb-4">
+//                           <h3 className="font-bold text-xl text-slate-900 group-hover:text-green-700 transition-colors line-clamp-1 mb-1">
+//                             {property.propertyTypeName}
+//                           </h3>
+//                           <div className="flex items-center text-sm text-slate-500 gap-2 font-medium">
+//                             <MapPin className="w-4 h-4 text-green-600 flex-shrink-0" />
+//                             <span className="line-clamp-1">{property.address}, {property.cityName}</span>
+//                           </div>
+//                         </div>
+
+//                         <div className="flex items-center gap-4 pt-4 border-t border-slate-100">
+//                           {property.configuration && (
+//                             <div className="flex items-center gap-2 text-sm font-semibold text-slate-600">
+//                               <Bed className="w-4 h-4 text-green-600" />
+//                               <span>{property.configuration}</span>
+//                             </div>
+//                           )}
+//                           {property.plotArea && (
+//                             <div className="flex items-center gap-2 text-sm font-semibold text-slate-600">
+//                               <Maximize className="w-4 h-4 text-green-600" />
+//                               <span>{property.plotArea} sqft</span>
+//                             </div>
+//                           )}
+//                           {property.area && (
+//                             <div className="flex items-center gap-2 text-sm font-semibold text-slate-600">
+//                               <Maximize className="w-4 h-4 text-green-600" />
+//                               <span>{property.area} sqft</span>
+//                             </div>
+//                           )}
+//                         </div>
+//                       </div>
+//                     </div>
+//                   ))}
+//                 </div>
+
+//                 {/* Pagination Controls */}
+//                 {totalPages > 1 && (
+//                   <div className="flex justify-center items-center mt-8 space-x-4">
+//                     <button
+//                       onClick={handlePreviousPage}
+//                       disabled={currentPage === 1}
+//                       className="px-4 py-2 bg-green-100 text-green-700 rounded-lg font-semibold hover:bg-green-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-1"
+//                     >
+//                       <ChevronLeft className="w-4 h-4" /> Previous
+//                     </button>
+//                     <span className="text-slate-700 font-medium">
+//                       Page <span className="font-bold">{currentPage}</span> of <span className="font-bold">{totalPages}</span>
+//                     </span>
+//                     <button
+//                       onClick={handleNextPage}
+//                       disabled={currentPage === totalPages}
+//                       className="px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-1"
+//                     >
+//                       Next <ChevronRight className="w-4 h-4" />
+//                     </button>
+//                   </div>
+//                 )}
+//               </>
+//             )}
+//           </main>
+//         </div>
+//       </div>
+//       <Footer/>
+//     </div>
+//   );
+// }
+// "use client";
+// import React, { useEffect, useState } from "react";
+// import {
+//   MapPin,
+//   Bed,
+//   Maximize,
+//   Grid,
+//   List,
+//   Search,
+//   Home,
+//   ChevronLeft,
+//   ChevronRight,
+//   Phone,
+//   MessageCircle,
+//   Filter,
+// } from "lucide-react";
+// import Footer from "../footer/footer";
+// import Header from "@/components/header/header";
+// interface Property {
+//   _id: string;
+//   propertyTypeName: string;
+//   price: number;
+//   images: string[];
+//   address: string;
+//   cityName: string;
+//   configuration?: string;
+//   area?: number;
+//   plotArea?: number;
+// }
+
+// export default function RealEstateBuyList() {
+//   const [properties, setProperties] = useState<Property[]>([]);
+//   const [filtered, setFiltered] = useState<Property[]>([]);
+//   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+//   const [loading, setLoading] = useState(true);
+
+//   const [search, setSearch] = useState("");
+//   const [location, setLocation] = useState("");
+//   const [type, setType] = useState("");
+//   const [minPrice, setMinPrice] = useState("");
+//   const [maxPrice, setMaxPrice] = useState("");
+//   const [availableCities, setAvailableCities] = useState<string[]>([]);
+//   const [availableTypes, setAvailableTypes] = useState<string[]>([]);
+
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const itemsPerPage = 20;
+
+//   // Get URL params on load
+//   useEffect(() => {
+//     const params = new URLSearchParams(window.location.search);
+//     const cityParam = params.get("city") || "";
+//     const typeParam = params.get("type") || "";
+//     const minPriceParam = params.get("minPrice") || "";
+//     const maxPriceParam = params.get("maxPrice") || "";
+
+//     setLocation(cityParam);
+//     setType(typeParam);
+//     setMinPrice(minPriceParam);
+//     setMaxPrice(maxPriceParam);
+//   }, []);
+
+//   // Fetch properties
+//   useEffect(() => {
+//     fetch("https://propertybackend-1-xdbs.onrender.com/api/property")
+//       .then((res) => res.json())
+//       .then((data) => {
+//         const allProperties = data.data || [];
+//         setProperties(allProperties);
+
+//         const cities = Array.from(
+//           new Set(allProperties.map((p: Property) => p.cityName))
+//         ).sort();
+//         const types = Array.from(
+//           new Set(allProperties.map((p: Property) => p.propertyTypeName))
+//         ).sort();
+
+//         setAvailableCities(cities as string[]);
+//         setAvailableTypes(types as string[]);
+//       })
+//       .catch((err) => console.error("Failed to fetch properties:", err))
+//       .finally(() => setLoading(false));
+//   }, []);
+
+//   // Apply filters
+//   const applyFilters = () => {
+//     let data = [...properties];
+
+//     if (search) {
+//       data = data.filter(
+//         (p) =>
+//           p.propertyTypeName.toLowerCase().includes(search.toLowerCase()) ||
+//           p.address.toLowerCase().includes(search.toLowerCase()) ||
+//           p.cityName.toLowerCase().includes(search.toLowerCase())
+//       );
+//     }
+
+//     if (location) {
+//       data = data.filter(
+//         (p) => p.cityName.toLowerCase() === location.toLowerCase()
+//       );
+//     }
+
+//     if (type) {
+//       data = data.filter(
+//         (p) => p.propertyTypeName.toLowerCase() === type.toLowerCase()
+//       );
+//     }
+
+//     if (minPrice) data = data.filter((p) => p.price >= Number(minPrice));
+//     if (maxPrice) data = data.filter((p) => p.price <= Number(maxPrice));
+
+//     setFiltered(data);
+//     setCurrentPage(1);
+//   };
+
+//   useEffect(() => {
+//     if (properties.length > 0) {
+//       applyFilters();
+//     }
+//   }, [location, search, type, minPrice, maxPrice, properties]);
+
+//   // Reset all filters
+//   const resetFilters = () => {
+//     setSearch("");
+//     setLocation("");
+//     setType("");
+//     setMinPrice("");
+//     setMaxPrice("");
+//     setFiltered(properties);
+//     setCurrentPage(1);
+//     window.history.pushState({}, "", "/list");
+//   };
+
+//   // Navigate to property details
+//   const navigateToDetails = (id: string) => {
+//     window.location.href = `/listdeatils/${id}`;
+//   };
+
+//   // Handle Call button
+//   const handleCall = (e: React.MouseEvent, property: Property) => {
+//     e.stopPropagation();
+//     window.location.href = "tel:+919876543210"; // Replace with actual number
+//   };
+
+//   // Handle WhatsApp button
+//   const handleWhatsApp = (e: React.MouseEvent, property: Property) => {
+//     e.stopPropagation();
+//     const message = `नमस्ते, मुझे ${property.propertyTypeName} में रुचि है।\n\n ${property.address}, ${property.cityName}\n कीमत: ${formatPrice(property.price)}\n\nकृपया जानकारी दें।`;
+//     const phone = "919876543210"; // Replace with actual number
+//     window.open(
+//       `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
+//       "_blank"
+//     );
+//   };
+
+//   // Format price in Indian format
+//   const formatPrice = (price: number) => {
+//     if (price >= 10000000) return `₹${(price / 10000000).toFixed(2)} Cr`;
+//     if (price >= 100000) return `₹${(price / 100000).toFixed(2)} Lac`;
+//     return `₹${price.toLocaleString("en-IN")}`;
+//   };
+
+//   // Pagination
+//   const totalPages = Math.ceil(filtered.length / itemsPerPage);
+//   const startIndex = (currentPage - 1) * itemsPerPage;
+//   const endIndex = startIndex + itemsPerPage;
+//   const currentProperties = filtered.slice(startIndex, endIndex);
+
+//   const handleNextPage = () => {
+//     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+//     window.scrollTo({ top: 0, behavior: "smooth" });
+//   };
+
+//   const handlePreviousPage = () => {
+//     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+//     window.scrollTo({ top: 0, behavior: "smooth" });
+//   };
+
+//   // Loading state
+//   if (loading) {
+//     return (
+//       <div
+//         className="min-h-screen flex items-center justify-center"
+//         style={{ backgroundColor: "#f5f5f5" }}
+//       >
+//         <div className="text-center">
+//           <div
+//             className="w-16 h-16 border-4 rounded-full animate-spin mx-auto mb-4"
+//             style={{ borderColor: "#cc3f3f", borderTopColor: "transparent" }}
+//           ></div>
+//           <p className="text-gray-600 font-semibold text-lg">
+//              प्रॉपर्टी लोड हो रही है...
+//           </p>
+//           <p className="text-gray-400 text-sm mt-1">कृपया थोड़ा इंतज़ार करें</p>
+//         </div>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="min-h-screen font-sans" style={{ backgroundColor: "#f5f5f5" }}>
+//       <Header/>
+//       {/* ========== HERO HEADER ========== */}
+//       <div
+//         className="bg-black border-b-4 pt-16 pb-20 px-4 relative overflow-hidden"
+//         style={{ borderBottomColor: "#cc3f3f" }}
+//       >
+//         <div
+//           className="absolute top-[-50px] right-[-50px] w-64 h-64 rounded-full z-0"
+//           style={{ backgroundColor: "rgba(204, 63, 63, 0.1)" }}
+//         ></div>
+//         <div className="max-w-7xl mx-auto text-center relative z-10">
+//           <span
+//             className="font-bold uppercase tracking-widest text-xs px-3 py-1 rounded-full mb-4 inline-block border"
+//             style={{
+//               color: "#cc3f3f",
+//               backgroundColor: "rgba(204, 63, 63, 0.1)",
+//               borderColor: "rgba(204, 63, 63, 0.3)",
+//             }}
+//           >
+//             🏡 Exclusive Listings
+//           </span>
+//           <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
+//             अपनी <span style={{ color: "#cc3f3f" }}>पसंद की प्रॉपर्टी</span> खोजें
+//           </h1>
+//           <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto font-medium mt-4">
+//              मकान &nbsp;  ज़मीन &nbsp;  दुकान &nbsp;  फ्लैट
+//           </p>
+
+//           {/* Active Filters Display */}
+//           {(location || type || minPrice || maxPrice) && (
+//             <div className="mt-6 flex flex-wrap justify-center gap-2">
+//               {location && (
+//                 <span
+//                   className="text-white px-4 py-2 rounded-full text-sm font-semibold"
+//                   style={{ backgroundColor: "#cc3f3f" }}
+//                 >
+//                    {location}
+//                 </span>
+//               )}
+//               {type && (
+//                 <span
+//                   className="text-white px-4 py-2 rounded-full text-sm font-semibold"
+//                   style={{ backgroundColor: "#cc3f3f" }}
+//                 >
+//                    {type}
+//                 </span>
+//               )}
+//               {(minPrice || maxPrice) && (
+//                 <span
+//                   className="text-white px-4 py-2 rounded-full text-sm font-semibold"
+//                   style={{ backgroundColor: "#cc3f3f" }}
+//                 >
+//                    {minPrice && `₹${Number(minPrice).toLocaleString()}`}
+//                   {minPrice && maxPrice && " - "}
+//                   {maxPrice && `₹${Number(maxPrice).toLocaleString()}`}
+//                 </span>
+//               )}
+//             </div>
+//           )}
+//         </div>
+//       </div>
+
+//       {/* ========== MAIN CONTENT ========== */}
+//       <div className="max-w-7xl mx-auto px-4 -mt-10 pb-12 relative z-20">
+//         <div className="flex flex-col lg:flex-row gap-8">
+//           {/* ========== SIDEBAR ========== */}
+//           <aside className="w-full lg:w-80 space-y-6">
+//             {/* Search Box */}
+//             <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
+//               <div className="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 border border-gray-200 focus-within:border-red-400 transition-all">
+//                 <Search className="w-5 h-5" style={{ color: "#cc3f3f" }} />
+//                 <input
+//                   type="text"
+//                   placeholder=" खोजें (Search)..."
+//                   value={search}
+//                   onChange={(e) => setSearch(e.target.value)}
+//                   className="flex-1 outline-none text-sm bg-transparent placeholder:text-gray-400 text-gray-900 font-medium"
+//                 />
+//               </div>
+//             </div>
+
+//             {/* Filters Box */}
+//             <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 space-y-6">
+//               <div className="flex justify-between items-center pb-4 border-b border-gray-100">
+//                 <div className="flex items-center gap-2">
+//                   <Filter className="w-5 h-5" style={{ color: "#cc3f3f" }} />
+//                   <h3 className="font-bold text-lg text-gray-900"> फ़िल्टर</h3>
+//                 </div>
+//                 <button
+//                   onClick={resetFilters}
+//                   className="text-xs font-bold uppercase hover:underline"
+//                   style={{ color: "#cc3f3f" }}
+//                 >
+//                    Reset
+//                 </button>
+//               </div>
+
+//               {/* Location Filter */}
+//               <div>
+//                 <label className="text-xs font-bold text-gray-700 mb-2 block uppercase tracking-wider">
+//                    स्थान (Location)
+//                 </label>
+//                 <select
+//                   value={location}
+//                   onChange={(e) => setLocation(e.target.value)}
+//                   className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 outline-none transition-all cursor-pointer font-medium focus:border-red-400"
+//                 >
+//                   <option value="">सभी शहर (All Locations)</option>
+//                   {availableCities.map((city) => (
+//                     <option key={city} value={city}>
+//                       {city}
+//                     </option>
+//                   ))}
+//                 </select>
+//               </div>
+
+//               {/* Type Filter */}
+//               <div>
+//                 <label className="text-xs font-bold text-gray-700 mb-2 block uppercase tracking-wider">
+//                    प्रॉपर्टी टाइप (Type)
+//                 </label>
+//                 <select
+//                   value={type}
+//                   onChange={(e) => setType(e.target.value)}
+//                   className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 outline-none transition-all cursor-pointer font-medium focus:border-red-400"
+//                 >
+//                   <option value="">सभी प्रकार (All Types)</option>
+//                   {availableTypes.map((t) => (
+//                     <option key={t} value={t}>
+//                       {t}
+//                     </option>
+//                   ))}
+//                 </select>
+//               </div>
+
+//               {/* Price Filter */}
+//               <div>
+//                 <label className="text-xs font-bold text-gray-700 mb-2 block uppercase tracking-wider">
+//                    कीमत (Price Range)
+//                 </label>
+//                 <div className="grid grid-cols-2 gap-3">
+//                   <input
+//                     type="number"
+//                     placeholder="कम से कम"
+//                     value={minPrice}
+//                     onChange={(e) => setMinPrice(e.target.value)}
+//                     className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 outline-none transition-all font-medium focus:border-red-400"
+//                   />
+//                   <input
+//                     type="number"
+//                     placeholder="ज़्यादा से ज़्यादा"
+//                     value={maxPrice}
+//                     onChange={(e) => setMaxPrice(e.target.value)}
+//                     className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 outline-none transition-all font-medium focus:border-red-400"
+//                   />
+//                 </div>
+//               </div>
+
+//               {/* Reset Button */}
+//               <button
+//                 onClick={resetFilters}
+//                 className="w-full py-3 rounded-xl font-bold text-white transition hover:opacity-90"
+//                 style={{ backgroundColor: "#cc3f3f" }}
+//               >
+//                  सब  हटाएं
+//               </button>
+//             </div>
+
+//             {/* Help Box */}
+//             {/* <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl p-5 text-white text-center shadow-lg">
+//               <p className="text-2xl mb-2">🤝</p>
+//               <p className="font-bold">मदद चाहिए?</p>
+//               <p className="text-sm text-white/80 mb-3">हमें कॉल करें!</p>
+//               <a
+//                 href="tel:+919876543210"
+//                 className="inline-block bg-white text-green-600 px-4 py-2 rounded-lg font-bold text-sm hover:bg-gray-100 transition"
+//               >
+//                 📞 कॉल करें
+//               </a>
+//             </div> */}
+//           </aside>
+
+//           {/* ========== MAIN CONTENT AREA ========== */}
+//           <main className="flex-1">
+//             {/* Results Info Bar */}
+//             <div className="bg-white rounded-2xl p-4 shadow-md mb-6 border border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+//               <p className="text-sm text-gray-500 font-medium">
+//                 🏠कुल{" "}
+//                 <span className="text-gray-900 font-bold text-lg">
+//                   {filtered.length}
+//                 </span>{" "}
+//                 प्रॉपर्टी मिली
+//               </p>
+
+//               <div className="flex items-center gap-3">
+//                 <span className="text-xs font-bold text-gray-400 uppercase">
+//                   देखें:
+//                 </span>
+//                 <div className="flex gap-1 bg-gray-100 p-1 rounded-lg">
+//                   <button
+//                     onClick={() => setViewMode("grid")}
+//                     className={`p-2 rounded-md transition-all ${
+//                       viewMode === "grid" ? "bg-white shadow-sm" : "text-gray-400"
+//                     }`}
+//                     style={viewMode === "grid" ? { color: "#cc3f3f" } : {}}
+//                   >
+//                     <Grid className="w-4 h-4" />
+//                   </button>
+//                   <button
+//                     onClick={() => setViewMode("list")}
+//                     className={`p-2 rounded-md transition-all ${
+//                       viewMode === "list" ? "bg-white shadow-sm" : "text-gray-400"
+//                     }`}
+//                     style={viewMode === "list" ? { color: "#cc3f3f" } : {}}
+//                   >
+//                     <List className="w-4 h-4" />
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* No Results */}
+//             {filtered.length === 0 ? (
+//               <div className="bg-white rounded-2xl p-12 text-center border border-gray-200 shadow-sm">
+//                 <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+//                   <span className="text-5xl">😔</span>
+//                 </div>
+//                 <h3 className="text-xl font-bold text-gray-900">
+//                   कोई प्रॉपर्टी नहीं मिली!
+//                 </h3>
+//                 <p className="text-gray-500 mt-2">
+//                   अपनी खोज बदलकर देखें या फ़िल्टर हटाएं
+//                 </p>
+//                 <button
+//                   onClick={resetFilters}
+//                   className="mt-6 px-6 py-3 text-white rounded-lg font-bold hover:opacity-90 transition"
+//                   style={{ backgroundColor: "#cc3f3f" }}
+//                 >
+//                    फ़िल्टर हटाएं
+//                 </button>
+//               </div>
+//             ) : (
+//               <>
+//                 {/* Property Cards */}
+//                 <div
+//                   className={`${
+//                     viewMode === "grid"
+//                       ? "grid grid-cols-1 md:grid-cols-2 gap-6"
+//                       : "space-y-6"
+//                   }`}
+//                 >
+//                   {currentProperties.map((property) => (
+//                     <div
+//                       key={property._id}
+//                       onClick={() => navigateToDetails(property._id)}
+//                       className={`group bg-white rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-red-400 hover:shadow-xl transition-all duration-300 cursor-pointer ${
+//                         viewMode === "list" ? "flex flex-col sm:flex-row" : ""
+//                       }`}
+//                     >
+//                       {/* Image Container - Fixed Size */}
+//                       <div
+//                         className={`relative overflow-hidden bg-gray-200 ${
+//                           viewMode === "list"
+//                             ? "w-full sm:w-72 h-56 sm:h-48 flex-shrink-0"
+//                             : "w-full h-52"
+//                         }`}
+//                       >
+//                         <img
+//                           src={
+//                             property.images?.length > 0
+//                               ? `https://propertybackend-1-xdbs.onrender.com${property.images[0]}`
+//                               : "https://via.placeholder.com/600x400?text=No+Image"
+//                           }
+//                           alt={property.propertyTypeName}
+//                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+//                           style={{ objectFit: "cover", objectPosition: "center" }}
+//                           onError={(e) => {
+//                             (e.target as HTMLImageElement).src =
+//                               "https://via.placeholder.com/600x400?text=No+Image";
+//                           }}
+//                         />
+
+//                         {/* Gradient Overlay */}
+//                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+//                         {/* Type Badge */}
+//                         <div className="absolute top-3 left-3">
+//                           <span
+//                             className="text-white px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-md"
+//                             style={{ backgroundColor: "#cc3f3f" }}
+//                           >
+//                             🏠 {property.propertyTypeName}
+//                           </span>
+//                         </div>
+
+//                         {/* Price Badge */}
+//                         <div
+//                           className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-4 py-2 rounded-lg shadow-lg border-l-4"
+//                           style={{ borderLeftColor: "#cc3f3f" }}
+//                         >
+//                           <p className="text-xl font-black text-gray-900">
+//                              {formatPrice(property.price)}
+//                           </p>
+//                         </div>
+//                       </div>
+
+//                       {/* Card Content */}
+//                       <div
+//                         className={`p-5 ${
+//                           viewMode === "list"
+//                             ? "flex-1 flex flex-col justify-between"
+//                             : ""
+//                         }`}
+//                       >
+//                         {/* Location */}
+//                         <div className="flex items-start gap-2 mb-3">
+//                           <MapPin
+//                             className="w-5 h-5 flex-shrink-0 mt-0.5"
+//                             style={{ color: "#cc3f3f" }}
+//                           />
+//                           <div className="min-w-0">
+//                             <p className="font-bold text-gray-800 text-base truncate">
+//                               {property.address}
+//                             </p>
+//                             <p className="text-gray-500 text-sm">
+//                                {property.cityName}
+//                             </p>
+//                           </div>
+//                         </div>
+
+//                         {/* Property Details */}
+//                         <div className="flex flex-wrap gap-2 mb-4">
+//                           {property.configuration && (
+//                             <span
+//                               className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold"
+//                               style={{
+//                                 backgroundColor: "rgba(204, 63, 63, 0.1)",
+//                                 color: "#cc3f3f",
+//                               }}
+//                             >
+//                               <Bed className="w-4 h-4" />
+//                               {property.configuration}
+//                             </span>
+//                           )}
+//                           {(property.plotArea || property.area) && (
+//                             <span
+//                               className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold"
+//                               style={{
+//                                 backgroundColor: "#e0f2fe",
+//                                 color: "#0284c7",
+//                               }}
+//                             >
+//                               <Maximize className="w-4 h-4" />
+//                               {property.plotArea || property.area} sqft
+//                             </span>
+//                           )}
+//                         </div>
+
+//                         {/* Action Buttons */}
+//                         <div className="grid grid-cols-2 gap-3">
+//                           <button
+//                             onClick={(e) => handleCall(e, property)}
+//                             className="text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition hover:opacity-90 shadow-md"
+//                             style={{ backgroundColor: "#16a34a" }}
+//                           >
+//                             <Phone className="w-5 h-5" />
+//                              कॉल करें
+//                           </button>
+//                           <button
+//                             onClick={(e) => handleWhatsApp(e, property)}
+//                             className="text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition hover:opacity-90 shadow-md"
+//                             style={{ backgroundColor: "#25D366" }}
+//                           >
+//                             <MessageCircle className="w-5 h-5" />
+//                             WhatsApp
+//                           </button>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   ))}
+//                 </div>
+
+//                 {/* Pagination */}
+//                 {totalPages > 1 && (
+//                   <div className="bg-white rounded-2xl p-5 mt-8 shadow-md border border-gray-200">
+//                     <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+//                       <button
+//                         onClick={handlePreviousPage}
+//                         disabled={currentPage === 1}
+//                         className="px-5 py-3 text-white rounded-xl font-bold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2 shadow-md"
+//                         style={{ backgroundColor: "#cc3f3f" }}
+//                       >
+//                         <ChevronLeft className="w-5 h-5" />
+//                         ⬅️ पिछला पेज
+//                       </button>
+
+//                       <div className="flex items-center gap-2 bg-gray-100 px-5 py-3 rounded-xl">
+//                         <span className="text-gray-600 font-medium">पेज</span>
+//                         <span
+//                           className="text-white px-4 py-1 rounded-lg font-bold text-lg"
+//                           style={{ backgroundColor: "#cc3f3f" }}
+//                         >
+//                           {currentPage}
+//                         </span>
+//                         <span className="text-gray-600 font-medium">
+//                           / {totalPages}
+//                         </span>
+//                       </div>
+
+//                       <button
+//                         onClick={handleNextPage}
+//                         disabled={currentPage === totalPages}
+//                         className="px-5 py-3 text-white rounded-xl font-bold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2 shadow-md"
+//                         style={{ backgroundColor: "#cc3f3f" }}
+//                       >
+//                         अगला पेज ➡️
+//                         <ChevronRight className="w-5 h-5" />
+//                       </button>
+//                     </div>
+//                   </div>
+//                 )}
+//               </>
+//             )}
+//           </main>
+//         </div>
+//       </div>
+//       <Footer/>
+//     </div>
+//   );
+// }
 "use client";
 import React, { useEffect, useState } from "react";
 import {
-  Heart,
   MapPin,
   Bed,
   Maximize,
   Grid,
   List,
   Search,
-  Filter,
   Home,
-  ChevronLeft, // Added for pagination
-  ChevronRight, // Added for pagination
+  ChevronLeft,
+  ChevronRight,
+  Phone,
+  MessageCircle,
+  Filter,
+  X,
 } from "lucide-react";
 import Footer from "../footer/footer";
 import Header from "@/components/header/header";
@@ -1312,13 +2381,20 @@ interface Property {
   plotArea?: number;
 }
 
+// Interface for Contact Info from API
+interface ContactInfo {
+  phoneNumbers: string[];
+  whatsappNumber: string;
+  // Add other fields if your API has them
+}
+
 export default function RealEstateBuyList() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [filtered, setFiltered] = useState<Property[]>([]);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [loading, setLoading] = useState(true);
 
-  // Filters
+  // Filter States
   const [search, setSearch] = useState("");
   const [location, setLocation] = useState("");
   const [type, setType] = useState("");
@@ -1327,17 +2403,23 @@ export default function RealEstateBuyList() {
   const [availableCities, setAvailableCities] = useState<string[]>([]);
   const [availableTypes, setAvailableTypes] = useState<string[]>([]);
 
-  // Pagination States
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20; // एक पेज पर 20 कार्ड दिखाएं
+  // Contact Info State
+  const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
+  
+  // Dropdown State for Desktop Call
+  const [showPhoneDropdown, setShowPhoneDropdown] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
 
-  /* ================= GET URL PARAMETERS ================= */
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
+
+  // Get URL params on load
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const cityParam = params.get('city') || '';
-    const typeParam = params.get('type') || '';
-    const minPriceParam = params.get('minPrice') || '';
-    const maxPriceParam = params.get('maxPrice') || '';
+    const cityParam = params.get("city") || "";
+    const typeParam = params.get("type") || "";
+    const minPriceParam = params.get("minPrice") || "";
+    const maxPriceParam = params.get("maxPrice") || "";
 
     setLocation(cityParam);
     setType(typeParam);
@@ -1345,25 +2427,42 @@ export default function RealEstateBuyList() {
     setMaxPrice(maxPriceParam);
   }, []);
 
-  /* ================= FETCH PROPERTIES ================= */
+  // Fetch properties AND contact info
   useEffect(() => {
-    fetch("https://propertybackend-1-xdbs.onrender.com/api/property")
-      .then((res) => res.json())
-      .then((data) => {
-        const allProperties = data.data || [];
-        setProperties(allProperties);
+    const fetchProperties = fetch("https://propertybackend-1-xdbs.onrender.com/api/property");
+    const fetchContact = fetch("https://propertybackend-1-xdbs.onrender.com/api/contact");
 
-        const cities = Array.from(new Set(allProperties.map((p: Property) => p.cityName))).sort();
-        const types = Array.from(new Set(allProperties.map((p: Property) => p.propertyTypeName))).sort();
+    Promise.all([fetchProperties, fetchContact])
+      .then(([propRes, contactRes]) => {
+        // Handle Properties
+        if (propRes.ok) {
+          return propRes.json().then((data) => {
+            const allProperties = data.data || [];
+            setProperties(allProperties);
 
-        setAvailableCities(cities as string[]);
-        setAvailableTypes(types as string[]);
+            const cities = Array.from(new Set(allProperties.map((p: Property) => p.cityName))).sort();
+            const types = Array.from(new Set(allProperties.map((p: Property) => p.propertyTypeName))).sort();
+
+            setAvailableCities(cities as string[]);
+            setAvailableTypes(types as string[]);
+          });
+        }
       })
-      .catch(err => console.error("Failed to fetch properties:", err))
+      .then(() => {
+        // Handle Contact Info (Separate then to ensure properties load even if contact fails)
+        return fetch("https://propertybackend-1-xdbs.onrender.com/api/contact")
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success && data.data) {
+              setContactInfo(data.data);
+            }
+          });
+      })
+      .catch((err) => console.error("Error fetching data:", err))
       .finally(() => setLoading(false));
   }, []);
 
-  /* ================= FILTER LOGIC ================= */
+  // Apply filters
   const applyFilters = () => {
     let data = [...properties];
 
@@ -1377,14 +2476,14 @@ export default function RealEstateBuyList() {
     }
 
     if (location) {
-      data = data.filter((p) =>
-        p.cityName.toLowerCase() === location.toLowerCase()
+      data = data.filter(
+        (p) => p.cityName.toLowerCase() === location.toLowerCase()
       );
     }
 
     if (type) {
-      data = data.filter((p) =>
-        p.propertyTypeName.toLowerCase() === type.toLowerCase()
+      data = data.filter(
+        (p) => p.propertyTypeName.toLowerCase() === type.toLowerCase()
       );
     }
 
@@ -1392,7 +2491,7 @@ export default function RealEstateBuyList() {
     if (maxPrice) data = data.filter((p) => p.price <= Number(maxPrice));
 
     setFiltered(data);
-    setCurrentPage(1); // फ़िल्टर लागू होने पर पेज को 1 पर रीसेट करें
+    setCurrentPage(1);
   };
 
   useEffect(() => {
@@ -1401,6 +2500,7 @@ export default function RealEstateBuyList() {
     }
   }, [location, search, type, minPrice, maxPrice, properties]);
 
+  // Reset all filters
   const resetFilters = () => {
     setSearch("");
     setLocation("");
@@ -1408,21 +2508,90 @@ export default function RealEstateBuyList() {
     setMinPrice("");
     setMaxPrice("");
     setFiltered(properties);
-    setCurrentPage(1); // फ़िल्टर रीसेट होने पर भी पेज को 1 पर रीसेट करें
+    setCurrentPage(1);
     window.history.pushState({}, "", "/list");
   };
 
+  // Navigate to property details
   const navigateToDetails = (id: string) => {
     window.location.href = `/listdeatils/${id}`;
   };
 
+  // --- HANDLE CALL (Smart Logic) ---
+  const handleCall = (e: React.MouseEvent, property: Property) => {
+    e.stopPropagation();
+
+    if (!contactInfo || !contactInfo.phoneNumbers || contactInfo.phoneNumbers.length === 0) {
+      alert("Contact number not available");
+      return;
+    }
+
+    // Check if Mobile/Tablet
+    const isMobile = window.innerWidth <= 1024;
+
+    if (isMobile) {
+      // Mobile: Call the FIRST number directly
+      const firstNumber = contactInfo.phoneNumbers[0];
+      window.location.href = `tel:${firstNumber}`;
+    } else {
+      // Desktop: Show Dropdown
+      const btn = e.currentTarget;
+      const rect = btn.getBoundingClientRect();
+      
+      setDropdownPosition({
+        top: rect.bottom + window.scrollY + 5,
+        left: rect.left + window.scrollX
+      });
+      setShowPhoneDropdown(true);
+    }
+  };
+
+  // --- HANDLE WHATSAPP ---
+  const handleWhatsApp = (e: React.MouseEvent, property: Property) => {
+    e.stopPropagation();
+
+    if (!contactInfo || !contactInfo.whatsappNumber) {
+      alert("WhatsApp number not available");
+      return;
+    }
+
+    // Create detailed message
+    const message = `नमस्ते, मुझे आपकी साइट पर मौजूद यह प्रॉपर्टी बहुत पसंद आई है:
+
+*प्रॉपर्टी:* ${property.propertyTypeName}
+*लोकेशन:* ${property.address}, ${property.cityName}
+*कीमत:* ${formatPrice(property.price)}
+
+कृपया मुझे इसके बारे में और जानकारी दें। धन्यवाद!`;
+
+    // Open WhatsApp
+    const url = `https://wa.me/${contactInfo.whatsappNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  };
+
+  // Handle Direct Number Click from Dropdown
+  const handleDirectPhoneCall = (phone: string) => {
+    window.location.href = `tel:${phone}`;
+    setShowPhoneDropdown(false);
+  };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = () => {
+      if (showPhoneDropdown) setShowPhoneDropdown(false);
+    };
+    window.addEventListener('click', handleClickOutside);
+    return () => window.removeEventListener('click', handleClickOutside);
+  }, [showPhoneDropdown]);
+
+  // Format price in Indian format
   const formatPrice = (price: number) => {
     if (price >= 10000000) return `₹${(price / 10000000).toFixed(2)} Cr`;
     if (price >= 100000) return `₹${(price / 100000).toFixed(2)} Lac`;
     return `₹${price.toLocaleString("en-IN")}`;
   };
 
-  // Pagination calculations
+  // Pagination
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -1430,59 +2599,53 @@ export default function RealEstateBuyList() {
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top on page change
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handlePreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top on page change
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#f5f5f5" }}>
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-green-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-600 font-semibold">Loading Properties...</p>
+          <div className="w-16 h-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{ borderColor: "#cc3f3f", borderTopColor: "transparent" }}></div>
+          <p className="text-gray-600 font-semibold text-lg">प्रॉपर्टी लोड हो रही है...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
-       <Header />
-      {/* Hero Header */}
-      <div className="bg-black border-b-4 border-green-600 pt-16 pb-20 px-4 relative overflow-hidden">
-        <div className="absolute top-[-50px] right-[-50px] w-64 h-64 bg-green-50 rounded-full z-0"></div>
+    <div className="min-h-screen font-sans" style={{ backgroundColor: "#f5f5f5" }}>
+      <Header/>
+      
+      {/* ========== HERO HEADER ========== */}
+      <div className="bg-black border-b-4 pt-16 pb-20 px-4 relative overflow-hidden" style={{ borderBottomColor: "#cc3f3f" }}>
+        <div className="absolute top-[-50px] right-[-50px] w-64 h-64 rounded-full z-0" style={{ backgroundColor: "rgba(204, 63, 63, 0.1)" }}></div>
         <div className="max-w-7xl mx-auto text-center relative z-10">
-          <span className="text-green-700 font-bold uppercase tracking-widest text-xs bg-green-100 px-3 py-1 rounded-full mb-4 inline-block border border-green-200">
-            Exclusive Listings
+          <span className="font-bold uppercase tracking-widest text-xs px-3 py-1 rounded-full mb-4 inline-block border" style={{ color: "#cc3f3f", backgroundColor: "rgba(204, 63, 63, 0.1)", borderColor: "rgba(204, 63, 63, 0.3)" }}>
+            🏡 Exclusive Listings
           </span>
-          <h1 className="text-5xl md:text-7xl font-black text-white leading-tight">
-            अपनी <span className="text-emerald-400">पसंद की प्रॉपर्टी</span> खोजें
+          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
+            अपनी <span style={{ color: "#cc3f3f" }}>पसंद की प्रॉपर्टी</span> खोजें
           </h1>
-          <p className="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto font-medium mt-4">
-            Find the best Homes, Land, and Shops in your budget.
+          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto font-medium mt-4">
+             मकान &nbsp;  ज़मीन &nbsp;  दुकान &nbsp;  फ्लैट
           </p>
 
           {/* Active Filters Display */}
           {(location || type || minPrice || maxPrice) && (
             <div className="mt-6 flex flex-wrap justify-center gap-2">
-              {location && (
-                <span className="bg-emerald-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                  📍 {location}
-                </span>
-              )}
-              {type && (
-                <span className="bg-emerald-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                  🏠 {type}
-                </span>
-              )}
+              {location && <span className="text-white px-4 py-2 rounded-full text-sm font-semibold" style={{ backgroundColor: "#cc3f3f" }}>{location}</span>}
+              {type && <span className="text-white px-4 py-2 rounded-full text-sm font-semibold" style={{ backgroundColor: "#cc3f3f" }}>{type}</span>}
               {(minPrice || maxPrice) && (
-                <span className="bg-emerald-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                  💰 {minPrice && `₹${Number(minPrice).toLocaleString()}`}
-                  {minPrice && maxPrice && ' - '}
+                <span className="text-white px-4 py-2 rounded-full text-sm font-semibold" style={{ backgroundColor: "#cc3f3f" }}>
+                   {minPrice && `₹${Number(minPrice).toLocaleString()}`}
+                  {minPrice && maxPrice && " - "}
                   {maxPrice && `₹${Number(maxPrice).toLocaleString()}`}
                 </span>
               )}
@@ -1491,222 +2654,161 @@ export default function RealEstateBuyList() {
         </div>
       </div>
 
+      {/* ========== MAIN CONTENT ========== */}
       <div className="max-w-7xl mx-auto px-4 -mt-10 pb-12 relative z-20">
         <div className="flex flex-col lg:flex-row gap-8">
-
-          {/* Sidebar */}
+          
+          {/* ========== SIDEBAR ========== */}
           <aside className="w-full lg:w-80 space-y-6">
-
-            {/* Search */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100">
-              <div className="flex items-center gap-3 bg-slate-50 rounded-xl px-4 py-3 border border-slate-200 focus-within:border-green-600 transition-all">
-                <Search className="w-5 h-5 text-green-600" />
-                <input
-                  type="text"
-                  placeholder="खोजें (Search)..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="flex-1 outline-none text-sm bg-transparent placeholder:text-slate-400 text-slate-900 font-medium"
-                />
+            {/* Search Box */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
+              <div className="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 border border-gray-200 focus-within:border-red-400 transition-all">
+                <Search className="w-5 h-5" style={{ color: "#cc3f3f" }} />
+                <input type="text" placeholder=" खोजें (Search)..." value={search} onChange={(e) => setSearch(e.target.value)} className="flex-1 outline-none text-sm bg-transparent placeholder:text-gray-400 text-gray-900 font-medium" />
               </div>
             </div>
 
-            {/* Filters */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100 space-y-6">
-              <div className="flex justify-between items-center pb-4 border-b border-slate-100">
+            {/* Filters Box */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 space-y-6">
+              <div className="flex justify-between items-center pb-4 border-b border-gray-100">
                 <div className="flex items-center gap-2">
-                  <Filter className="w-5 h-5 text-green-600" />
-                  <h3 className="font-bold text-lg text-slate-900">Filters</h3>
+                  <Filter className="w-5 h-5" style={{ color: "#cc3f3f" }} />
+                  <h3 className="font-bold text-lg text-gray-900"> फ़िल्टर</h3>
                 </div>
-                <button onClick={resetFilters} className="text-green-600 text-xs font-bold uppercase hover:underline">
-                  Reset
-                </button>
+                <button onClick={resetFilters} className="text-xs font-bold uppercase hover:underline" style={{ color: "#cc3f3f" }}>Reset</button>
               </div>
 
               {/* Location */}
               <div>
-                <label className="text-xs font-bold text-slate-700 mb-2 block uppercase tracking-wider">
-                  स्थान (Location)
-                </label>
-                <select
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 focus:border-green-600 outline-none transition-all cursor-pointer font-medium"
-                >
-                  <option value="">All Locations</option>
-                  {availableCities.map((city) => (
-                    <option key={city} value={city}>{city}</option>
-                  ))}
+                <label className="text-xs font-bold text-gray-700 mb-2 block uppercase tracking-wider">स्थान (Location)</label>
+                <select value={location} onChange={(e) => setLocation(e.target.value)} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 outline-none transition-all cursor-pointer font-medium focus:border-red-400">
+                  <option value="">सभी शहर (All Locations)</option>
+                  {availableCities.map((city) => <option key={city} value={city}>{city}</option>)}
                 </select>
               </div>
 
               {/* Type */}
               <div>
-                <label className="text-xs font-bold text-slate-700 mb-2 block uppercase tracking-wider">
-                  प्रॉपर्टी टाइप (Type)
-                </label>
-                <select
-                  value={type}
-                  onChange={(e) => setType(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 focus:border-green-600 outline-none transition-all cursor-pointer font-medium"
-                >
-                  <option value="">All Types</option>
-                  {availableTypes.map((t) => (
-                    <option key={t} value={t}>{t}</option>
-                  ))}
+                <label className="text-xs font-bold text-gray-700 mb-2 block uppercase tracking-wider">प्रॉपर्टी टाइप (Type)</label>
+                <select value={type} onChange={(e) => setType(e.target.value)} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 outline-none transition-all cursor-pointer font-medium focus:border-red-400">
+                  <option value="">सभी प्रकार (All Types)</option>
+                  {availableTypes.map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
 
               {/* Price */}
               <div>
-                <label className="text-xs font-bold text-slate-700 mb-2 block uppercase tracking-wider">
-                  कीमत (Price Range)
-                </label>
+                <label className="text-xs font-bold text-gray-700 mb-2 block uppercase tracking-wider">कीमत (Price Range)</label>
                 <div className="grid grid-cols-2 gap-3">
-                  <input
-                    type="number"
-                    placeholder="Min"
-                    value={minPrice}
-                    onChange={(e) => setMinPrice(e.target.value)}
-                    className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 focus:border-green-600 outline-none transition-all font-medium"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Max"
-                    value={maxPrice}
-                    onChange={(e) => setMaxPrice(e.target.value)}
-                    className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 focus:border-green-600 outline-none transition-all font-medium"
-                  />
+                  <input type="number" placeholder="कम से कम" value={minPrice} onChange={(e) => setMinPrice(e.target.value)} className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 outline-none transition-all font-medium focus:border-red-400" />
+                  <input type="number" placeholder="ज़्यादा से ज़्यादा" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 outline-none transition-all font-medium focus:border-red-400" />
                 </div>
               </div>
+
+              <button onClick={resetFilters} className="w-full py-3 rounded-xl font-bold text-white transition hover:opacity-90" style={{ backgroundColor: "#cc3f3f" }}>सब हटाएं</button>
             </div>
           </aside>
 
-          {/* Main Content */}
+          {/* ========== MAIN CONTENT AREA ========== */}
           <main className="flex-1">
-
-            {/* Toolbar */}
-            <div className="bg-white rounded-2xl p-4 shadow-md mb-6 border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
-              <p className="text-sm text-slate-500 font-medium">
-                Showing <span className="text-slate-900 font-bold">{filtered.length}</span> properties
+            {/* Results Info Bar */}
+            <div className="bg-white rounded-2xl p-4 shadow-md mb-6 border border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+              <p className="text-sm text-gray-500 font-medium">
+                🏠कुल <span className="text-gray-900 font-bold text-lg">{filtered.length}</span> प्रॉपर्टी मिली
               </p>
-
               <div className="flex items-center gap-3">
-                <span className="text-xs font-bold text-slate-400 uppercase">View:</span>
-                <div className="flex gap-1 bg-slate-100 p-1 rounded-lg">
-                  <button onClick={() => setViewMode("grid")} className={`p-2 rounded-md transition-all ${viewMode === "grid" ? "bg-white text-green-600 shadow-sm" : "text-slate-400"}`}>
+                <span className="text-xs font-bold text-gray-400 uppercase">देखें:</span>
+                <div className="flex gap-1 bg-gray-100 p-1 rounded-lg">
+                  <button onClick={() => setViewMode("grid")} className={`p-2 rounded-md transition-all ${viewMode === "grid" ? "bg-white shadow-sm" : "text-gray-400"}`} style={viewMode === "grid" ? { color: "#cc3f3f" } : {}}>
                     <Grid className="w-4 h-4" />
                   </button>
-                  <button onClick={() => setViewMode("list")} className={`p-2 rounded-md transition-all ${viewMode === "list" ? "bg-white text-green-600 shadow-sm" : "text-slate-400"}`}>
+                  <button onClick={() => setViewMode("list")} className={`p-2 rounded-md transition-all ${viewMode === "list" ? "bg-white shadow-sm" : "text-gray-400"}`} style={viewMode === "list" ? { color: "#cc3f3f" } : {}}>
                     <List className="w-4 h-4" />
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* Grid/List View */}
+            {/* No Results */}
             {filtered.length === 0 ? (
-              <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 shadow-sm">
-                <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Home className="w-10 h-10 text-slate-300" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900">No Properties Found</h3>
-                <p className="text-slate-500 mt-2">Try adjusting your search filters.</p>
-                <button onClick={resetFilters} className="mt-6 px-6 py-2 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition">
-                  Reset Filters
-                </button>
+              <div className="bg-white rounded-2xl p-12 text-center border border-gray-200 shadow-sm">
+                <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4"><span className="text-5xl">😔</span></div>
+                <h3 className="text-xl font-bold text-gray-900">कोई प्रॉपर्टी नहीं मिली!</h3>
+                <p className="text-gray-500 mt-2">अपनी खोज बदलकर देखें या फ़िल्टर हटाएं</p>
+                <button onClick={resetFilters} className="mt-6 px-6 py-3 text-white rounded-lg font-bold hover:opacity-90 transition" style={{ backgroundColor: "#cc3f3f" }}>फ़िल्टर हटाएं</button>
               </div>
             ) : (
-              <> {/* Added a Fragment here to wrap both properties and pagination */}
+              <>
+                {/* Property Cards */}
                 <div className={`${viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 gap-6" : "space-y-6"}`}>
-                  {/* Changed from filtered.map to currentProperties.map */}
                   {currentProperties.map((property) => (
-                    <div
-                      key={property._id}
-                      onClick={() => navigateToDetails(property._id)}
-                      className={`group bg-white rounded-3xl overflow-hidden border border-slate-200 hover:border-green-500 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer ${
-                        viewMode === "list" ? "flex flex-row" : ""
-                      }`}
-                    >
+                    <div key={property._id} onClick={() => navigateToDetails(property._id)} className={`group bg-white rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-red-400 hover:shadow-xl transition-all duration-300 cursor-pointer ${viewMode === "list" ? "flex flex-col sm:flex-row" : ""}`}>
+                      
                       {/* Image */}
-                      <div className={`relative overflow-hidden ${viewMode === "list" ? "w-80 flex-shrink-0" : "h-64"}`}>
-                        <img
-                          src={property.images?.length > 0 ? `https://propertybackend-1-xdbs.onrender.com${property.images[0]}` : "https://via.placeholder.com/600x400?text=No+Image"}
-                          alt={property.propertyTypeName}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                          onError={(e) => { (e.target as HTMLImageElement).src = "https://via.placeholder.com/600x400?text=No+Image"; }}
-                        />
-
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
-
-                        <div className="absolute top-4 left-4">
-                          <span className="bg-green-600 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider shadow-md">
-                            {property.propertyTypeName}
-                          </span>
+                      <div className={`relative overflow-hidden bg-gray-200 ${viewMode === "list" ? "w-full sm:w-72 h-56 sm:h-48 flex-shrink-0" : "w-full h-52"}`}>
+                        <img src={property.images?.length > 0 ? `https://propertybackend-1-xdbs.onrender.com${property.images[0]}` : "https://via.placeholder.com/600x400?text=No+Image"} alt={property.propertyTypeName} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={(e) => { (e.target as HTMLImageElement).src = "https://via.placeholder.com/600x400?text=No+Image"; }} />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div className="absolute top-3 left-3">
+                          <span className="text-white px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-md" style={{ backgroundColor: "#cc3f3f" }}>🏠 {property.propertyTypeName}</span>
                         </div>
-
-                        <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-lg shadow-lg border-l-4 border-green-600">
-                          <p className="text-xl font-bold text-slate-900">{formatPrice(property.price)}</p>
+                        <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-4 py-2 rounded-lg shadow-lg border-l-4" style={{ borderLeftColor: "#cc3f3f" }}>
+                          <p className="text-xl font-black text-gray-900">{formatPrice(property.price)}</p>
                         </div>
                       </div>
 
                       {/* Content */}
-                      <div className={`p-6 ${viewMode === "list" ? "flex-1 flex flex-col justify-center" : ""}`}>
-                        <div className="mb-4">
-                          <h3 className="font-bold text-xl text-slate-900 group-hover:text-green-700 transition-colors line-clamp-1 mb-1">
-                            {property.propertyTypeName}
-                          </h3>
-                          <div className="flex items-center text-sm text-slate-500 gap-2 font-medium">
-                            <MapPin className="w-4 h-4 text-green-600 flex-shrink-0" />
-                            <span className="line-clamp-1">{property.address}, {property.cityName}</span>
+                      <div className={`p-5 ${viewMode === "list" ? "flex-1 flex flex-col justify-between" : ""}`}>
+                        <div className="flex items-start gap-2 mb-3">
+                          <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: "#cc3f3f" }} />
+                          <div className="min-w-0">
+                            <p className="font-bold text-gray-800 text-base truncate">{property.address}</p>
+                            <p className="text-gray-500 text-sm">{property.cityName}</p>
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-4 pt-4 border-t border-slate-100">
+                        <div className="flex flex-wrap gap-2 mb-4">
                           {property.configuration && (
-                            <div className="flex items-center gap-2 text-sm font-semibold text-slate-600">
-                              <Bed className="w-4 h-4 text-green-600" />
-                              <span>{property.configuration}</span>
-                            </div>
+                            <span className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold" style={{ backgroundColor: "rgba(204, 63, 63, 0.1)", color: "#cc3f3f" }}>
+                              <Bed className="w-4 h-4" />{property.configuration}
+                            </span>
                           )}
-                          {property.plotArea && (
-                            <div className="flex items-center gap-2 text-sm font-semibold text-slate-600">
-                              <Maximize className="w-4 h-4 text-green-600" />
-                              <span>{property.plotArea} sqft</span>
-                            </div>
+                          {(property.plotArea || property.area) && (
+                            <span className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold" style={{ backgroundColor: "#e0f2fe", color: "#0284c7" }}>
+                              <Maximize className="w-4 h-4" />{property.plotArea || property.area} sqft
+                            </span>
                           )}
-                          {property.area && (
-                            <div className="flex items-center gap-2 text-sm font-semibold text-slate-600">
-                              <Maximize className="w-4 h-4 text-green-600" />
-                              <span>{property.area} sqft</span>
-                            </div>
-                          )}
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="grid grid-cols-2 gap-3">
+                          <button onClick={(e) => handleCall(e, property)} className="text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition hover:opacity-90 shadow-md" style={{ backgroundColor: "#16a34a" }}>
+                            <Phone className="w-5 h-5" /> कॉल करें
+                          </button>
+                          <button onClick={(e) => handleWhatsApp(e, property)} className="text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition hover:opacity-90 shadow-md" style={{ backgroundColor: "#25D366" }}>
+                            <MessageCircle className="w-5 h-5" /> WhatsApp
+                          </button>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                {/* Pagination Controls */}
+                {/* Pagination */}
                 {totalPages > 1 && (
-                  <div className="flex justify-center items-center mt-8 space-x-4">
-                    <button
-                      onClick={handlePreviousPage}
-                      disabled={currentPage === 1}
-                      className="px-4 py-2 bg-green-100 text-green-700 rounded-lg font-semibold hover:bg-green-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-1"
-                    >
-                      <ChevronLeft className="w-4 h-4" /> Previous
-                    </button>
-                    <span className="text-slate-700 font-medium">
-                      Page <span className="font-bold">{currentPage}</span> of <span className="font-bold">{totalPages}</span>
-                    </span>
-                    <button
-                      onClick={handleNextPage}
-                      disabled={currentPage === totalPages}
-                      className="px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-1"
-                    >
-                      Next <ChevronRight className="w-4 h-4" />
-                    </button>
+                  <div className="bg-white rounded-2xl p-5 mt-8 shadow-md border border-gray-200">
+                    <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+                      <button onClick={handlePreviousPage} disabled={currentPage === 1} className="px-5 py-3 text-white rounded-xl font-bold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2 shadow-md" style={{ backgroundColor: "#cc3f3f" }}>
+                        <ChevronLeft className="w-5 h-5" /> ⬅️ पिछला पेज
+                      </button>
+                      <div className="flex items-center gap-2 bg-gray-100 px-5 py-3 rounded-xl">
+                        <span className="text-gray-600 font-medium">पेज</span>
+                        <span className="text-white px-4 py-1 rounded-lg font-bold text-lg" style={{ backgroundColor: "#cc3f3f" }}>{currentPage}</span>
+                        <span className="text-gray-600 font-medium">/ {totalPages}</span>
+                      </div>
+                      <button onClick={handleNextPage} disabled={currentPage === totalPages} className="px-5 py-3 text-white rounded-xl font-bold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2 shadow-md" style={{ backgroundColor: "#cc3f3f" }}>
+                        अगला पेज ➡️ <ChevronRight className="w-5 h-5" />
+                      </button>
+                    </div>
                   </div>
                 )}
               </>
@@ -1714,7 +2816,55 @@ export default function RealEstateBuyList() {
           </main>
         </div>
       </div>
+
+      {/* --- DROPDOWN FOR DESKTOP CALL --- */}
+      {showPhoneDropdown && (
+        <div 
+          className="fixed bg-white rounded-xl shadow-2xl border-2 border-gray-200 overflow-hidden z-50 animate-fadeIn"
+          style={{ 
+            top: dropdownPosition.top, 
+            left: dropdownPosition.left,
+            minWidth: '250px'
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="p-3 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
+            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Select Number</span>
+            <button onClick={() => setShowPhoneDropdown(false)} className="text-gray-400 hover:text-red-500">
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+          <div className="max-h-60 overflow-y-auto">
+            {contactInfo?.phoneNumbers.map((phone, index) => (
+              <button
+                key={index}
+                onClick={() => handleDirectPhoneCall(phone)}
+                className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-[#fdf2f2] transition-colors border-b border-gray-100 last:border-b-0"
+              >
+                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#fdf2f2' }}>
+                  <Phone className="w-4 h-4" style={{ color: '#cc3f3f' }} />
+                </div>
+                <div>
+                  <p className="font-bold text-gray-800">{phone}</p>
+                  <p className="text-xs text-gray-500">Office Line {index + 1}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <Footer/>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-5px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.2s ease-out;
+        }
+      `}</style>
     </div>
   );
 }

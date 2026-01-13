@@ -26,15 +26,15 @@ export default function Index() {
 
   return (
     <>
-      <Header/>
+     <Header/>
       <HeroSection />
       <ServicesSection />
-      <PropertyTypeExplorer/>
+       <WhyChooseUsSection/>
+     
       <Propertiescard/>
-      <BenefitsShowcase/>
-      <ProcessSection />
-      
+     
       <AboutSection />
+      <PropertyTypeExplorer/>
        <ServiceAreasSection/>
       {/* <FloatingButtons />
       <WhyChooseUsSection/> */}

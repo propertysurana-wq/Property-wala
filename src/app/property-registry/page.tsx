@@ -824,6 +824,401 @@
 //     </div>
 //   );
 // }
+// "use client";
+
+// import { useState } from "react";
+// import Link from "next/link";
+// import {
+//   Stamp,
+//   Check,
+//   Phone,
+//   ArrowRight,
+//   Calculator,
+//   FileText,
+//   Building,
+//   ShieldCheck,
+//   ChevronDown,
+//   Clock,
+//   IndianRupee,
+//   Loader2,
+// } from "lucide-react";
+
+// import Header from "@/components/header/header";
+// import Footer from "@/components/footer/footer";
+
+// export default function PropertyRegistryPage() {
+//   const [openFaq, setOpenFaq] = useState<number | null>(null);
+//   const [loading, setLoading] = useState(false);
+
+//   /* ---------------- SERVICES ---------------- */
+//   const services = [
+//     {
+//       icon: Calculator,
+//       title: "Stamp Duty Calculation",
+//       hindiTitle: "स्टांप ड्यूटी गणना",
+//       description: "Accurate calculation of stamp duty.",
+//     },
+//     {
+//       icon: FileText,
+//       title: "Deed Drafting",
+//       hindiTitle: "बैनामा लेखन",
+//       description: "Professional drafting of documents.",
+//     },
+//     {
+//       icon: Building,
+//       title: "Office Assistance",
+//       hindiTitle: "रजिस्ट्रार ऑफिस सहायता",
+//       description: "Complete support at Sub-Registrar office.",
+//     },
+//     {
+//       icon: ShieldCheck,
+//       title: "Document Verification",
+//       hindiTitle: "दस्तावेज़ सत्यापन",
+//       description: "Verification of all documents.",
+//     },
+//   ];
+
+//   /* ---------------- STEPS ---------------- */
+//   const registrySteps = [
+//     "Title Verification (टाइटल जांच)",
+//     "Stamp Duty Calculation",
+//     "Sale Deed Drafting",
+//     "Challan Payment",
+//     "Appointment Booking",
+//     "Biometric & Photo",
+//     "Document Submission",
+//     "Final Registry",
+//   ];
+
+//   /* ---------------- FAQ ---------------- */
+//   const faqs = [
+//     {
+//       q: "स्टांप ड्यूटी कितनी लगती है?",
+//       a: "यह राज्य और संपत्ति की कीमत पर निर्भर करती है (5–7%)।",
+//     },
+//     {
+//       q: "कौन-कौन से दस्तावेज़ चाहिए?",
+//       a: "आधार, पैन, पुराने कागजात, फोटो, गवाहों के आईडी।",
+//     },
+//     {
+//       q: "क्या दोनों पार्टियों का आना ज़रूरी है?",
+//       a: "हाँ, बायोमेट्रिक और फोटो के लिए दोनों जरूरी हैं।",
+//     },
+//     {
+//       q: "कितना समय लगता है?",
+//       a: "ऑफिस प्रक्रिया 1–2 घंटे में पूरी हो जाती है।",
+//     },
+//   ];
+
+//   /* ---------------- FORM STATE ---------------- */
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     phone: "",
+//     propertyValue: "",
+//     location: "",
+//   });
+
+//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   /* ---------------- SUBMIT ---------------- */
+//   const handleSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     setLoading(true);
+
+//     try {
+//       const res = await fetch(
+//         "https://propertybackend-1-xdbs.onrender.com/api/complete-property-registration",
+//         {
+//           method: "POST",
+//           headers: { "Content-Type": "application/json" },
+//           body: JSON.stringify(formData),
+//         }
+//       );
+
+//       const data = await res.json().catch(() => ({}));
+//       if (!res.ok) throw new Error(data?.message || "Submission failed");
+
+//       alert("✅ Enquiry submitted successfully!");
+//       setFormData({ name: "", phone: "", propertyValue: "", location: "" });
+//     } catch (error: any) {
+//       alert("❌ " + (error?.message || "Something went wrong"));
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-slate-50">
+//       <Header />
+
+//       {/* ---------------- HERO (same premium style like your reference) ---------------- */}
+//       <section className="relative bg-slate-900 py-24 overflow-hidden text-white">
+//         {/* Glow */}
+//         <div className="absolute inset-0 opacity-20">
+//           <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500 rounded-full blur-[120px]" />
+//           <div className="absolute bottom-0 left-0 w-80 h-80 bg-emerald-700 rounded-full blur-[100px]" />
+//         </div>
+
+//         <div className="container mx-auto px-4 relative z-10">
+//           <Link
+//             href="/#services"
+//             className="inline-flex items-center text-emerald-400 hover:text-white mb-8 transition-colors text-sm font-bold uppercase tracking-wider"
+//           >
+//             <ArrowRight className="rotate-180 mr-2" size={16} />
+//             Back to Services
+//           </Link>
+
+//           <div className="flex flex-col lg:flex-row items-center gap-16">
+//             {/* Left Content */}
+//             <div className="flex-1 text-center lg:text-left">
+//               <div className="inline-flex items-center gap-2 bg-emerald-900/50 border border-emerald-500/30 rounded-full px-4 py-1.5 mb-6">
+//                 <Stamp className="w-4 h-4 text-emerald-400" />
+//                 <span className="text-emerald-100 text-xs font-bold uppercase tracking-wider">
+//                   Property Registry Service
+//                 </span>
+//               </div>
+
+//               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight">
+//                 पक्की रजिस्ट्री <br />
+//                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">
+//                   बिना परेशानी
+//                 </span>
+//               </h1>
+
+//               <p className="text-lg text-slate-300 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+//                 Complete assistance for property registration including stamp duty, documentation
+//                 &amp; registrar office process.
+//               </p>
+
+//               <div className="flex flex-wrap gap-6 mb-10 justify-center lg:justify-start text-sm font-medium text-slate-300">
+//                 <div className="flex items-center bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700">
+//                   <IndianRupee className="mr-2 text-emerald-400" size={18} />
+//                   <span>Accurate Fees</span>
+//                 </div>
+//                 <div className="flex items-center bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700">
+//                   <Clock className="mr-2 text-emerald-400" size={18} />
+//                   <span>Quick Processing</span>
+//                 </div>
+//                 <div className="flex items-center bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700">
+//                   <ShieldCheck className="mr-2 text-emerald-400" size={18} />
+//                   <span>100% Legal</span>
+//                 </div>
+//               </div>
+
+//               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+//                 <a
+//                   href="tel:+919876543210"
+//                   className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-emerald-500/30 transition-all flex items-center justify-center gap-2"
+//                 >
+//                   <Phone size={20} /> Call Now
+//                 </a>
+//                 <a
+//                   href="#quote"
+//                   className="bg-white text-slate-900 hover:bg-slate-100 px-8 py-4 rounded-xl font-bold text-lg shadow-md transition-all flex items-center justify-center gap-2"
+//                 >
+//                   <Calculator size={20} /> Get Quote
+//                 </a>
+//               </div>
+//             </div>
+
+//             {/* Right Form Card */}
+//             <div id="quote" className="flex-1 w-full max-w-md">
+//               <div className="bg-white rounded-3xl p-8 shadow-2xl border border-slate-200 relative overflow-hidden text-slate-900">
+//                 <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500" />
+
+//                 <h3 className="text-2xl font-bold mb-2">Registry Cost Estimate</h3>
+//                 <p className="text-slate-500 mb-6 text-sm">
+//                   Fill details and get a quick estimate.
+//                 </p>
+
+//                 <form onSubmit={handleSubmit} className="space-y-4">
+//                   <div>
+//                     <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+//                       Name
+//                     </label>
+//                     <input
+//                       name="name"
+//                       value={formData.name}
+//                       onChange={handleChange}
+//                       placeholder="Your Name"
+//                       className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm"
+//                       required
+//                     />
+//                   </div>
+
+//                   <div>
+//                     <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+//                       Phone
+//                     </label>
+//                     <input
+//                       name="phone"
+//                       value={formData.phone}
+//                       onChange={handleChange}
+//                       placeholder="Mobile Number"
+//                       className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm"
+//                       required
+//                     />
+//                   </div>
+
+//                   <div>
+//                     <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+//                       Property Value
+//                     </label>
+//                     <input
+//                       name="propertyValue"
+//                       value={formData.propertyValue}
+//                       onChange={handleChange}
+//                       placeholder="Approx Value (₹)"
+//                       className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm"
+//                       required
+//                     />
+//                   </div>
+
+//                   <div>
+//                     <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+//                       Location
+//                     </label>
+//                     <input
+//                       name="location"
+//                       value={formData.location}
+//                       onChange={handleChange}
+//                       placeholder="City / Tehsil / District"
+//                       className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm"
+//                       required
+//                     />
+//                   </div>
+
+//                   <button
+//                     disabled={loading}
+//                     className="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-emerald-600 transition-all shadow-lg mt-2 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+//                   >
+//                     {loading ? (
+//                       <>
+//                         <Loader2 className="animate-spin" size={18} />
+//                         Submitting...
+//                       </>
+//                     ) : (
+//                       "Get Estimate"
+//                     )}
+//                   </button>
+
+//                   <div className="pt-2 text-center">
+//                     <a
+//                       href="tel:+919876543210"
+//                       className="inline-flex items-center gap-2 text-emerald-600 font-bold"
+//                     >
+//                       <Phone size={18} /> Call Now
+//                     </a>
+//                   </div>
+//                 </form>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* ---------------- SERVICES ---------------- */}
+//       <section className="py-24 bg-white">
+//         <div className="container mx-auto px-4">
+//           <div className="text-center mb-16">
+//             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
+//               Registry Services
+//             </h2>
+//             <p className="text-emerald-600 font-bold text-lg">
+//               हम रजिस्ट्री में पूरी मदद करते हैं
+//             </p>
+//           </div>
+
+//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+//             {services.map((s, i) => (
+//               <div
+//                 key={i}
+//                 className="group bg-slate-50 rounded-2xl p-6 hover:bg-white hover:shadow-xl transition-all border border-slate-100 hover:border-emerald-200 text-center"
+//               >
+//                 <div className="w-16 h-16 bg-slate-900 text-white rounded-2xl flex items-center justify-center mb-5 mx-auto shadow-sm group-hover:bg-emerald-600 transition-colors">
+//                   <s.icon size={32} />
+//                 </div>
+//                 <h3 className="text-xl font-bold text-slate-900 mb-1">{s.title}</h3>
+//                 <p className="text-emerald-600 font-bold text-sm mb-3">{s.hindiTitle}</p>
+//                 <p className="text-slate-500 text-sm leading-relaxed">{s.description}</p>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* ---------------- CHECKLIST ---------------- */}
+//       <section className="py-20 bg-emerald-50/50">
+//         <div className="container mx-auto px-4">
+//           <div className="max-w-4xl mx-auto">
+//             <h3 className="text-2xl font-bold text-slate-900 mb-2 text-center">
+//               Registry Checklist
+//             </h3>
+//             <p className="text-slate-500 text-center mb-10">
+//               रजिस्ट्री प्रक्रिया के स्टेप्स
+//             </p>
+
+//             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//               {registrySteps.map((step, index) => (
+//                 <div
+//                   key={index}
+//                   className="flex items-center bg-white p-4 rounded-xl border border-emerald-100 shadow-sm hover:shadow-md transition-shadow"
+//                 >
+//                   <div className="bg-emerald-100 p-1.5 rounded-full mr-3 text-emerald-600">
+//                     <Check size={18} strokeWidth={3} />
+//                   </div>
+//                   <span className="font-medium text-slate-700">{step}</span>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* ---------------- FAQ ---------------- */}
+//       <section className="py-24 bg-slate-50 border-t border-slate-200">
+//         <div className="container mx-auto px-4 max-w-3xl">
+//           <div className="text-center mb-12">
+//             <h2 className="text-3xl font-extrabold text-slate-900 mb-2">FAQ</h2>
+//             <p className="text-emerald-600 font-medium">Common Registry Questions</p>
+//           </div>
+
+//           <div className="space-y-4">
+//             {faqs.map((faq, index) => (
+//               <div
+//                 key={index}
+//                 className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-emerald-300 transition-colors shadow-sm"
+//               >
+//                 <button
+//                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
+//                   className="w-full flex items-center justify-between p-5 text-left"
+//                   type="button"
+//                 >
+//                   <span className="font-bold text-slate-800 block text-lg">{faq.q}</span>
+//                   <ChevronDown
+//                     className={`text-slate-400 transition-transform duration-300 ${
+//                       openFaq === index ? "rotate-180" : ""
+//                     }`}
+//                   />
+//                 </button>
+
+//                 {openFaq === index && (
+//                   <div className="px-5 pb-5 text-slate-600 leading-relaxed border-t border-slate-50 pt-4 bg-emerald-50/30">
+//                     {faq.a}
+//                   </div>
+//                 )}
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       <Footer />
+//     </div>
+//   );
+// }
 "use client";
 
 import { useState } from "react";
@@ -832,6 +1227,7 @@ import {
   Stamp,
   Check,
   Phone,
+  Mail,
   ArrowRight,
   Calculator,
   FileText,
@@ -841,6 +1237,8 @@ import {
   Clock,
   IndianRupee,
   Loader2,
+  FileCheck,
+  Shield,
 } from "lucide-react";
 
 import Header from "@/components/header/header";
@@ -849,6 +1247,8 @@ import Footer from "@/components/footer/footer";
 export default function PropertyRegistryPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   /* ---------------- SERVICES ---------------- */
   const services = [
@@ -856,25 +1256,25 @@ export default function PropertyRegistryPage() {
       icon: Calculator,
       title: "Stamp Duty Calculation",
       hindiTitle: "स्टांप ड्यूटी गणना",
-      description: "Accurate calculation of stamp duty.",
+      description: "Accurate calculation of stamp duty based on property type, location, and current government rates.",
     },
     {
       icon: FileText,
-      title: "Deed Drafting",
-      hindiTitle: "बैनामा लेखन",
-      description: "Professional drafting of documents.",
+      title: "Document Preparation",
+      hindiTitle: "दस्तावेज़ तैयारी",
+      description: "Complete preparation of sale deed, agreement, and all required documents for registration.",
     },
     {
       icon: Building,
-      title: "Office Assistance",
-      hindiTitle: "रजिस्ट्रार ऑफिस सहायता",
-      description: "Complete support at Sub-Registrar office.",
+      title: "Registration Process",
+      hindiTitle: "रजिस्ट्री प्रक्रिया",
+      description: "End-to-end assistance at sub-registrar office including appointment and submission.",
     },
     {
       icon: ShieldCheck,
       title: "Document Verification",
       hindiTitle: "दस्तावेज़ सत्यापन",
-      description: "Verification of all documents.",
+      description: "Thorough verification of all property documents to ensure clear title and legal compliance.",
     },
   ];
 
@@ -890,23 +1290,37 @@ export default function PropertyRegistryPage() {
     "Final Registry",
   ];
 
+  /* ---------------- PROCESS ---------------- */
+  const process = [
+    { step: 1, title: "Document Collection", hindiTitle: "दस्तावेज़ संग्रह", description: "Collect all property documents, identity proofs, and photographs from both parties." },
+    { step: 2, title: "Title Verification", hindiTitle: "टाइटल सत्यापन", description: "Verify property title, ownership chain, and check for any encumbrances or disputes." },
+    { step: 3, title: "Stamp Duty Calculation", hindiTitle: "स्टांप ड्यूटी गणना", description: "Calculate exact stamp duty and registration fees based on property value and type." },
+    { step: 4, title: "Agreement Drafting", hindiTitle: "समझौता प्रारूपण", description: "Prepare sale deed with all terms, conditions, and property details." },
+    { step: 5, title: "Stamp Paper & Appointment", hindiTitle: "स्टांप पेपर और अपॉइंटमेंट", description: "Purchase stamp paper and book appointment at sub-registrar office." },
+    { step: 6, title: "Registration", hindiTitle: "रजिस्ट्रेशन", description: "Complete registration with biometric verification and document submission." },
+  ];
+
   /* ---------------- FAQ ---------------- */
   const faqs = [
     {
-      q: "स्टांप ड्यूटी कितनी लगती है?",
-      a: "यह राज्य और संपत्ति की कीमत पर निर्भर करती है (5–7%)।",
+      question: "स्टांप ड्यूटी कितनी लगती है?",
+      englishQuestion: "What is the stamp duty rate?",
+      answer: "यह राज्य और संपत्ति की कीमत पर निर्भर करती है। ज्यादातर राज्यों में यह संपत्ति मूल्य का 5-7% होता है। महिला खरीदारों को अक्सर छूट मिलती है। हम आपकी संपत्ति के विवरण के आधार पर सटीक राशि की गणना करते हैं।",
     },
     {
-      q: "कौन-कौन से दस्तावेज़ चाहिए?",
-      a: "आधार, पैन, पुराने कागजात, फोटो, गवाहों के आईडी।",
+      question: "कौन-कौन से दस्तावेज़ चाहिए?",
+      englishQuestion: "What documents are required?",
+      answer: "आवश्यक दस्तावेज़ों में शामिल हैं: मूल बिक्री विलेख, पिछले स्वामित्व दस्तावेज़, संपत्ति कर रसीदें, एनकम्ब्रेंस प्रमाणपत्र, दोनों पक्षों का आधार और पैन, पता प्रमाण, फोटोग्राफ, और NOC (यदि लागू हो)।",
     },
     {
-      q: "क्या दोनों पार्टियों का आना ज़रूरी है?",
-      a: "हाँ, बायोमेट्रिक और फोटो के लिए दोनों जरूरी हैं।",
+      question: "रजिस्ट्रेशन में कितना समय लगता है?",
+      englishQuestion: "How long does registration take?",
+      answer: "सब-रजिस्ट्रार ऑफिस में वास्तविक रजिस्ट्रेशन 1-2 घंटे में हो जाता है। हालांकि, दस्तावेज़ तैयारी और सत्यापन में 7-15 दिन लग सकते हैं। हमारी सहायता से, हम सुचारु और त्वरित प्रक्रिया सुनिश्चित करते हैं।",
     },
     {
-      q: "कितना समय लगता है?",
-      a: "ऑफिस प्रक्रिया 1–2 घंटे में पूरी हो जाती है।",
+      question: "क्या दोनों पार्टियों का आना ज़रूरी है?",
+      englishQuestion: "Is physical presence mandatory?",
+      answer: "हाँ, रजिस्ट्रेशन के दौरान बायोमेट्रिक सत्यापन के लिए खरीदार और विक्रेता दोनों की भौतिक उपस्थिति अनिवार्य है। हालांकि, पावर ऑफ अटॉर्नी धारक उचित दस्तावेज़ीकरण के साथ कुछ मामलों में पक्षों का प्रतिनिधित्व कर सकते हैं।",
     },
   ];
 
@@ -925,9 +1339,15 @@ export default function PropertyRegistryPage() {
   /* ---------------- SUBMIT ---------------- */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setError("");
+
+    if (!formData.name || !formData.phone || !formData.propertyValue || !formData.location) {
+      setError("Please fill all fields");
+      return;
+    }
 
     try {
+      setLoading(true);
       const res = await fetch(
         "https://propertybackend-1-xdbs.onrender.com/api/complete-property-registration",
         {
@@ -940,69 +1360,67 @@ export default function PropertyRegistryPage() {
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data?.message || "Submission failed");
 
-      alert("✅ Enquiry submitted successfully!");
+      setSuccess(true);
       setFormData({ name: "", phone: "", propertyValue: "", location: "" });
     } catch (error: any) {
-      alert("❌ " + (error?.message || "Something went wrong"));
+      setError(error?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-white">
       <Header />
 
-      {/* ---------------- HERO (same premium style like your reference) ---------------- */}
-      <section className="relative bg-slate-900 py-24 overflow-hidden text-white">
+      {/* ---------------- HERO ---------------- */}
+      <section className="relative bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] pt-24 pb-32 overflow-hidden">
         {/* Glow */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-emerald-700 rounded-full blur-[100px]" />
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-[#e8734a] rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#e15e5e] rounded-full blur-3xl"></div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <Link
             href="/#services"
-            className="inline-flex items-center text-emerald-400 hover:text-white mb-8 transition-colors text-sm font-bold uppercase tracking-wider"
+            className="inline-flex items-center text-gray-300 hover:text-white mb-8 transition-colors text-sm font-bold uppercase tracking-wider"
           >
             <ArrowRight className="rotate-180 mr-2" size={16} />
             Back to Services
           </Link>
 
-          <div className="flex flex-col lg:flex-row items-center gap-16">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
-            <div className="flex-1 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 bg-emerald-900/50 border border-emerald-500/30 rounded-full px-4 py-1.5 mb-6">
-                <Stamp className="w-4 h-4 text-emerald-400" />
-                <span className="text-emerald-100 text-xs font-bold uppercase tracking-wider">
-                  Property Registry Service
-                </span>
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 bg-[#e8734a]/10 border border-[#e8734a]/20 text-[#e8734a] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
+                <Stamp size={14} />
+                Property Registry Service
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
                 पक्की रजिस्ट्री <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e8734a] to-[#e15e5e]">
                   बिना परेशानी
                 </span>
               </h1>
 
-              <p className="text-lg text-slate-300 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                Complete assistance for property registration including stamp duty, documentation
-                &amp; registrar office process.
+              <p className="text-gray-300 text-lg mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                End-to-end registry services with stamp duty calculation, document preparation, 
+                and complete registration process management at sub-registrar office.
               </p>
 
-              <div className="flex flex-wrap gap-6 mb-10 justify-center lg:justify-start text-sm font-medium text-slate-300">
-                <div className="flex items-center bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700">
-                  <IndianRupee className="mr-2 text-emerald-400" size={18} />
+              <div className="flex flex-wrap gap-6 mb-10 justify-center lg:justify-start text-sm font-medium">
+                <div className="flex items-center bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700 text-gray-300">
+                  <IndianRupee className="mr-2 text-[#e8734a]" size={18} />
                   <span>Accurate Fees</span>
                 </div>
-                <div className="flex items-center bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700">
-                  <Clock className="mr-2 text-emerald-400" size={18} />
+                <div className="flex items-center bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700 text-gray-300">
+                  <Clock className="mr-2 text-[#e8734a]" size={18} />
                   <span>Quick Processing</span>
                 </div>
-                <div className="flex items-center bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700">
-                  <ShieldCheck className="mr-2 text-emerald-400" size={18} />
+                <div className="flex items-center bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700 text-gray-300">
+                  <Shield className="mr-2 text-[#e8734a]" size={18} />
                   <span>100% Legal</span>
                 </div>
               </div>
@@ -1010,13 +1428,13 @@ export default function PropertyRegistryPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <a
                   href="tel:+919876543210"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-emerald-500/30 transition-all flex items-center justify-center gap-2"
+                  className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#e8734a] to-[#e15e5e] hover:shadow-lg hover:shadow-[#e8734a]/30 text-white px-8 py-4 rounded-xl font-bold transition-all"
                 >
                   <Phone size={20} /> Call Now
                 </a>
                 <a
                   href="#quote"
-                  className="bg-white text-slate-900 hover:bg-slate-100 px-8 py-4 rounded-xl font-bold text-lg shadow-md transition-all flex items-center justify-center gap-2"
+                  className="flex items-center justify-center gap-2 border-2 border-white text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-gray-800 transition-all"
                 >
                   <Calculator size={20} /> Get Quote
                 </a>
@@ -1024,95 +1442,108 @@ export default function PropertyRegistryPage() {
             </div>
 
             {/* Right Form Card */}
-            <div id="quote" className="flex-1 w-full max-w-md">
-              <div className="bg-white rounded-3xl p-8 shadow-2xl border border-slate-200 relative overflow-hidden text-slate-900">
-                <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500" />
-
-                <h3 className="text-2xl font-bold mb-2">Registry Cost Estimate</h3>
-                <p className="text-slate-500 mb-6 text-sm">
+            <div id="quote" className="w-full max-w-md mx-auto">
+              <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  Registry Cost Estimate
+                </h3>
+                <p className="text-gray-300 mb-6 text-sm">
                   Fill details and get a quick estimate.
                 </p>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                      Name
-                    </label>
-                    <input
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Your Name"
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm"
-                      required
-                    />
+                {success ? (
+                  <div className="bg-green-500/20 border border-green-500/40 text-white p-4 rounded-xl text-center font-bold mb-4">
+                    <Check className="inline mr-2" size={20} />
+                    Enquiry Submitted Successfully!
                   </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-bold text-gray-300 uppercase mb-1">
+                        Name
+                      </label>
+                      <input
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Your Name"
+                        className="w-full px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 rounded-xl focus:border-[#e8734a] focus:outline-none transition-all text-sm"
+                        required
+                      />
+                    </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                      Phone
-                    </label>
-                    <input
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="Mobile Number"
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm"
-                      required
-                    />
-                  </div>
+                    <div>
+                      <label className="block text-xs font-bold text-gray-300 uppercase mb-1">
+                        Phone
+                      </label>
+                      <input
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="Mobile Number"
+                        className="w-full px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 rounded-xl focus:border-[#e8734a] focus:outline-none transition-all text-sm"
+                        required
+                      />
+                    </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                      Property Value
-                    </label>
-                    <input
-                      name="propertyValue"
-                      value={formData.propertyValue}
-                      onChange={handleChange}
-                      placeholder="Approx Value (₹)"
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm"
-                      required
-                    />
-                  </div>
+                    <div>
+                      <label className="block text-xs font-bold text-gray-300 uppercase mb-1">
+                        Property Value
+                      </label>
+                      <input
+                        name="propertyValue"
+                        value={formData.propertyValue}
+                        onChange={handleChange}
+                        placeholder="Approx Value (₹)"
+                        className="w-full px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 rounded-xl focus:border-[#e8734a] focus:outline-none transition-all text-sm"
+                        required
+                      />
+                    </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                      Location
-                    </label>
-                    <input
-                      name="location"
-                      value={formData.location}
-                      onChange={handleChange}
-                      placeholder="City / Tehsil / District"
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-all text-sm"
-                      required
-                    />
-                  </div>
+                    <div>
+                      <label className="block text-xs font-bold text-gray-300 uppercase mb-1">
+                        Location
+                      </label>
+                      <input
+                        name="location"
+                        value={formData.location}
+                        onChange={handleChange}
+                        placeholder="City / Tehsil / District"
+                        className="w-full px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 rounded-xl focus:border-[#e8734a] focus:outline-none transition-all text-sm"
+                        required
+                      />
+                    </div>
 
-                  <button
-                    disabled={loading}
-                    className="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-emerald-600 transition-all shadow-lg mt-2 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                  >
-                    {loading ? (
-                      <>
-                        <Loader2 className="animate-spin" size={18} />
-                        Submitting...
-                      </>
-                    ) : (
-                      "Get Estimate"
+                    {error && (
+                      <div className="bg-red-500/20 border border-red-500/40 text-white p-3 rounded-xl text-sm">
+                        {error}
+                      </div>
                     )}
-                  </button>
 
-                  <div className="pt-2 text-center">
-                    <a
-                      href="tel:+919876543210"
-                      className="inline-flex items-center gap-2 text-emerald-600 font-bold"
+                    <button
+                      disabled={loading}
+                      className="w-full bg-gradient-to-r from-[#e8734a] to-[#e15e5e] text-white font-bold py-4 rounded-xl hover:shadow-lg transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >
-                      <Phone size={18} /> Call Now
-                    </a>
-                  </div>
-                </form>
+                      {loading ? (
+                        <>
+                          <Loader2 className="animate-spin" size={18} />
+                          Submitting...
+                        </>
+                      ) : (
+                        "Get Estimate"
+                      )}
+                    </button>
+
+                    <div className="pt-2 text-center">
+                      <a
+                        href="tel:+919876543210"
+                        className="inline-flex items-center gap-2 text-[#e8734a] font-bold hover:text-[#e15e5e] transition-colors"
+                      >
+                        <Phone size={18} /> Call Now
+                      </a>
+                    </div>
+                  </form>
+                )}
               </div>
             </div>
           </div>
@@ -1120,29 +1551,29 @@ export default function PropertyRegistryPage() {
       </section>
 
       {/* ---------------- SERVICES ---------------- */}
-      <section className="py-24 bg-white">
+      <section className="py-20 bg-gradient-to-br from-[#fefdf9] to-[#fef7f0]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
-              Registry Services
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              Our Registry Services
             </h2>
-            <p className="text-emerald-600 font-bold text-lg">
+            <p className="text-xl text-[#b54035] font-semibold">
               हम रजिस्ट्री में पूरी मदद करते हैं
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((s, i) => (
               <div
                 key={i}
-                className="group bg-slate-50 rounded-2xl p-6 hover:bg-white hover:shadow-xl transition-all border border-slate-100 hover:border-emerald-200 text-center"
+                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-[#fce8e8] text-center group"
               >
-                <div className="w-16 h-16 bg-slate-900 text-white rounded-2xl flex items-center justify-center mb-5 mx-auto shadow-sm group-hover:bg-emerald-600 transition-colors">
-                  <s.icon size={32} />
+                <div className="w-16 h-16 bg-gradient-to-br from-[#e8734a] to-[#e15e5e] rounded-xl flex items-center justify-center mb-5 mx-auto shadow-sm group-hover:scale-110 transition-transform">
+                  <s.icon className="text-white" size={32} />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-1">{s.title}</h3>
-                <p className="text-emerald-600 font-bold text-sm mb-3">{s.hindiTitle}</p>
-                <p className="text-slate-500 text-sm leading-relaxed">{s.description}</p>
+                <h3 className="text-xl font-bold text-gray-800 mb-1">{s.title}</h3>
+                <p className="text-[#b54035] font-bold text-sm mb-3">{s.hindiTitle}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{s.description}</p>
               </div>
             ))}
           </div>
@@ -1150,67 +1581,133 @@ export default function PropertyRegistryPage() {
       </section>
 
       {/* ---------------- CHECKLIST ---------------- */}
-      <section className="py-20 bg-emerald-50/50">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-slate-900 mb-2 text-center">
-              Registry Checklist
-            </h3>
-            <p className="text-slate-500 text-center mb-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              Registry Process Checklist
+            </h2>
+            <p className="text-xl text-[#b54035] font-semibold">
               रजिस्ट्री प्रक्रिया के स्टेप्स
             </p>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {registrySteps.map((step, index) => (
-                <div
-                  key={index}
-                  className="flex items-center bg-white p-4 rounded-xl border border-emerald-100 shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <div className="bg-emerald-100 p-1.5 rounded-full mr-3 text-emerald-600">
-                    <Check size={18} strokeWidth={3} />
-                  </div>
-                  <span className="font-medium text-slate-700">{step}</span>
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+            {registrySteps.map((step, index) => (
+              <div
+                key={index}
+                className="flex items-center bg-gradient-to-r from-[#fefdf9] to-[#fef7f0] p-4 rounded-xl border border-[#fdeee0] shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="w-8 h-8 bg-gradient-to-br from-[#e8734a] to-[#e15e5e] rounded-full flex items-center justify-center mr-3 flex-shrink-0 text-white font-bold text-sm">
+                  {index + 1}
                 </div>
-              ))}
-            </div>
+                <span className="font-medium text-gray-700">{step}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- PROCESS ---------------- */}
+      <section className="py-20 bg-gradient-to-br from-[#fefdf9] to-[#fdf2f2]">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              How We Help
+            </h2>
+            <p className="text-xl text-[#b54035] font-semibold">
+              हम कैसे मदद करते हैं
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            {process.map((item, index) => (
+              <div key={index} className="flex gap-6 mb-8 last:mb-0">
+                <div className="flex flex-col items-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#e8734a] to-[#e15e5e] rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                    {item.step}
+                  </div>
+                  {index < process.length - 1 && (
+                    <div className="w-0.5 h-full bg-gradient-to-b from-[#e8734a] to-[#e15e5e] mt-2"></div>
+                  )}
+                </div>
+                <div className="flex-1 pb-8">
+                  <h3 className="text-xl font-bold text-gray-800 mb-1">{item.title}</h3>
+                  <p className="text-xs font-semibold text-[#b54035] mb-2">{item.hindiTitle}</p>
+                  <p className="text-gray-600">{item.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ---------------- FAQ ---------------- */}
-      <section className="py-24 bg-slate-50 border-t border-slate-200">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-extrabold text-slate-900 mb-2">FAQ</h2>
-            <p className="text-emerald-600 font-medium">Common Registry Questions</p>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              FAQ (सवाल-जवाब)
+            </h2>
+            <p className="text-xl text-[#b54035] font-semibold">
+              Frequently Asked Questions
+            </p>
           </div>
 
           <div className="space-y-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-emerald-300 transition-colors shadow-sm"
+                className="border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full flex items-center justify-between p-5 text-left"
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
                   type="button"
                 >
-                  <span className="font-bold text-slate-800 block text-lg">{faq.q}</span>
+                  <div>
+                    <span className="font-bold text-gray-800 block text-lg">{faq.question}</span>
+                    <span className="text-xs font-bold text-[#b54035] uppercase mt-1 block">
+                      {faq.englishQuestion}
+                    </span>
+                  </div>
                   <ChevronDown
-                    className={`text-slate-400 transition-transform duration-300 ${
+                    className={`text-[#e8734a] transition-transform duration-300 flex-shrink-0 ml-4 ${
                       openFaq === index ? "rotate-180" : ""
                     }`}
+                    size={24}
                   />
                 </button>
 
                 {openFaq === index && (
-                  <div className="px-5 pb-5 text-slate-600 leading-relaxed border-t border-slate-50 pt-4 bg-emerald-50/30">
-                    {faq.a}
+                  <div className="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
+                    {faq.answer}
                   </div>
                 )}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- CTA ---------------- */}
+      <section className="py-20 bg-gradient-to-r from-[#e8734a] to-[#e15e5e]">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready for Property Registration?
+          </h2>
+          <p className="text-xl text-white/90 mb-8">
+            Get hassle-free registry services with complete assistance.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a href="tel:+919876543210" className="bg-white text-[#e8734a] px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all flex items-center">
+              <Phone className="mr-2" size={20} />
+              +91 98765 43210
+            </a>
+            <a href="mailto:info@example.com" className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-[#e8734a] transition-all flex items-center">
+              <Mail className="mr-2" size={20} />
+              Email Us
+            </a>
           </div>
         </div>
       </section>
