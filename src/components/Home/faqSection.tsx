@@ -143,10 +143,10 @@
 // }
 'use client'
 import { useState } from "react";
-import { Plus, Minus } from "lucide-react";
+import { ChevronDown, HelpCircle } from "lucide-react";
 
 export default function FAQSection() {
-  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
+  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
     setExpandedFAQ(expandedFAQ === index ? null : index);
@@ -176,115 +176,87 @@ export default function FAQSection() {
   ];
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header */}
-        <div className="mb-8 sm:mb-10 md:mb-12 text-center lg:text-left">
-          <span 
-            className="font-bold tracking-widest uppercase text-xs sm:text-sm mb-2 block"
-            style={{ color: '#cc3f3f' }}
-          >
-            Common Questions
-          </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-800 tracking-tight">
-            Frequently Asked <span style={{ color: '#cc3f3f' }}>Questions</span>
+  <section className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <div className="inline-block mb-4">
+            <div className="w-16 h-16 bg-gradient-to-br from-[#e8734a] to-[#cc3f3f] rounded-2xl flex items-center justify-center mx-auto shadow-lg">
+              <HelpCircle className="text-white" size={32} />
+            </div>
+          </div>
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            Frequently Asked Questions
           </h2>
-          <p className="text-base sm:text-lg text-gray-600 mt-2">
-            अक्सर पूछे जाने वाले सवाल
+          <p className="text-xl text-[#b54035] mb-2 font-semibold">
+            अक्सर पूछे जाने वाले प्रश्न
           </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-[#e8734a] to-[#e15e5e] mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16">
-          
-          {/* LEFT: FAQ List */}
-          <div className="lg:col-span-7 space-y-3 sm:space-y-4">
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className={`border rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 ${
-                  expandedFAQ === index 
-                    ? "border-2 shadow-md" 
-                    : "border hover:border-red-200"
-                }`}
-                style={{
-                  backgroundColor: expandedFAQ === index ? '#fff5f5' : 'white',
-                  borderColor: expandedFAQ === index ? '#cc3f3f' : '#e5e7eb'
-                }}
+        <div className="max-w-4xl mx-auto space-y-4">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className={`bg-white rounded-2xl shadow-lg border-2 transition-all duration-300 overflow-hidden ${
+                expandedFAQ === index 
+                  ? "border-[#e8734a] shadow-xl" 
+                  : "border-[#fdeee0] hover:border-[#e8734a]/30"
+              }`}
+            >
+              <button
+                onClick={() => toggleFAQ(index)}
+                className="w-full p-6 text-left flex items-start justify-between hover:bg-gradient-to-r hover:from-[#fefdf9] hover:to-[#fef7f0] transition-all duration-300 group"
               >
-                <button
-                  onClick={() => toggleFAQ(index)}
-                  className="w-full p-4 sm:p-5 md:p-6 text-left flex items-start justify-between gap-3 sm:gap-4"
-                >
-                  <span 
-                    className="text-sm sm:text-base md:text-lg font-bold"
-                    style={{ color: expandedFAQ === index ? '#cc3f3f' : '#1f2937' }}
-                  >
+                <div className="flex items-start gap-4 flex-1">
+                  <div className={`mt-1 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 ${
+                    expandedFAQ === index 
+                      ? "bg-gradient-to-br from-[#e8734a] to-[#cc3f3f]" 
+                      : "bg-gradient-to-br from-gray-100 to-gray-200 group-hover:from-[#fef7f0] group-hover:to-[#fdeee0]"
+                  }`}>
+                    <span className={`font-bold transition-colors duration-300 ${
+                      expandedFAQ === index ? "text-white" : "text-gray-600"
+                    }`}>
+                      {index + 1}
+                    </span>
+                  </div>
+                  <span className="text-lg font-semibold text-gray-800 leading-relaxed pr-4">
                     {faq.question}
                   </span>
-                  
-                  <div 
-                    className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-colors"
-                    style={{
-                      backgroundColor: expandedFAQ === index ? '#cc3f3f' : '#f3f4f6',
-                      color: expandedFAQ === index ? 'white' : '#6b7280'
-                    }}
-                  >
-                    {expandedFAQ === index ? <Minus size={16} className="sm:w-[18px] sm:h-[18px]" /> : <Plus size={16} className="sm:w-[18px] sm:h-[18px]" />}
-                  </div>
-                </button>
-
-                {/* Answer */}
-                <div 
-                  className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                    expandedFAQ === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                </div>
+                <ChevronDown
+                  className={`text-[#d9543f] transition-all duration-300 flex-shrink-0 ${
+                    expandedFAQ === index ? "transform rotate-180 scale-110" : "group-hover:scale-110"
                   }`}
-                >
-                  <div className="px-4 sm:px-5 md:px-6 pb-4 sm:pb-5 md:pb-6 text-gray-600 text-sm sm:text-base leading-relaxed">
-                    {faq.answer}
+                  size={24}
+                />
+              </button>
+              
+              <div
+                className={`transition-all duration-300 ease-in-out ${
+                  expandedFAQ === index 
+                    ? "max-h-96 opacity-100" 
+                    : "max-h-0 opacity-0"
+                }`}
+              >
+                <div className="px-6 pb-6">
+                  <div className="pl-12 pr-4 pt-2 border-l-4 border-[#e8734a]/30">
+                    <p className="text-gray-600 leading-relaxed">
+                      {faq.answer}
+                    </p>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* RIGHT: Single Image */}
-          <div className="lg:col-span-5 flex flex-col gap-4 sm:gap-6">
-            
-            {/* Single Large Image */}
-            <div className="relative h-64 sm:h-80 md:h-96 w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border-2 sm:border-4 border-white group">
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500" />
-              <img 
-                src="/image/frequently.png" 
-                alt="Property Consultation" 
-                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-              />
             </div>
+          ))}
+        </div>
 
-            {/* Contact Card */}
-            <div 
-              className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl border text-center mt-2"
-              style={{ 
-                backgroundColor: '#fff5f5',
-                borderColor: 'rgba(204, 63, 63, 0.2)'
-              }}
-            >
-              <p className="font-bold text-base sm:text-lg mb-1" style={{ color: '#cc3f3f' }}>
-                Need Immediate Help?
-              </p>
-              <p className="text-gray-600 text-xs sm:text-sm mb-3">
-                Talk to our experts directly.
-              </p>
-              <button 
-                className="text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity w-full"
-                style={{ backgroundColor: '#cc3f3f' }}
-              >
-                Contact Support
-              </button>
-            </div>
-
-          </div>
-
+        <div className="text-center mt-12">
+          <p className="text-gray-600 mb-4">
+            Still have questions? We're here to help!
+          </p>
+          <p className="text-[#b54035] font-semibold">
+            और सवाल हैं? हम आपकी मदद के लिए हैं!
+          </p>
         </div>
       </div>
     </section>

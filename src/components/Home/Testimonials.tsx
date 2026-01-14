@@ -126,6 +126,7 @@
 //     </section>
 //   );
 // }
+// 
 import { Star, ShieldCheck, Quote, MapPin } from "lucide-react";
 
 export default function TestimonialsSection() {
@@ -133,44 +134,51 @@ export default function TestimonialsSection() {
     {
       stars: 5,
       text: "बहुत ही अच्छी सेवा मिली। प्रॉपर्टी की रजिस्ट्री में कोई परेशानी नहीं हुई। सभी कागज़ात सही समय पर तैयार हो गए।",
-      name: "रमेश शर्मा",
+      name: "श्याम लाल",
       location: "भीलवाड़ा",
-      role: "किसान"
+      role: "किसान",
+      image: "/image/images1.png"
     },
     {
-      stars: 3,
+      stars: 5,
       text: "प्रॉपर्टी साथी की टीम बहुत मददगार है। नक़ल और पट्टा बनवाने में बहुत आसानी हुई। पूरी तरह से भरोसेमंद सेवा।",
       name: "सुनीता देवी",
       location: "मांडल",
-      role: "गृहणी"
+      role: "गृहणी",
+      image: "/image/images2.png"
     },
     {
       stars: 4,
-      text: "मैंने यहाँ से अपनी जमीन बेची थी। बहुत ही अच्छी कीमत मिली और सारा काम बहुत जल्दी हो गया। धन्यवाद!",
+     
+      text: "बहुत ही ईमानदार और मेहनती टीम है। मुझे लगा था कि प्रॉपर्टी का काम बहुत मुश्किल होगा, लेकिन यहाँ सब आसान हो गया।",
       name: "विकास गुप्ता",
       location: "आसीन्द",
-      role: "व्यापारी"
+      role: "व्यापारी",
+      image: "/image/images3.png"
     },
     {
       stars: 5,
       text: "कानूनी सलाह बहुत अच्छी मिली। प्रॉपर्टी में कोई समस्या नहीं थी, लेकिन फिर भी सब कुछ चेक करवाया। बहुत संतुष्ट हूँ।",
       name: "प्रिया अग्रवाल",
       location: "गुलाबपुरा",
-      role: "निवेशक"
+      role: "निवेशक",
+      image: "/image/images4.png"
     },
     {
       stars: 4,
-      text: "बहुत ही ईमानदार और मेहनती टीम है। मुझे लगा था कि प्रॉपर्टी का काम बहुत मुश्किल होगा, लेकिन यहाँ सब आसान हो गया।",
-      name: "अजय मीणा",
+     text: "मैंने यहाँ से अपनी जमीन बेची थी। बहुत ही अच्छी कीमत मिली और सारा काम बहुत जल्दी हो गया। धन्यवाद!",
+      name: "रमेश शर्मा",
       location: "शाहपुरा",
-      role: "सरकारी कर्मचारी"
+      role: "सरकारी कर्मचारी",
+      image: "/image/images5.png"
     },
     {
-      stars: 3,
+      stars: 5,
       text: "24 घंटे सेवा का वादा सच में निभाते हैं। रात को भी फोन किया तो तुरंत जवाब मिला। बहुत अच्छी सेवा।",
       name: "कमला जैन",
       location: "बनेड़ा",
-      role: "शिक्षिका"
+      role: "शिक्षिका",
+      image: "/image/images6.png"
     },
   ];
 
@@ -244,20 +252,32 @@ export default function TestimonialsSection() {
 
               {/* User Profile */}
               <div className="flex items-center pt-4 border-t" style={{ borderColor: '#fdf2f2' }}>
-                <div 
-                  className="w-12 h-12 rounded-full text-white flex items-center justify-center font-bold text-xl mr-4 shadow-md border-2 transition-colors"
-                  style={{ 
-                    backgroundColor: '#cc3f3f',
-                    borderColor: 'white'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#cc3f3f';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'white';
-                  }}
-                >
-                  {testimonial.name.charAt(0)}
+                {/* Real Person Image */}
+                <div className="relative mr-4">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover shadow-md border-2 transition-all duration-300 group-hover:border-[#cc3f3f]"
+                    style={{ borderColor: '#cc3f3f' }}
+                    onError={(e) => {
+                      // Fallback to initial if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const fallback = target.nextElementSibling as HTMLElement;
+                      if (fallback) fallback.style.display = 'flex';
+                    }}
+                  />
+                  {/* Fallback Initial (hidden by default) */}
+                  <div 
+                    className="w-12 h-12 rounded-full text-white flex items-center justify-center font-bold text-xl shadow-md border-2 transition-colors absolute top-0 left-0"
+                    style={{ 
+                      backgroundColor: '#cc3f3f',
+                      borderColor: '#cc3f3f',
+                      display: 'none'
+                    }}
+                  >
+                    {testimonial.name.charAt(0)}
+                  </div>
                 </div>
                 <div>
                   <div 

@@ -30,18 +30,18 @@ export default function Index() {
       <HeroSection />
       <ServicesSection />
        <WhyChooseUsSection/>
-     
-      <Propertiescard/>
+     <BenefitsShowcase/>
+      
      
       <AboutSection />
-      <PropertyTypeExplorer/>
-       <ServiceAreasSection/>
+     
       {/* <FloatingButtons />
       <WhyChooseUsSection/> */}
       <TestimonialsSection/>
-     
-      {/* <ContactSection/> */}
+      <ServiceAreasSection/>
+      
       <FAQSection/>
+      <ContactSection/> 
       <CTASection/>
       
       <Footer/>

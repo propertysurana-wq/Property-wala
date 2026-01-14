@@ -68,138 +68,68 @@
 //   );
 // }
 // 
-import { Users, Clock, Heart, Shield, Home, MessageCircle } from "lucide-react";
+// 
+import { Phone, MessageCircle, Settings, CheckCircle } from "lucide-react";
 
-export default function WhyChooseUsSection() {
-  const features = [
+export default function ProcessSection() {
+  const steps = [
     {
-      icon: Users,
-      title: "अनुभवी टीम",
-      englishTitle: "Expert Team",
-      description: "हमारी टीम में अनुभवी लोग हैं जो प्रॉपर्टी के कानून और यहाँ की बाज़ार को अच्छे से जानते हैं।",
-    },
-    {
-      icon: Clock,
-      title: "जल्दी काम",
-      englishTitle: "Quick Service",
-      description: "आपके सभी कागज़ात और प्रॉपर्टी के काम जल्दी और सही तरीके से पूरे होते हैं।",
-    },
-    {
-      icon: Heart,
-      title: "स्थानीय समझ",
-      englishTitle: "Local Understanding",
-      description: "हम यहाँ की संस्कृति और रीति-रिवाज़ को समझते हैं, इसलिए गाँव के लोग भी आराम से काम करा सकते हैं।",
-    },
-    {
-      icon: Shield,
-      title: "100% कानूनी",
-      englishTitle: "100% Legal",
-      description: "सभी लेन-देन पूरी तरह कानूनी हैं और सरकारी दफ्तर से सही तरीके से जाँचे जाते हैं।",
-    },
-    {
-      icon: Home,
-      title: "उचित दाम",
-      englishTitle: "Fair Pricing",
-      description: "सभी खर्चे साफ़-साफ़ बताए जाते हैं। कोई छिपा हुआ खर्चा या अचानक से पैसे नहीं माँगे जाते।",
+      icon: Phone,
+      title: "Contact Us",
+      hindiTitle: "हमसे संपर्क करें",
+      description: "Call us or WhatsApp to discuss your property needs. We're available 24/7 for consultation.",
     },
     {
       icon: MessageCircle,
-      title: "24/7 मदद",
-      englishTitle: "24/7 Support",
-      description: "प्रॉपर्टी से जुड़े किसी भी सवाल या परेशानी के लिए हम हमेशा आपकी मदद के लिए तैयार हैं।",
+      title: "Discuss Your Need",
+      hindiTitle: "ज़रूरत बताइए",
+      description: "Share your requirements with our experts. We'll understand your needs and provide the best solution.",
+    },
+    {
+      icon: Settings,
+      title: "We Manage Papers & Deal",
+      hindiTitle: "कागज़ और डील हमारी ज़िम्मेदारी",
+      description: "Our team handles all paperwork, legal formalities, and negotiations on your behalf.",
+    },
+    {
+      icon: CheckCircle,
+      title: "Get Property Solved",
+      hindiTitle: "समाधान प्राप्त करें",
+      description: "Receive your completed documents and successful property transaction with full satisfaction.",
     },
   ];
 
   return (
-    <section 
-      id="why-choose-us" 
-      className="py-20"
-      style={{ 
-        backgroundImage: 'linear-gradient(to bottom right, #f7f7f7, #fff5f5)' 
-      }}
-    >
+    <section id="process" className="py-20 bg-gradient-to-br from-[#fef7f0] via-[#fefdf9] to-[#fdf2f2]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <div 
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border mb-4"
-            style={{ 
-              backgroundColor: 'rgba(204, 63, 63, 0.1)',
-              borderColor: 'rgba(204, 63, 63, 0.2)'
-            }}
-          >
-            <span 
-              className="w-2 h-2 rounded-full" 
-              style={{ backgroundColor: '#cc3f3f' }}
-            />
-            <span 
-              className="text-xs md:text-sm font-bold uppercase tracking-wider"
-              style={{ color: '#cc3f3f' }}
-            >
-              हमें क्यों चुनें
-            </span>
-          </div>
-          
-          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-3">
-            प्रॉपर्टी साथी <span style={{ color: '#cc3f3f' }}>क्यों चुनें?</span>
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            Our Simple 4-Step Process
           </h2>
-          <p className="text-lg text-gray-600 font-medium">
-            Why Choose Property Sathi?
+          <p className="text-xl text-[#b54035] mb-2 font-semibold">
+            हमारी आसान 4-चरण प्रक्रिया
           </p>
-          <div 
-            className="w-24 h-1 mx-auto rounded-full mt-4"
-            style={{ 
-              backgroundImage: 'linear-gradient(to right, #cc3f3f, #b33636)' 
-            }}
-          ></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-[#e8734a] to-[#e15e5e] mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((item, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border group"
-              style={{ borderColor: '#f3f4f6' }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(204, 63, 63, 0.3)';
-                e.currentTarget.style.transform = 'translateY(-4px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#f3f4f6';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              <div 
-                className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110"
-                style={{ 
-                  backgroundImage: 'linear-gradient(to bottom right, #cc3f3f, #b33636)',
-                  boxShadow: '0 10px 15px -3px rgba(204, 63, 63, 0.3)'
-                }}
-              >
-                <item.icon className="text-white" size={32} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {steps.map((step, index) => (
+            <div key={index} className="text-center group flex flex-col">
+              <div className="w-24 h-24 bg-gradient-to-br from-[#e8734a] to-[#cc3f3f] rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl group-hover:scale-110 transition-all duration-300">
+                <step.icon className="text-white" size={48} />
               </div>
-              
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
-                {item.title}
-              </h3>
-              <p className="text-sm text-gray-500 mb-3 font-medium">
-                {item.englishTitle}
-              </p>
-              <p className="text-gray-600 leading-relaxed">
-                {item.description}
-              </p>
+              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-[#fdeee0] flex flex-col h-full">
+                <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-lg text-[#b54035] mb-3 font-semibold">
+                  {step.hindiTitle}
+                </p>
+                <p className="text-gray-600">{step.description}</p>
+              </div>
             </div>
           ))}
         </div>
-
-        {/* Bottom Message */}
-        {/* <div className="mt-16 text-center">
-          <p className="text-gray-700 text-lg font-medium mb-4">
-            हम आपके सपनों के घर को सच करने में मदद करते हैं
-          </p>
-          <p className="text-gray-600 text-base">
-            We help make your dream home come true
-          </p>
-        </div> */}
       </div>
     </section>
   );

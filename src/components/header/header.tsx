@@ -165,16 +165,16 @@ export default function Navbar() {
 
           {/* Desktop Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-             <Link href="/userlogin">
-                 <button className="bg-green-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-green-700 transition w-full">
-                   Sign In
-                </button>
-              </Link>
-            <Link href="/Adminlogin">
+            <Link href="/userlogin">
+  <button className="bg-[#cc3f3f] text-white px-5 py-2 rounded-md font-semibold hover:bg-[#b33636] transition w-full">
+    Sign In
+  </button>
+</Link>
+            {/* <Link href="/Adminlogin">
               <button className="flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full font-semibold hover:bg-slate-800 transition shadow-md text-sm border-2 border-transparent hover:border-[#d9543f]">
                 <User size={16} /> Admin
               </button>
-            </Link>
+            </Link> */}
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -207,16 +207,16 @@ export default function Navbar() {
                   </button>
                 </Link> */}
                  <Link href="/userlogin">
-                 <button className="bg-green-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-green-700 transition w-full">
+                 <button className="bg-[#cc3f3f]-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-green-700 transition w-full">
                   Sign In
                   </button>
           </Link>
 
-                <Link href="/Adminlogin">
+                {/* <Link href="/Adminlogin">
                   <button className="w-full bg-black text-white px-5 py-3 rounded-xl font-semibold hover:bg-slate-800 transition shadow-md flex items-center justify-center gap-2">
                     <User size={18} /> Admin Access
                   </button>
-                </Link>
+                </Link> */}
               </div>
 
             </div>
