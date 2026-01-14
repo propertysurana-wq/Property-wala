@@ -178,7 +178,7 @@ export default function TestimonialsSection() {
       name: "कमला जैन",
       location: "बनेड़ा",
       role: "शिक्षिका",
-      image: "/image/images6.png"
+      image: "/image/images6.png "
     },
   ];
 
