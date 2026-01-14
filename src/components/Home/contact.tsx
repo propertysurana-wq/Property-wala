@@ -566,7 +566,7 @@ export default function ContactPage() {
                     <p className="text-gray-400">Loading address...</p>
                   ) : (
                     <>
-                      <p className="font-bold text-gray-800 text-lg mb-2">Property Sathi Office</p>
+                      <p className="font-bold text-gray-800 text-lg mb-2">Surana Homes Office</p>
                       <p className="text-gray-700 mb-3">{contactInfo.officeAddress || 'Address not available'}</p>
                     </>
                   )}

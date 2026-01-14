@@ -621,8 +621,8 @@ export default function Footer() {
                 <Home className="text-white" size={24} />
               </div>
               <div>
-                <span className="font-bold text-xl">Property Sathi</span>
-                <div className="text-xs text-gray-400">प्रॉपर्टी साथी</div>
+                <span className="font-bold text-xl">Surana Homes</span>
+                <div className="text-xs text-gray-400">सुराना होम्स</div>
               </div>
             </div>
             <p className="text-gray-300 mb-4 leading-relaxed">
@@ -747,7 +747,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} Property Sathi. All rights reserved. | प्रॉपर्टी साथी - सभी अधिकार सुरक्षित।
+              © {new Date().getFullYear()} Surana Homes. All rights reserved. | प्रॉपर्टी साथी - सभी अधिकार सुरक्षित।
             </p>
 
             {/* Social Icons - Real Brand Icons */}

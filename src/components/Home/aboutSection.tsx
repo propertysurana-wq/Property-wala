@@ -144,12 +144,12 @@ export default function AboutSection() {
 
             {/* Heading */}
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-3 sm:mb-4 leading-tight">
-              प्रॉपर्टी साथी <br className="hidden sm:block" />
+              सुराना होम्स <br className="hidden sm:block" />
               <span style={{ color: '#cc3f3f' }}>के बारे में</span>
             </h2>
             
             <p className="text-base sm:text-lg text-gray-500 mb-4 sm:mb-6 font-medium">
-              About Property Sathi
+              About Surana Homes
             </p>
 
             {/* Hindi Description */}

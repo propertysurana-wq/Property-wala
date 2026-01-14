@@ -143,13 +143,13 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold text-gray-800 leading-none">
-                Property Sathi
+               Surana Homes
               </span>
               <span 
                 className="text-xs font-medium tracking-wider"
                 style={{ color: '#d9543f' }}
               >
-                प्रॉपर्टी साथी
+               सुराना होम्स
               </span>
             </div>
           </Link>

@@ -133,10 +133,10 @@ export default function AboutSection() {
                 Who We Are
               </span>
               <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mt-6 mb-2 tracking-tight">
-                About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e8734a] to-[#e15e5e]">Property Sathi</span>
+                About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e8734a] to-[#e15e5e]">Surana Homes</span>
               </h2>
               <p className="text-lg text-[#b54035] font-semibold mb-8">
-                प्रॉपर्टी साथी के बारे में
+               सुराना होम्स के बारे में
               </p>
 
               <div className="space-y-6 text-slate-600 text-lg leading-relaxed">
