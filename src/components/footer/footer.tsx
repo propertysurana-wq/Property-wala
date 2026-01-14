@@ -11,8 +11,8 @@
 //     //             <Home className="text-white" size={24} />
 //     //           </div>
 //     //           <div>
-//     //             <span className="font-bold text-xl">Property Sathi</span>
-//     //             <div className="text-xs text-gray-400">प्रॉपर्टी साथी</div>
+//     //             <span className="font-bold text-xl">Surana Homes</span>
+//     //             <div className="text-xs text-gray-400">सुराना होम्स</div>
 //     //           </div>
 //     //         </div>
 //     //         <p className="text-gray-300 mb-4 leading-relaxed">
@@ -88,7 +88,7 @@
 //     //     <div className="border-t border-gray-800 pt-8">
 //     //       <div className="flex flex-col md:flex-row justify-between items-center">
 //     //         <p className="text-gray-400 text-sm mb-4 md:mb-0">
-//     //           © 2024 Property Sathi. All rights reserved. | प्रॉपर्टी साथी -
+//     //           © 2024 Surana Homes. All rights reserved. | सुराना होम्स -
 //     //           सभी अधिकार सुरक्षित।
 //     //         </p>
 
@@ -240,7 +240,7 @@
 //                 <Home className="w-8 h-8 text-white" />
 //               </div>
 //               <div>
-//                 <span className="text-xl sm:text-2xl font-bold block">Property Sathi</span>
+//                 <span className="text-xl sm:text-2xl font-bold block">Surana Homes</span>
 //                 <span className="text-xs text-green-400">Property Solutions</span>
 //               </div>
 //             </div>
@@ -353,7 +353,7 @@
 
 //           {/* Copyright */}
 //           <p className="text-gray-400 text-sm text-center">
-//             &copy; {new Date().getFullYear()} Property Sathi. All rights reserved.
+//             &copy; {new Date().getFullYear()} Surana Homes. All rights reserved.
 //           </p>
 //         </div>
 
@@ -413,8 +413,8 @@
 //                 <Home className="text-white" size={24} />
 //               </div>
 //               <div>
-//                 <span className="font-bold text-xl">Property Sathi</span>
-//                 <div className="text-xs text-gray-400">प्रॉपर्टी साथी</div>
+//                 <span className="font-bold text-xl">Surana Homes</span>
+//                 <div className="text-xs text-gray-400">सुराना होम्स</div>
 //               </div>
 //             </div>
 //             <p className="text-gray-300 mb-4 leading-relaxed">
@@ -539,7 +539,7 @@
 //         <div className="border-t border-gray-800 pt-8">
 //           <div className="flex flex-col md:flex-row justify-between items-center">
 //             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-//               © {new Date().getFullYear()} Property Sathi. All rights reserved. | प्रॉपर्टी साथी - सभी अधिकार सुरक्षित।
+//               © {new Date().getFullYear()} Surana Homes. All rights reserved. | सुराना होम्स - सभी अधिकार सुरक्षित।
 //             </p>
 
 //             {/* Social Icons */}
@@ -747,7 +747,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} Surana Homes. All rights reserved. | प्रॉपर्टी साथी - सभी अधिकार सुरक्षित।
+              © {new Date().getFullYear()} Surana Homes. All rights reserved. | सुराना होम्स - सभी अधिकार सुरक्षित।
             </p>
 
             {/* Social Icons - Real Brand Icons */}

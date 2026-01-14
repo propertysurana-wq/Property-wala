@@ -17,7 +17,7 @@
 //           {/* Logo */}
 //           <div className="flex items-center space-x-2">
 //             <Home className="w-8 h-8 text-teal-500" />
-//             <span className="text-xl font-bold text-gray-900">Property Sathi</span>
+//             <span className="text-xl font-bold text-gray-900">Surana Homes</span>
 //           </div>
 
 //           {/* Desktop Menu */}

@@ -12,10 +12,10 @@
 //               Who We Are
 //             </span>
 //             <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mt-6 mb-2 tracking-tight">
-//               About Property Sathi
+//               About Surana Homes
 //             </h2>
 //             <p className="text-lg text-emerald-700 font-medium mb-8 font-serif">
-//               प्रॉपर्टी साथी के बारे में
+//               सुराना होम्स के बारे में
 //             </p>
 
 //             <div className="space-y-6 text-slate-600 text-lg leading-relaxed">

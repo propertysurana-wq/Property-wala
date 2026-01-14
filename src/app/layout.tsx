@@ -46,8 +46,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Property Sathi - Your Trusted Property Partner",
-  description: "Property Sathi provides trusted property services in Bhilwara including property buy & sell, registry, documentation, and legal consultation.",
+  title: "Surana Homes - Your Trusted Property Partner",
+  description: "Surana Homes provides trusted property services in Bhilwara including property buy & sell, registry, documentation, and legal consultation.",
 };
 
 export default function RootLayout({

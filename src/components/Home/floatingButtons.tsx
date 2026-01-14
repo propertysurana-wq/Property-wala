@@ -45,10 +45,10 @@ export default function WhyChooseUsSection() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">
-            Why Choose Property Sathi?
+            Why Choose Surana Homes?
           </h2>
           <p className="text-xl text-[#b54035] mb-2 font-semibold">
-            प्रॉपर्टी साथी क्यों चुनें?
+            सुराना होम्स क्यों चुनें?
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-[#e8734a] to-[#e15e5e] mx-auto rounded-full"></div>
         </div>

@@ -149,7 +149,7 @@
 //                 </div>
 //               </div>
 //               <div className="bg-gradient-to-br from-[#fefdf9] to-[#fef7f0] rounded-xl p-6 border border-[#fdeee0]">
-//                 <p className="font-bold text-gray-800 text-lg mb-2">Property Sathi Office</p>
+//                 <p className="font-bold text-gray-800 text-lg mb-2">Surana Homes Office</p>
 //                 <p className="text-gray-700 mb-1">Near City Palace, Bhilwara</p>
 //                 <p className="text-gray-700 mb-3">Rajasthan - 311001</p>
 //                 <div className="border-t border-[#fdeee0] pt-3 mt-3">
