@@ -544,7 +544,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
               <span className="text-black font-bold text-xl">P</span>
             </div>
             <span className="font-bold text-lg tracking-wide">
-              Property<span className="text-zinc-400">Sathi</span>
+             Surana<span className="text-zinc-400">Homes</span>
             </span>
           </div>
 

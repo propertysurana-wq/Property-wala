@@ -527,7 +527,7 @@ export default function HeroSection() {
           src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&h=700&fit=crop"
           alt="Traditional Rajasthani houses with modern city buildings"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#752e2f]/70 via-[#742d2d]/60 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#752e2f]/70 via-[]/60 to-transparent"></div>
       </div>
 
       <div className="relative container mx-auto px-4 h-full min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px] flex items-center py-6 sm:py-8 md:py-0">
@@ -587,3 +587,74 @@ export default function HeroSection() {
     </section>
   );
 }
+// import { Handshake, Phone } from "lucide-react";
+
+// export default function HeroSection() {
+//   return (
+//     <section className="relative min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:h-[700px] bg-gradient-to-r from-[#fdeee0] via-[#fefbf0] to-[#fce8e8] overflow-hidden">
+//       <div className="absolute inset-0">
+//         <img
+//           className="w-full h-full object-cover opacity-30"
+//           src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&h=700&fit=crop"
+//           alt="Traditional Rajasthani houses with modern city buildings"
+//         />
+//         <div className="absolute inset-0 bg-gradient-to-r from-[#752e2f]/70 via-[#742d2d]/60 to-transparent"></div>
+//       </div>
+
+//       {/* Content Area with Top/Bottom Padding */}
+//       <div className="relative container mx-auto px-4 h-full min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px] flex items-center py-16 sm:py-20 md:py-0">
+//         <div className="max-w-4xl w-full">
+//           {/* ...baaki ka content waisa hi rahega... */}
+//           <div className="mb-3 sm:mb-4 md:mb-6">
+//             <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 sm:mb-3 md:mb-4 leading-tight">
+//               Your Trusted Property & Registry Partner in Bhilwara
+//             </h1>
+//             <h2 className="text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl text-[#fcf5d9] mb-3 sm:mb-4 md:mb-6 font-semibold">
+//               आपका भरोसेमंद प्रॉपर्टी और पट्टा रजिस्ट्रेशन साथी
+//             </h2>
+//           </div>
+//           <p className="text-xs sm:text-sm md:text-lg lg:text-xl text-[#fefbf0] mb-1 sm:mb-2 md:mb-3 max-w-2xl">
+//             We make buying, selling, and paperwork simple
+//           </p>
+//           <p className="text-[10px] sm:text-xs md:text-base lg:text-lg text-[#fcf5d9] mb-3 sm:mb-4 md:mb-8 max-w-2xl">
+//             प्रॉपर्टी खरीद, बिक्री और कागज़ात अब आसान
+//           </p>
+//           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4">
+//             <button className="bg-gradient-to-r from-[#e8734a] to-[#cc3f3f] hover:from-[#cc3f3f] hover:to-[#b54035] text-white px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-semibold transition-all transform hover:scale-105 shadow-xl flex items-center justify-center gap-2">
+//               <Handshake size={16} className="sm:w-[18px] sm:h-[18px] md:w-5 md:h-5" />
+//               <span className="whitespace-nowrap">Get Property Help</span>
+//             </button>
+//             <button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#cc3f3f] px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-semibold transition-all flex items-center justify-center gap-2">
+//               <Phone size={16} className="sm:w-[18px] sm:h-[18px] md:w-5 md:h-5" />
+//               <span className="whitespace-nowrap">प्रॉपर्टी सहायता लें</span>
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Floating Stats - Yahaan badlaav kiya gaya hai */}
+//       <div className="absolute bottom-8 sm:bottom-10 md:bottom-12 lg:bottom-14 left-1/2 transform -translate-x-1/2 w-[96%] sm:w-[90%] md:w-auto">
+//         <div className="flex flex-row justify-around sm:justify-center sm:gap-4 md:gap-6 lg:gap-8 bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 lg:p-6 shadow-2xl">
+//           <div className="text-center flex-1 sm:flex-none">
+//             <div className="text-sm sm:text-base md:text-xl lg:text-2xl font-bold text-[#cc3f3f]">15+</div>
+//             <div className="text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-gray-600 mt-0.5">
+//               Years<br className="sm:hidden" /> Experience
+//             </div>
+//           </div>
+//           <div className="text-center flex-1 sm:flex-none sm:border-l border-gray-300 sm:pl-4 md:pl-6 lg:pl-8">
+//             <div className="text-sm sm:text-base md:text-xl lg:text-2xl font-bold text-[#cc3f3f]">500+</div>
+//             <div className="text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-gray-600 mt-0.5">
+//               Happy<br className="sm:hidden" /> Clients
+//             </div>
+//           </div>
+//           <div className="text-center flex-1 sm:flex-none sm:border-l border-gray-300 sm:pl-4 md:pl-6 lg:pl-8">
+//             <div className="text-sm sm:text-base md:text-xl lg:text-2xl font-bold text-green-600">100%</div>
+//             <div className="text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-gray-600 mt-0.5">
+//               Success<br className="sm:hidden" /> Rate
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
