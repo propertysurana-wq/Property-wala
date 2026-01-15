@@ -1087,10 +1087,7 @@ export default function Footer() {
                   }}
                 />
               </div>
-              <div>
-                {/* <span className="font-bold text-xl">Surana Homes</span>
-                <div className="text-xs text-gray-400">सुराना होम्स</div> */}
-              </div>
+             
             </div>
             <p className="text-gray-300 mb-4 leading-relaxed">
               Your trusted partner for all property-related services in
