@@ -1077,7 +1077,7 @@ export default function Footer() {
           {/* Logo + Text */}
           <div>
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-17 h-19 rounded-full flex items-center justify-center overflow-hidden bg-white">
+              <div className="w-17 h-20 rounded-full flex items-center justify-center overflow-hidden bg-white">
                 <img
                   src="/image/logo3.png"
                   alt="Surana Homes Logo"
