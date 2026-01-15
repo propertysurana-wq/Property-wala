@@ -1077,7 +1077,7 @@ export default function Footer() {
           {/* Logo + Text */}
           <div>
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-17 h-20 rounded-full flex items-center justify-center overflow-hidden bg-white">
+              {/* <div className="w-17 h-20 rounded-full flex items-center justify-center overflow-hidden bg-white">
                 <img
                   src="/image/logo3.png"
                   alt="Surana Homes Logo"
@@ -1086,6 +1086,20 @@ export default function Footer() {
                     e.currentTarget.style.display = "none";
                   }}
                 />
+              </div> */}
+              <div className="w-20 sm:w-24 md:w-28 h-20 sm:h-24 md:h-28 rounded-full flex items-center justify-center overflow-hidden bg-white">
+  <img
+    src="/image/logo3.png"
+    alt="Surana Homes Logo"
+    className="w-full h-full object-contain"
+    onError={(e) => {
+      e.currentTarget.style.display = "none";
+    }}
+  />
+</div>
+ <div>
+                <span className="font-bold text-xl">Surana Homes</span>
+                <div className="text-xs text-gray-400">सुराना होम्स</div>
               </div>
              
             </div>
