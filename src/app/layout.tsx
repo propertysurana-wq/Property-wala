@@ -30,6 +30,42 @@
 //     </html>
 //   );
 // }
+// import type { Metadata } from "next";
+// import { Geist, Geist_Mono } from "next/font/google";
+// import "./globals.css";
+// import FloatingContactButtons from "@/components/Floatingcontactbutton/Floatingcontactbutton";
+
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
+
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
+
+// export const metadata: Metadata = {
+//   title: "Surana Homes - Your Trusted Property Partner",
+//   description: "Surana Homes provides trusted property services in Bhilwara including property buy & sell, registry, documentation, and legal consultation.",
+// };
+
+// export default function RootLayout({
+//   children,
+// }: Readonly<{
+//   children: React.ReactNode;
+// }>) {
+//   return (
+//     <html lang="en">
+//       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+//         {children}
+        
+//         {/* Floating Contact Buttons - Har page par dikhega */}
+//         <FloatingContactButtons />
+//       </body>
+//     </html>
+//   );
+// }
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -45,10 +81,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Surana Homes - Your Trusted Property Partner",
-  description: "Surana Homes provides trusted property services in Bhilwara including property buy & sell, registry, documentation, and legal consultation.",
+export const metadata = {
+  title: "Surana Homes",
+  description:
+    "Surana Homes provides trusted property services in Bhilwara including property buy & sell, registry, documentation, and legal consultation.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
+
 
 export default function RootLayout({
   children,
@@ -59,7 +100,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
-        
+
         {/* Floating Contact Buttons - Har page par dikhega */}
         <FloatingContactButtons />
       </body>

@@ -277,22 +277,8 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-20">
 
           {/* Logo Section - IMAGE */}
-          <Link href="/" className="flex items-center group">
-            {/* Logo Image - Replace '/logo.png' with your actual logo path */}
-           {/* <img 
-  src="/image/logo3.png" 
-  alt="Surana Homes Logo"
- className="h-14 sm:h-16 md:h-16 w-auto object-contain 
-           transition-transform group-hover:scale-105 
-           m-0 p-0 block align-middle"
-
-  onError={(e) => {
-    const target = e.target as HTMLImageElement;
-    target.style.display = 'none';
-    const fallback = target.nextElementSibling as HTMLElement;
-    if (fallback) fallback.style.display = 'flex';
-  }}
-/> */}
+          <Link href="" className="flex items-center group">
+           
 <img
   src="/image/logo3.png"
   alt="Surana Homes Logo"
