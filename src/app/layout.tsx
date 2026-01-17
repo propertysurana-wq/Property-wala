@@ -98,8 +98,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="robots" content="noindex, nofollow"></meta>
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
+        
 
         {/* Floating Contact Buttons - Har page par dikhega */}
         <FloatingContactButtons />
