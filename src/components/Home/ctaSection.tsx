@@ -382,14 +382,250 @@
 //   );
 // }
 // 
-'use client'
+// 'use client'
+// import { useState, useEffect } from "react";
+// import { Phone, MessageCircle, Clock, Shield, Handshake } from "lucide-react";
+
+// export default function CTASection() {
+//   const [contactInfo, setContactInfo] = useState({
+//     phoneNumbers: ["+91 98765 43210"],
+//     whatsappNumber: "+91 98765 43210"
+//   });
+
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     fetchContactInfo();
+//   }, []);
+
+//   const fetchContactInfo = async () => {
+//     try {
+//       const response = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contact');
+//       const data = await response.json();
+      
+//       if (data.success && data.data) {
+//         setContactInfo({
+//           phoneNumbers: data.data.phoneNumbers || ["+91 98765 43210"],
+//           whatsappNumber: data.data.whatsappNumber || "+91 98765 43210"
+//         });
+//       }
+//     } catch (err) {
+//       console.error('Failed to fetch contact information:', err);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const primaryPhone = contactInfo.phoneNumbers[0];
+//   const whatsappLink = `https://wa.me/${contactInfo.whatsappNumber.replace(/[^0-9]/g, '')}`;
+
+//   return (
+//     <section className="py-20 bg-gradient-to-r from-[#d9543f] via-[#cc3f3f] to-[#b54035] relative overflow-hidden">
+//       <div className="absolute inset-0 bg-black opacity-20"></div>
+//       <div className="absolute inset-0">
+//         <img
+//           className="w-full h-full object-cover opacity-30"
+//           src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1200&h=400&fit=crop"
+//           alt="Traditional Rajasthani architecture patterns"
+//         />
+//       </div>
+
+//       <div className="container mx-auto px-4 relative z-10">
+//         <div className="text-center max-w-4xl mx-auto">
+//           <h2 className="text-5xl font-bold text-white mb-6">
+//             Ready to Solve Your Property Issues?
+//           </h2>
+//           <p className="text-2xl text-[#fcf5d9] mb-8 font-semibold">
+//             अपनी प्रॉपर्टी की समस्या हल करने के लिए तैयार हैं?
+//           </p>
+
+//           <p className="text-xl text-[#fefbf0] mb-10 leading-relaxed">
+//             Don't let property paperwork stress you out. Our expert team is
+//             here to handle everything from buying and selling to documentation
+//             and registry. Contact us today for a hassle-free experience!
+//           </p>
+
+//           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+//             <a 
+//               href={`tel:${primaryPhone}`}
+//               className="bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-full text-xl font-bold transition-all transform hover:scale-110 shadow-2xl flex items-center gap-3"
+//             >
+//               <Phone size={24} />
+//               {loading ? "Loading..." : `Call Now: ${primaryPhone}`}
+//             </a>
+
+//             <a 
+//               href={whatsappLink}
+//               target="_blank"
+//               rel="noopener noreferrer"
+//               className="bg-white hover:bg-[#fefdf9] text-[#d9543f] px-10 py-5 rounded-full text-xl font-bold transition-all transform hover:scale-110 shadow-2xl flex items-center gap-3"
+//             >
+//               <MessageCircle className="text-green-500" size={24} />
+//               WhatsApp Us
+//             </a>
+//           </div>
+
+//           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+//             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+//               <Clock className="text-[#fcf5d9] text-3xl mx-auto mb-4" />
+//               <h3 className="text-white font-bold text-lg mb-2">
+//                 24/7 Available
+//               </h3>
+//               <p className="text-[#fcf5d9]">हमेशा उपलब्ध</p>
+//             </div>
+
+//             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+//               <Shield className="text-[#fcf5d9] text-3xl mx-auto mb-4" />
+//               <h3 className="text-white font-bold text-lg mb-2">
+//                 100% Safe
+//               </h3>
+//               <p className="text-[#fcf5d9]">पूर्ण सुरक्षा</p>
+//             </div>
+
+//             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+//               <Handshake className="text-[#fcf5d9] text-3xl mx-auto mb-4" />
+//               <h3 className="text-white font-bold text-lg mb-2">
+//                 Trusted Service
+//               </h3>
+//               <p className="text-[#fcf5d9]">भरोसेमंद सेवा</p>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+// "use client";
+// import { useState, useEffect } from "react";
+// import { Phone, MessageCircle, Clock, Shield, Handshake } from "lucide-react";
+
+// export default function CTASection() {
+//   const [contactInfo, setContactInfo] = useState({
+//     phoneNumbers: ["+91 98765 43210"],
+//     whatsappNumber: "+91 98765 43210",
+//   });
+
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     fetchContactInfo();
+//   }, []);
+
+//   const fetchContactInfo = async () => {
+//     try {
+//       const response = await fetch(
+//         "https://propertybackend-1-xdbs.onrender.com/api/contact"
+//       );
+//       const data = await response.json();
+
+//       if (data.success && data.data) {
+//         setContactInfo({
+//           phoneNumbers: data.data.phoneNumbers || ["+91 98765 43210"],
+//           whatsappNumber: data.data.whatsappNumber || "+91 98765 43210",
+//         });
+//       }
+//     } catch (err) {
+//       console.error("Failed to fetch contact information:", err);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const primaryPhone = contactInfo.phoneNumbers[0];
+//   const whatsappLink = `https://wa.me/${contactInfo.whatsappNumber.replace(
+//     /[^0-9]/g,
+//     ""
+//   )}`;
+
+//   return (
+//     <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-r from-[#d9543f] via-[#cc3f3f] to-[#b54035] relative overflow-hidden">
+//       {/* Overlays */}
+//       <div className="absolute inset-0 bg-black/20"></div>
+//       <div className="absolute inset-0">
+//         <img
+//           className="w-full h-full object-cover opacity-30"
+//           src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1200&h=400&fit=crop"
+//           alt="Traditional Rajasthani architecture patterns"
+//         />
+//       </div>
+
+//       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+//         <div className="text-center max-w-4xl mx-auto">
+//           {/* Heading */}
+//           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+//             Ready to Solve Your Property Issues?
+//           </h2>
+//           <p className="text-lg sm:text-2xl text-[#fcf5d9] mb-5 sm:mb-8 font-semibold">
+//             अपनी प्रॉपर्टी की समस्या हल करने के लिए तैयार हैं?
+//           </p>
+
+//           {/* Subtext */}
+//           <p className="text-base sm:text-lg md:text-xl text-[#fefbf0] mb-8 sm:mb-10 leading-relaxed">
+//             Don&apos;t let property paperwork stress you out. Our expert team is
+//             here to handle everything from buying and selling to documentation
+//             and registry. Contact us today for a hassle-free experience!
+//           </p>
+
+//           {/* Buttons */}
+//           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-stretch sm:items-center">
+//             <a
+//               href={`tel:${primaryPhone}`}
+//               className="w-full sm:w-auto justify-center bg-green-500 hover:bg-green-600 text-white px-7 sm:px-10 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center gap-3"
+//             >
+//               <Phone size={22} className="flex-shrink-0" />
+//               <span>{loading ? "Loading..." : `Call Now: ${primaryPhone}`}</span>
+//             </a>
+
+//             <a
+//               href={whatsappLink}
+//               target="_blank"
+//               rel="noopener noreferrer"
+//               className="w-full sm:w-auto justify-center bg-white hover:bg-[#fefdf9] text-[#d9543f] px-7 sm:px-10 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center gap-3"
+//             >
+//               <MessageCircle className="text-green-500 flex-shrink-0" size={22} />
+//               <span>WhatsApp Us</span>
+//             </a>
+//           </div>
+
+//           {/* Features */}
+//           <div className="mt-10 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-8 text-center">
+//             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-white/20">
+//               <Clock className="text-[#fcf5d9] mx-auto mb-3 sm:mb-4" size={32} />
+//               <h3 className="text-white font-bold text-base sm:text-lg mb-1.5 sm:mb-2">
+//                 24/7 Available
+//               </h3>
+//               <p className="text-[#fcf5d9] text-sm sm:text-base">हमेशा उपलब्ध</p>
+//             </div>
+
+//             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-white/20">
+//               <Shield className="text-[#fcf5d9] mx-auto mb-3 sm:mb-4" size={32} />
+//               <h3 className="text-white font-bold text-base sm:text-lg mb-1.5 sm:mb-2">
+//                 100% Safe
+//               </h3>
+//               <p className="text-[#fcf5d9] text-sm sm:text-base">पूर्ण सुरक्षा</p>
+//             </div>
+
+//             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-white/20">
+//               <Handshake className="text-[#fcf5d9] mx-auto mb-3 sm:mb-4" size={32} />
+//               <h3 className="text-white font-bold text-base sm:text-lg mb-1.5 sm:mb-2">
+//                 Trusted Service
+//               </h3>
+//               <p className="text-[#fcf5d9] text-sm sm:text-base">भरोसेमंद सेवा</p>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+"use client";
 import { useState, useEffect } from "react";
 import { Phone, MessageCircle, Clock, Shield, Handshake } from "lucide-react";
 
 export default function CTASection() {
   const [contactInfo, setContactInfo] = useState({
     phoneNumbers: ["+91 98765 43210"],
-    whatsappNumber: "+91 98765 43210"
+    whatsappNumber: "+91 98765 43210",
   });
 
   const [loading, setLoading] = useState(true);
@@ -400,28 +636,34 @@ export default function CTASection() {
 
   const fetchContactInfo = async () => {
     try {
-      const response = await fetch('https://propertybackend-1-xdbs.onrender.com/api/contact');
+      const response = await fetch(
+        "https://propertybackend-1-xdbs.onrender.com/api/contact"
+      );
       const data = await response.json();
-      
+
       if (data.success && data.data) {
         setContactInfo({
           phoneNumbers: data.data.phoneNumbers || ["+91 98765 43210"],
-          whatsappNumber: data.data.whatsappNumber || "+91 98765 43210"
+          whatsappNumber: data.data.whatsappNumber || "+91 98765 43210",
         });
       }
     } catch (err) {
-      console.error('Failed to fetch contact information:', err);
+      console.error("Failed to fetch contact information:", err);
     } finally {
       setLoading(false);
     }
   };
 
   const primaryPhone = contactInfo.phoneNumbers[0];
-  const whatsappLink = `https://wa.me/${contactInfo.whatsappNumber.replace(/[^0-9]/g, '')}`;
+  const whatsappLink = `https://wa.me/${contactInfo.whatsappNumber.replace(
+    /[^0-9]/g,
+    ""
+  )}`;
 
   return (
-    <section className="py-20 bg-gradient-to-r from-[#d9543f] via-[#cc3f3f] to-[#b54035] relative overflow-hidden">
-      <div className="absolute inset-0 bg-black opacity-20"></div>
+    <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-r from-[#d9543f] via-[#cc3f3f] to-[#b54035] relative overflow-hidden">
+      {/* Overlays */}
+      <div className="absolute inset-0 bg-black/20"></div>
       <div className="absolute inset-0">
         <img
           className="w-full h-full object-cover opacity-30"
@@ -430,64 +672,102 @@ export default function CTASection() {
         />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
-          <h2 className="text-5xl font-bold text-white mb-6">
+          {/* Heading */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
             Ready to Solve Your Property Issues?
           </h2>
-          <p className="text-2xl text-[#fcf5d9] mb-8 font-semibold">
+          <p className="text-lg sm:text-2xl text-[#fcf5d9] mb-5 sm:mb-8 font-semibold">
             अपनी प्रॉपर्टी की समस्या हल करने के लिए तैयार हैं?
           </p>
 
-          <p className="text-xl text-[#fefbf0] mb-10 leading-relaxed">
-            Don't let property paperwork stress you out. Our expert team is
+          {/* Subtext */}
+          <p className="text-base sm:text-lg md:text-xl text-[#fefbf0] mb-8 sm:mb-10 leading-relaxed">
+            Don&apos;t let property paperwork stress you out. Our expert team is
             here to handle everything from buying and selling to documentation
             and registry. Contact us today for a hassle-free experience!
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <a 
+          {/* Buttons */}
+          <div
+            className="
+              flex flex-col sm:flex-row flex-wrap
+              gap-4 sm:gap-6
+              justify-center items-center
+            "
+          >
+            <a
               href={`tel:${primaryPhone}`}
-              className="bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-full text-xl font-bold transition-all transform hover:scale-110 shadow-2xl flex items-center gap-3"
+              className="
+                w-full sm:w-auto
+                max-w-[320px] sm:max-w-none
+                justify-center
+                bg-green-500 hover:bg-green-600
+                text-white
+                px-6 sm:px-8 lg:px-10
+                py-3.5 sm:py-4 lg:py-5
+                rounded-full
+                text-base sm:text-lg lg:text-xl
+                font-bold
+                transition-all transform hover:scale-105
+                shadow-2xl
+                flex items-center gap-3
+              "
             >
-              <Phone size={24} />
-              {loading ? "Loading..." : `Call Now: ${primaryPhone}`}
+              <Phone size={20} className="flex-shrink-0" />
+              <span>{loading ? "Loading..." : `Call Now: ${primaryPhone}`}</span>
             </a>
 
-            <a 
+            <a
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white hover:bg-[#fefdf9] text-[#d9543f] px-10 py-5 rounded-full text-xl font-bold transition-all transform hover:scale-110 shadow-2xl flex items-center gap-3"
+              className="
+                w-full sm:w-auto
+                max-w-[320px] sm:max-w-none
+                justify-center
+                bg-white hover:bg-[#fefdf9]
+                text-[#d9543f]
+                px-6 sm:px-8 lg:px-10
+                py-3.5 sm:py-4 lg:py-5
+                rounded-full
+                text-base sm:text-lg lg:text-xl
+                font-bold
+                transition-all transform hover:scale-105
+                shadow-2xl
+                flex items-center gap-3
+              "
             >
-              <MessageCircle className="text-green-500" size={24} />
-              WhatsApp Us
+              <MessageCircle className="text-green-500 flex-shrink-0" size={20} />
+              <span>WhatsApp Us</span>
             </a>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-              <Clock className="text-[#fcf5d9] text-3xl mx-auto mb-4" />
-              <h3 className="text-white font-bold text-lg mb-2">
+          {/* Features */}
+          <div className="mt-10 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-8 text-center">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-white/20">
+              <Clock className="text-[#fcf5d9] mx-auto mb-3 sm:mb-4" size={32} />
+              <h3 className="text-white font-bold text-base sm:text-lg mb-1.5 sm:mb-2">
                 24/7 Available
               </h3>
-              <p className="text-[#fcf5d9]">हमेशा उपलब्ध</p>
+              <p className="text-[#fcf5d9] text-sm sm:text-base">हमेशा उपलब्ध</p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-              <Shield className="text-[#fcf5d9] text-3xl mx-auto mb-4" />
-              <h3 className="text-white font-bold text-lg mb-2">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-white/20">
+              <Shield className="text-[#fcf5d9] mx-auto mb-3 sm:mb-4" size={32} />
+              <h3 className="text-white font-bold text-base sm:text-lg mb-1.5 sm:mb-2">
                 100% Safe
               </h3>
-              <p className="text-[#fcf5d9]">पूर्ण सुरक्षा</p>
+              <p className="text-[#fcf5d9] text-sm sm:text-base">पूर्ण सुरक्षा</p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-              <Handshake className="text-[#fcf5d9] text-3xl mx-auto mb-4" />
-              <h3 className="text-white font-bold text-lg mb-2">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-white/20">
+              <Handshake className="text-[#fcf5d9] mx-auto mb-3 sm:mb-4" size={32} />
+              <h3 className="text-white font-bold text-base sm:text-lg mb-1.5 sm:mb-2">
                 Trusted Service
               </h3>
-              <p className="text-[#fcf5d9]">भरोसेमंद सेवा</p>
+              <p className="text-[#fcf5d9] text-sm sm:text-base">भरोसेमंद सेवा</p>
             </div>
           </div>
         </div>
